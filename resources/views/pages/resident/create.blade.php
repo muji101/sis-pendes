@@ -1,6 +1,17 @@
+@php
+    //isset buat ngecek data kalau ada true kalau tidak false
+    $isEdit = isset($residents);
+    
+    $title = $isEdit ? 'Edit Data Penduduk' : 'Tambah Data Penduduk';
+
+    $route = $isEdit ? route('residents.update', $residents->id) : route('residents.store');
+
+    $button = $isEdit ? 'Update' : 'Create';
+@endphp
+
 @extends('layouts.dashboard')
 
-@section('title', 'Tambah Data Penduduk')
+@section('title', $title)
 
 @section('content')
 <div class="main-content container-fluid">
@@ -32,22 +43,26 @@
             </div>
             <div class="card-content">
             <div class="card-body">
-                <form class="form form-vertical" action="{{ route('residents.store') }}" method="POST">
+                <form class="form form-vertical" action="{{ $route }}" method="POST">
                     @csrf
-                    @method('POST')
+                    @if ($isEdit)
+                        @method('PUT')
+                    @else
+                        @method('POST')
+                    @endif
                 <div class="form-body">
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
                             <label for="first-name-vertical">NIK</label>
-                            <input type="number" id="first-name-vertical" class="form-control" name="nik"
+                            <input type="number" id="first-name-vertical" class="form-control" name="nik" value="{{ $isEdit ? $residents->nik : '' }}"
                                 placeholder="NIK">
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
                             <label for="first-name-vertical">Nama</label>
-                            <input type="text" id="first-name-vertical" class="form-control" name="name"
+                            <input type="text" id="first-name-vertical" class="form-control" name="name" value="{{ $isEdit ? $residents->name : '' }}"
                                 placeholder="Nama Lengkap">
                             </div>
                         </div>
@@ -55,12 +70,12 @@
                             <div class="row">
                                 <div class="col-6 form-group">
                                     <label for="email-id-vertical">Tempat Lahir</label>
-                                    <input type="text" id="email-id-vertical" class="form-control" name="birthplace"
+                                    <input type="text" id="email-id-vertical" class="form-control" name="birthplace" value="{{ $isEdit ? $residents->birthplace : '' }}"
                                         placeholder="Tempat Lahir">
                                 </div>
                                 <div class=" col-6 form-group">
                                     <label for="contact-info-vertical">Tanggal Lahir</label>
-                                    <input type="date" id="contact-info-vertical" class="form-control" name="birthdate"
+                                    <input type="date" id="contact-info-vertical" class="form-control" name="birthdate" value="{{ $isEdit ? $residents->birthdate : '' }}"
                                         placeholder="Tanggal Lahir">
                                 </div>
                             </div>
@@ -68,10 +83,18 @@
                         <div class="col-12">
                             <div class="form-group">
                             <label for="contact-info-vertical">Jenis Kelamin</label>
+                            {{-- @php
+                                $gender =  $isEdit ? $residents->gender : '' ;
+                            @endphp --}}
                             <select class="form-select" id="disabledSelect" name="gender">
-                                <option selected disabled>-- Jenis Kelamin --</option>
-                                <option>Laki-laki</option>
-                                <option>Perempuan</option>
+                                @if ($isEdit)
+                                    <option value="Laki-laki"{{ $residents->gender ===  'Laki-laki'  ? 'selected': '' }}>Laki-laki</option>
+                                    <option value="Perempuan"{{ $residents->gender ===  'Perempuan'  ? 'selected': '' }}>Perempuan</option>
+                                @else
+                                    <option selected disabled>-- Jenis Kelamin --</option>
+                                    <option value="Laki-laki">Laki-laki</option>
+                                    <option value="Perempuan">Perempuan</option>
+                                @endif
                             </select>
                             </div>
                         </div>
@@ -79,43 +102,63 @@
                             <div class="form-group">
                             <label for="password-vertical">Agama</label>
                             <select class="form-select" id="disabledSelect" name="religion">
-                                <option selected disabled>-- Agama --</option>
-                                <option>Islam</option>
-                                <option>Hindu</option>
-                                <option>Budha</option>
-                                <option>Kristen</option>
-                                <option>Konghucu</option>
-                                <option>Atheis</option>
+                                @if ($isEdit)
+                                    <option value="Islam"{{ $residents->religion ===  'Islam'  ? 'selected': '' }}>Islam</option>
+                                    <option value="Hindu"{{ $residents->religion ===  'Hindu'  ? 'selected': '' }}>Hindu</option>
+                                    <option value="Budha"{{ $residents->religion ===  'Budha'  ? 'selected': '' }}>Budha</option>
+                                    <option value="Kristen"{{ $residents->religion ===  'Kristen'  ? 'selected': '' }}>Kristen</option>
+                                    <option value="Konghucu"{{ $residents->religion ===  'Konghucu'  ? 'selected': '' }}>Konghucu</option>
+                                @else
+                                    <option selected disabled>-- Agama --</option>
+                                    <option>Islam</option>
+                                    <option>Hindu</option>
+                                    <option>Budha</option>
+                                    <option>Kristen</option>
+                                    <option>Konghucu</option>
+                                @endif
                             </select>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
                             <label for="first-name-vertical">Pendidikan Terakhir</label>
                             <select class="form-select" id="disabledSelect" name="last_education">
-                                <option selected disabled>-- Pendidikan --</option>
-                                <option>SD</option>
-                                <option>SMP</option>
-                                <option>SMA</option>
-                                <option>D1</option>
-                                <option>D2</option>
-                                <option>D3</option>
-                                <option>D4</option>
-                                <option>S1</option>
-                                <option>S2</option>
-                                <option>S3</option>
+                                @if ($isEdit)
+                                    <option value="SD"{{ $residents->last_education ===  'SD'  ? 'selected': '' }}>SD</option>
+                                    <option value="SMP"{{ $residents->last_education ===  'SMP'  ? 'selected': '' }}>SMP</option>
+                                    <option value="SMA"{{ $residents->last_education ===  'SMA'  ? 'selected': '' }}>SMA</option>
+                                    <option value="D1"{{ $residents->last_education ===  'D1'  ? 'selected': '' }}>D1</option>
+                                    <option value="D2"{{ $residents->last_education ===  'D2'  ? 'selected': '' }}>D2</option>
+                                    <option value="D3"{{ $residents->last_education ===  'D3'  ? 'selected': '' }}>D3</option>
+                                    <option value="D4"{{ $residents->last_education ===  'D4'  ? 'selected': '' }}>D4</option>
+                                    <option value="S1"{{ $residents->last_education ===  'S1'  ? 'selected': '' }}>S1</option>
+                                    <option value="S2"{{ $residents->last_education ===  'S2'  ? 'selected': '' }}>S2</option>
+                                    <option value="S3"{{ $residents->last_education ===  'S3'  ? 'selected': '' }}>S3</option>
+                                @else
+                                    <option selected disabled>-- Pendidikan --</option>
+                                    <option>SD</option>
+                                    <option>SMP</option>
+                                    <option>SMA</option>
+                                    <option>D1</option>
+                                    <option>D2</option>
+                                    <option>D3</option>
+                                    <option>D4</option>
+                                    <option>S1</option>
+                                    <option>S2</option>
+                                    <option>S3</option>
+                                @endif
                             </select>
                         </div>
-                        <div class="col-12">
+                        {{-- <div class="col-12">
                             <div class="form-group">
                             <label for="first-name-vertical">Alamat</label>
-                            <input type="text" id="first-name-vertical" class="form-control" name="address"
+                            <input type="text" id="first-name-vertical" class="form-control" name="address" value="{{ $isEdit ? $residents->address : '' }}"
                                 placeholder="Alamat">
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="col-12">
                             <div class="form-group">
                             <label for="first-name-vertical">Pekerjaan</label>
-                            <input type="text" id="first-name-vertical" class="form-control" name="work"
+                            <input type="text" id="first-name-vertical" class="form-control" name="work" value="{{ $isEdit ? $residents->work : '' }}"
                                 placeholder="Pekerjaan">
                             </div>
                         </div>
@@ -123,24 +166,40 @@
                             <div class="form-group">
                             <label for="first-name-vertical">Golongan Darah</label>
                             <select class="form-select" id="disabledSelect" name="blood_type">
-                                <option selected disabled>-- Golongan Darah --</option>
-                                <option>A-</option>
-                                <option>A+</option>
-                                <option>B-</option>
-                                <option>B+</option>
-                                <option>O-</option>
-                                <option>O+</option>
-                                <option>AB-</option>
-                                <option>AB+</option>
+                                @if ($isEdit)
+                                    <option value="A-"{{ $residents->blood_type ===  'A-'  ? 'selected': '' }}>A-</option>
+                                    <option value="A+"{{ $residents->blood_type ===  'A+'  ? 'selected': '' }}>A+</option>
+                                    <option value="B"{{ $residents->blood_type ===  'B'  ? 'selected': '' }}>B</option>
+                                    <option value="B+"{{ $residents->blood_type ===  'B+'  ? 'selected': '' }}>B+</option>
+                                    <option value="O-"{{ $residents->blood_type ===  'O-'  ? 'selected': '' }}>O-</option>
+                                    <option value="O+"{{ $residents->blood_type ===  'O+'  ? 'selected': '' }}>O+</option>
+                                    <option value="AB-"{{ $residents->blood_type ===  'AB-'  ? 'selected': '' }}>AB-</option>
+                                    <option value="AB+"{{ $residents->blood_type ===  'AB+'  ? 'selected': '' }}>AB+</option>
+                                @else
+                                    <option selected disabled>-- Golongan Darah --</option>
+                                    <option>A-</option>
+                                    <option>A+</option>
+                                    <option>B-</option>
+                                    <option>B+</option>
+                                    <option>O-</option>
+                                    <option>O+</option>
+                                    <option>AB-</option>
+                                    <option>AB+</option>
+                                @endif
                             </select>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
                             <label for="first-name-vertical">Status</label>
                             <select class="form-select" id="disabledSelect" name="martial_status">
-                                <option selected disabled>-- Status --</option>
-                                <option>Kawin</option>
-                                <option>Belum Kawin</option>
+                                @if ($isEdit)
+                                    <option value="Kawin"{{ $residents->martial_status ===  'Kawin'  ? 'selected': '' }}>Kawin</option>
+                                    <option value="Belum Kawin"{{ $residents->martial_status ===  'Belum Kawin'  ? 'selected': '' }}>Belum Kawin</option>
+                                @else
+                                    <option selected disabled>-- Status --</option>
+                                    <option>Kawin</option>
+                                    <option>Belum Kawin</option>
+                                @endif
                             </select>
                             </div>
                         </div>
@@ -148,13 +207,18 @@
                             <div class="form-group">
                             <label for="first-name-vertical">Kewarganegaraan</label>
                             <select class="form-select" id="disabledSelect" name="citizenship">
-                                <option selected disabled>-- Kewarganegaraan --</option>
-                                <option>WNI</option>
-                                <option>WNA</option>
+                                @if ($isEdit)
+                                    <option value="WNI"{{ $residents->martial_status ===  'WNI'  ? 'selected': '' }}>WNI</option>
+                                    <option value="WNA"{{ $residents->martial_status ===  'WNA'  ? 'selected': '' }}>WNA</option>
+                                @else
+                                    <option selected disabled>-- Kewarganegaraan --</option>
+                                    <option>WNI</option>
+                                    <option>WNA</option>
+                                @endif
                             </select>
                         </div>
                         <div class="col-12 d-flex justify-content-end">
-                            <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                            <button type="submit" class="btn btn-primary me-1 mb-1">{{ $button }}</button>
                             <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
                         </div>
                     </div>

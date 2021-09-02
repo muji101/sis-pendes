@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FamilyMember;
 use Illuminate\Http\Request;
-use App\Http\Requests\MoveRequest;
-use App\Models\Move;
-use App\Models\Resident;
 
-class MoveController extends Controller
+class FamilyMemberController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +14,7 @@ class MoveController extends Controller
      */
     public function index()
     {
-        $moves = Move::get();
-
-        return view('pages.move.index', [
-            'moves' => $moves
-        ]);
+        
     }
 
     /**
@@ -30,11 +24,7 @@ class MoveController extends Controller
      */
     public function create()
     {
-        $residents = Resident::get();
-        
-        return view('pages.move.create', [
-            'residents' => $residents
-        ]);
+        //
     }
 
     /**
@@ -43,13 +33,13 @@ class MoveController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(MoveRequest $request)
+    public function store(Request $request)
     {
         $data = $request->all();
 
-        Move::create($data);
+        FamilyMember::create($data);
 
-        return redirect()->route('moves.index');
+        return back();
     }
 
     /**
@@ -71,12 +61,7 @@ class MoveController extends Controller
      */
     public function edit($id)
     {
-        $residents = Resident::get();
-        $moves = Move::findOrFail($id);
-        return view('pages.move.create', [
-            'moves' => $moves,
-            'residents' => $residents
-        ]);
+        //
     }
 
     /**
@@ -86,13 +71,9 @@ class MoveController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(MoveRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $data = $request->all();
-
-        Move::FindOrfail($id)->update($data);
-
-        return redirect()->route('moves.index');
+        //
     }
 
     /**
@@ -103,10 +84,6 @@ class MoveController extends Controller
      */
     public function destroy($id)
     {
-        $data = Move::find($id);
-
-        $data->delete();
-
-        return back();
+        //
     }
 }

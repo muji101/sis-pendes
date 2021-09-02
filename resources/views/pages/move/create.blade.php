@@ -1,6 +1,16 @@
+@php
+    //isset buat ngecek data kalau ada true kalau tidak false
+    $isEdit = isset($moves);
+    
+    $title = $isEdit ? 'Edit Data Pindahan' : 'Tambah Data Pindahan';
+
+    $route = $isEdit ? route('moves.update', $moves->id) : route('moves.store');
+
+    $button = $isEdit ? 'Update' : 'Create';
+@endphp
 @extends('layouts.dashboard')
 
-@section('title', 'Tambah Data Perpindahan')
+@section('title', $title)
 
 @section('content')
 <div class="main-content container-fluid">
@@ -32,39 +42,47 @@
             </div>
             <div class="card-content">
             <div class="card-body">
-                <form class="form form-vertical">
+                <form class="form form-vertical" action="{{ $route }}" method="POST">
+                    @csrf
+                    @if ($isEdit)
+                        @method('PUT')
+                    @else
+                        @method('POST')
+                    @endif
                 <div class="form-body">
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="first-name-vertical">Nama</label>
-                                <select class="choices form-select">
-                                    <option selected disabled>-- NIK-Nama --</option>
-                                    <option value="rectangle">2323243-Seno</option>
-                                    <option value="rombo">1243324-Lunga</option>
-                                    <option value="romboid">55634-Romboid</option>
-                                    <option value="trapeze">365456-Trapeze</option>
-                                    <option value="traible">23455-Triangle</option>
-                                    <option value="polygon">5634564-Polygon</option>
+                                <select class="choices form-select" name="resident_id"> value="{{ $isEdit ? $moves->resident_id : '' }}"
+                                    <option selected disabled>-- NIK -- Nama --</option>
+                                    @if ($isEdit)
+                                        <option value="{{ $moves->resident->id }}"{{ $moves->resident->name === $moves->resident->name ? 'selected': '' }}>{{ $moves->resident->nik }} -- {{ $moves->resident->name }}</option>
+                                    @else
+                                        @foreach ($residents as $resident)
+                                        <option value="{{ $resident->id }}">{{ $resident->nik }} -- {{ $resident->name }}</option>
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>
                         </div>
+                        </div>
                         <div class="col-12">
                                 <div class="form-group">
-                                    <label for="email-id-vertical">Tanggal</label>
-                                    <input type="date" id="email-id-vertical" class="form-control" name="email-id"
+                                    <label for="email-id-vertical">Tanggal Pindah</label>
+                                    <input type="date" id="email-id-vertical" class="form-control" name="date" value="{{ $isEdit ? $moves->date : '' }}"
                                         placeholder="Tanggal">
                                 </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                            <label for="first-name-vertical">Alasan</label>
-                            <input type="text" id="first-name-vertical" class="form-control" name="fname"
-                                placeholder="Alasan pindah">
+                            <label for="first-name-vertical">Alasan Pindah</label>
+                            <input type="text" id="first-name-vertical" class="form-control" name="reason" value="{{ $isEdit ? $moves->reason : '' }}"
+                                placeholder="Alasan Pindah">
                             </div>
                         </div>
                         <div class="col-12 d-flex justify-content-end">
-                            <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                            <button type="submit" class="btn btn-primary me-1 mb-1">{{ $button }}</button>
                             <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
                         </div>
                     </div>

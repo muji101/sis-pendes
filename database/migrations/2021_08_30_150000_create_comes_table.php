@@ -16,19 +16,19 @@ class CreateComesTable extends Migration
         Schema::create('comes', function (Blueprint $table) {
             $table->id();
 
-            $table->integer('nik');
+            $table->bigInteger('nik');
             $table->string('name');
             $table->string('birthplace');
             $table->date('birthdate');
-            $table->enum('gender', ['LK, PR']);
-            $table->enum('religion', ['Islam', 'Kristen', 'Budha', 'Hindu', 'Konghucu']);
+            $table->string('gender');
+            $table->string('religion');
             $table->string('last_education');
-            $table->string('address');
+            $table->text('address');
             $table->string('work');
             $table->string('blood_type');
             $table->string('martial_status');
-            $table->string('citizenship');
             $table->date('arrival_date');
+            $table->string('citizenship');
             $table->integer('resident_id');
             
             $table->timestamps();

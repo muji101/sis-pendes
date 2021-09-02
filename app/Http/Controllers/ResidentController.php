@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\ResidentRequest;
+use App\Models\Family;
+use App\Models\FamilyMember;
 use App\Models\Resident;
 
 class ResidentController extends Controller
@@ -16,9 +18,11 @@ class ResidentController extends Controller
     public function index()
     {
         $residents = Resident::get();
-        
+        $families = Family::get();
+
         return view('pages.resident.index', [
-            'residents' => $residents
+            'residents' => $residents,
+            'families' => $families
         ]);
     }
 
@@ -40,15 +44,11 @@ class ResidentController extends Controller
      */
     public function store(ResidentRequest $request)
     {
-        $residents = Resident::get();
-
         $data = $request->all();
 
         Resident::create($data);
 
-        return view('pages.resident.index', [
-            'residents' => $residents
-        ]);
+        return redirect()->route('residents.index');
 
     }
 
@@ -71,7 +71,10 @@ class ResidentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $residents = Resident::findOrFail($id);
+        return view('pages.resident.create', [
+            'residents' => $residents
+        ]);
     }
 
     /**
@@ -81,9 +84,13 @@ class ResidentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ResidentRequest $request, $id)
     {
-        //
+        $data = $request->all();
+
+        Resident::Find($id)->update($data);
+
+        return redirect()->route('residents.index');
     }
 
     /**

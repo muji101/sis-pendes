@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\DeathRequest;
+use App\Models\Death;
+use App\Models\Resident;
+use Illuminate\Support\Carbon;
 
 class DeathController extends Controller
 {
@@ -13,7 +17,16 @@ class DeathController extends Controller
      */
     public function index()
     {
-        return view('pages.death.index');
+        $deaths = Death::get();
+        // $residents = Resident::get();
+        $current = Carbon::now()->toDateString();
+        $matis = Carbon::now()->isoFormat('dddd, D MMMM Y');
+
+        return view('pages.death.index', [
+            'deaths' => $deaths,
+            'current' => $current,
+            'matis' => $matis
+        ]);
     }
 
     /**
@@ -23,8 +36,11 @@ class DeathController extends Controller
      */
     public function create()
     {
-        return view('pages.death.create');
+        $residents = Resident::get();
         
+        return view('pages.death.create', [
+            'residents' => $residents
+        ]);
     }
 
     /**
@@ -33,9 +49,13 @@ class DeathController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DeathRequest $request)
     {
-        //
+        $data = $request->all();
+
+        Death::create($data);
+
+        return redirect()->route('deaths.index');
     }
 
     /**
@@ -57,7 +77,12 @@ class DeathController extends Controller
      */
     public function edit($id)
     {
-        //
+        $residents = Resident::get();
+        $deaths = Death::findOrFail($id);
+        return view('pages.death.create', [
+            'deaths' => $deaths,
+            'residents' => $residents
+        ]);
     }
 
     /**
@@ -67,9 +92,13 @@ class DeathController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DeathRequest $request, $id)
     {
-        //
+        $data = $request->all();
+
+        Death::FindOrfail($id)->update($data);
+
+        return redirect()->route('deaths.index');
     }
 
     /**
@@ -80,6 +109,10 @@ class DeathController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Death::find($id);
+
+        $data->delete();
+
+        return back();
     }
 }

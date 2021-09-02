@@ -10,7 +10,7 @@
 
                 <li class='sidebar-title'>Main Menu</li>
 
-                <li class="sidebar-item active ">
+                <li class="sidebar-item {{ (request()->is('dashboard')) ? 'active' : '' }}">
                     <a href="{{ route('dashboard') }}" class='sidebar-link'>
                         <i data-feather="home" width="20"></i>
                         <span>Dashboard</span>
@@ -18,7 +18,7 @@
 
                 </li>
 
-                <li class="sidebar-item  has-sub">
+                <li class="sidebar-item  has-sub {{ (request()->is('residents*')) ? 'active' : '' }}">
                     <a href="#" class='sidebar-link'>
                         <i data-feather="package" width="20"></i>
                         <span>Data Penduduk</span>
@@ -37,7 +37,7 @@
 
                 </li>
 
-                <li class="sidebar-item  has-sub">
+                <li class="sidebar-item  has-sub {{ (request()->is('families*')) ? 'active' : '' }}">
                     <a href="#" class='sidebar-link'>
                         <i data-feather="briefcase" width="20"></i>
                         <span>Data Kartu Keluarga</span>
@@ -54,7 +54,7 @@
 
                     </ul>
                 </li>
-                <li class="sidebar-item  has-sub">
+                <li class="sidebar-item  has-sub {{ (request()->is('births*')) ? 'active' : '' }}">
                     <a href="#" class='sidebar-link'>
                         <i data-feather="droplet" width="20"></i>
                         <span>Data Kelahiran</span>
@@ -71,7 +71,7 @@
 
                     </ul>
                 </li>
-                <li class="sidebar-item  has-sub">
+                <li class="sidebar-item  has-sub {{ (request()->is('deaths*')) ? 'active' : '' }}">
                     <a href="#" class='sidebar-link'>
                         <i data-feather="slack" width="20"></i>
                         <span>Data Kematian</span>
@@ -88,7 +88,7 @@
 
                     </ul>
                 </li>
-                <li class="sidebar-item  has-sub">
+                <li class="sidebar-item  has-sub {{ (request()->is('moves*')) ? 'active' : '' }}">
                     <a href="#" class='sidebar-link'>
                         <i data-feather="wind" width="20"></i>
                         <span>Data Perpindahan</span>
@@ -105,7 +105,7 @@
 
                     </ul>
                 </li>
-                <li class="sidebar-item  has-sub">
+                <li class="sidebar-item  has-sub {{ (request()->is('comes*')) ? 'active' : '' }}">
                     <a href="#" class='sidebar-link'>
                         <i data-feather="repeat" width="20"></i>
                         <span>Data Pendatang</span>
@@ -125,7 +125,7 @@
 
                 <li class='sidebar-title'>Settings &amp; Others</li>
 
-                <li class="sidebar-item  has-sub">
+                <li class="sidebar-item  has-sub {{ (request()->is('user*')) ? 'active' : '' }}">
                     <a href="#" class='sidebar-link'>
                         <i data-feather="users" width="20"></i>
                         <span>Setting Users</span>

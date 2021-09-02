@@ -58,7 +58,7 @@
                                         <td>{{ $family->id }}</td>
                                         <td>{{ $family->no_family }}</td>
                                         <td>{{ $family->resident->name }}</td>
-                                        <td>0</td>
+                                        <td>{{ $family->familyMember->count() }}</td>
                                         <td>{{ $family->rt }}</td>
                                         <td>{{ $family->rw }}</td>
                                         <td>
@@ -69,11 +69,19 @@
                                                     Info
                                                 </button>
                                                 <div class="dropdown-menu bg-transparent border-0" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item text-white rounded bg-success" href="#"><i data-feather="eye" width="20"></i> Detail</a>
-                                                    <a class="dropdown-item text-white rounded bg-primary" href="#"><i data-feather="edit" width="20"></i> Edit</a>
-                                                    <form action="#" method="POST">
+                                                    <a class="dropdown-item text-white rounded bg-success" href="{{ route('families.show', $family->id) }}"><i data-feather="eye" width="20"></i> Detail</a>
+                                                    {{-- <a href="#mymodal"
+                                                        data-remote="{{ route('families.show', $family->id) }}"
+                                                        data-toggle="modal"
+                                                        data-target="#mymodal"
+                                                        data-title="Detail Keluarga {{ $family->no_family }}" 
+                                                        class="btn btn-info btn-sm">
+                                                        <i data-feather="eye" width="20"></i>
+                                                    </a> --}}
+                                                    <a class="dropdown-item text-white rounded bg-primary" href="{{ route('families.edit', $family->id) }}"><i data-feather="edit" width="20"></i> Edit</a>
+                                                    <form action="{{ route('families.destroy', $family->id) }}" method="POST">
                                                         @csrf
-                                                        @method('DElETE')
+                                                        @method('delete')
                                                         <button class="dropdown-item text-white rounded bg-danger"><i data-feather="trash" width="20"></i> Delete</button>
                                                     </form>
                                                 </div>

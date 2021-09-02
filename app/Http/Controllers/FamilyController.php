@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\FamilyRequest;
 use App\Models\Family;
+use App\Models\FamilyMember;
 use App\Models\Resident;
 
 class FamilyController extends Controller
@@ -19,7 +20,7 @@ class FamilyController extends Controller
         $families = Family::get();
         
         return view('pages.family.index', [
-            'families' => $families
+            'families' => $families,
         ]);
     }
 
@@ -45,17 +46,14 @@ class FamilyController extends Controller
      */
     public function store(FamilyRequest $request)
     {
-        $families = Family::get();
-        
-        $data = $request->all();
+        // $residents = Resident::get();
 
-        // dd($data);
+        $data = $request->all();
 
         Family::create($data);
 
-        return view('pages.family.index', [
-            'families' => $families
-        ]);
+        return redirect()->route('families.index')->with('residents');
+
     }
 
     /**
@@ -66,7 +64,26 @@ class FamilyController extends Controller
      */
     public function show($id)
     {
-        //
+        $families = Family::findOrFail($id);
+        $residents = Resident::get();
+        $members = FamilyMember::where('family_id', $id)->get();
+        // $families = Family::with('details.product')->findOrFail($id);
+
+        // return view('pages.family.show')->with([
+        //     'families' => $families
+        // ]);
+
+        return view('pages.family.detail', [
+            'families' => $families,
+            'residents' => $residents,
+            'members' => $members
+        ]);
+
+        // $families = Family::findOrFail($id);
+
+        // return view('pages.family.detail', [
+        //     'families' => $families
+        // ]);
     }
 
     /**
@@ -77,7 +94,10 @@ class FamilyController extends Controller
      */
     public function edit($id)
     {
-        //
+        $families = Family::findOrFail($id);
+        return view('pages.family.create', [
+            'families' => $families
+        ]);
     }
 
     /**
@@ -89,7 +109,11 @@ class FamilyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        Family::Find($id)->update($data);
+
+        return redirect()->route('families.index');
     }
 
     /**
@@ -100,6 +124,10 @@ class FamilyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Family::findOrFail($id);
+
+        $data->delete();
+
+        return back();
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ResidentRequest extends FormRequest
+class ComeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -31,10 +31,13 @@ class ResidentRequest extends FormRequest
             'gender' => 'required',
             'religion' => 'required',
             'last_education' => 'required',
+            'address' => 'required',
             'work' => 'required',
             'blood_type' => 'required',
             'martial_status' => 'required',
-            'citizenship' => 'required'
+            'citizenship' => 'required',
+            'arrival_date' => 'required',
+            'resident_id' => 'required'
         ];
     }
 }

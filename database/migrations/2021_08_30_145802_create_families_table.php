@@ -17,10 +17,11 @@ class CreateFamiliesTable extends Migration
             $table->id();
             
             $table->integer('resident_id');
-            $table->integer('no_family');
+            $table->bigInteger('no_family');
             $table->string('village');
             $table->integer('rt');
             $table->integer('rw');
+            $table->text('address');
 
             $table->timestamps();
         });

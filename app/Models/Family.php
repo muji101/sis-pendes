@@ -14,21 +14,23 @@ class Family extends Model
         'no_family',
         'village',
         'rt',
-        'rw'
+        'rw',
+        'address',
     ];
 
-    public function birth()
-    {
-        return $this->hasMany(Birth::class);
-    }
+    // public function birth()
+    // {
+    //     return $this->hasMany(Birth::class);
+    // }
 
     public function resident()
     {
-        return $this->hasMany(Resident::class);
+        return $this->belongsTo(Resident::class);
     }
 
     public function familyMember()
     {
-        return $this->hasMany(FamilyMember::class);
+        return $this->hasMany(FamilyMember::class, 'family_id', 'id');
     }
+
 }

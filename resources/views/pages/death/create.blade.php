@@ -1,6 +1,16 @@
+@php
+    //isset buat ngecek data kalau ada true kalau tidak false
+    $isEdit = isset($deaths);
+
+    $title = $isEdit ? 'Edit Data Kematian' : 'Tambah Data Kematian';
+    
+    $route = $isEdit ? route('deaths.update', $deaths->id) : route('deaths.store');
+
+    $button = $isEdit ? 'Update' : 'Create';
+@endphp
 @extends('layouts.dashboard')
 
-@section('title', 'Tambah Data Kematian')
+@section('title',  $title )
 
 @section('content')
 <div class="main-content container-fluid">
@@ -32,20 +42,27 @@
             </div>
             <div class="card-content">
             <div class="card-body">
-                <form class="form form-vertical">
+                <form class="form form-vertical" action="{{ $route }}" method="POST">
+                    @csrf
+                    @if ($isEdit)
+                        @method('PUT')
+                    @else
+                        @method('POST')
+                    @endif
                 <div class="form-body">
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="first-name-vertical">Nama</label>
-                                <select class="choices form-select">
-                                    <option selected disabled>-- NIK-Nama --</option>
-                                    <option value="rectangle">2323243-Seno</option>
-                                    <option value="rombo">1243324-Lunga</option>
-                                    <option value="romboid">55634-Romboid</option>
-                                    <option value="trapeze">365456-Trapeze</option>
-                                    <option value="traible">23455-Triangle</option>
-                                    <option value="polygon">5634564-Polygon</option>
+                                <select class="choices form-select" name="resident_id"> value="{{ $isEdit ? $deaths->resident_id : '' }}"
+                                    <option selected disabled>-- NIK -- Nama --</option>
+                                    @if ($isEdit)
+                                        <option value="{{ $deaths->resident->id }}"{{ $deaths->resident->name === $deaths->resident->name ? 'selected': '' }}>{{ $deaths->resident->nik }} -- {{ $deaths->resident->name }}</option>
+                                    @else
+                                        @foreach ($residents as $resident)
+                                        <option value="{{ $resident->id }}">{{ $resident->nik }} -- {{ $resident->name }}</option>
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>
                         </div>
@@ -53,12 +70,12 @@
                             <div class="row">
                                 <div class="col-6 form-group">
                                     <label for="email-id-vertical">Tanggal</label>
-                                    <input type="date" id="email-id-vertical" class="form-control" name="email-id"
+                                    <input type="date" id="email-id-vertical" class="form-control" name="date" value="{{ $isEdit ? $deaths->date : '' }}"
                                         placeholder="Tanggal">
                                 </div>
                                 <div class=" col-6 form-group">
                                     <label for="contact-info-vertical">Jam</label>
-                                    <input type="time" id="contact-info-vertical" class="form-control" name="contact"
+                                    <input type="time" id="contact-info-vertical" class="form-control" name="time" value="{{ $isEdit ? $deaths->time : '' }}"
                                         placeholder="Jam">
                                 </div>
                             </div>
@@ -66,18 +83,18 @@
                         <div class="col-12">
                             <div class="form-group">
                             <label for="password-vertical">Umur</label>
-                            <input type="number" id="contact-info-vertical" class="form-control" name="contact"
+                            <input type="number" id="contact-info-vertical" class="form-control" name="age" value="{{ $isEdit ? $deaths->age : '' }}"
                             placeholder="Umur">
                         </div>
                         <div class="col-12">
                             <div class="form-group">
                             <label for="first-name-vertical">Penyebab</label>
-                            <input type="text" id="first-name-vertical" class="form-control" name="fname"
+                            <input type="text" id="first-name-vertical" class="form-control" name="reason" value="{{ $isEdit ? $deaths->reason : '' }}"
                                 placeholder="Penyebab Kematian">
                             </div>
                         </div>
                         <div class="col-12 d-flex justify-content-end">
-                            <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                            <button type="submit" class="btn btn-primary me-1 mb-1">{{ $button }}</button>
                             <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
                         </div>
                     </div>

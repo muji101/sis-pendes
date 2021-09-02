@@ -47,8 +47,8 @@
                                         <th>NIK</th>
                                         <th>Nama</th>
                                         <th>Jenis Kelamin</th>
-                                        <th>Alamat</th>
-                                        <th>NO. KK</th>
+                                        {{-- <th>Alamat</th>
+                                        <th>NO. KK</th> --}}
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -59,9 +59,22 @@
                                         <td>{{ $resident->nik }}</td>
                                         <td>{{ $resident->name }}</td>
                                         <td>{{ $resident->gender }}</td>
-                                        <td>{{ $resident->address }}</td>
-                                        <td></td>
-                                        <td>
+                                        {{-- @if (isset($families))
+                                            <td>{{ $families->address }}</td>
+                                            <td>{{ $families->no_family }}</td>
+                                            @foreach ($families as $item)
+                                                <td>{{ $item->address }}</td>
+                                                <td>{{ $item->no_family }}</td>
+                                            @endforeach
+                                            <td></td>
+                                            <td></td>
+                                        @else
+                                            <td>-</td>
+                                            <td>-</td>
+                                        @endif --}}
+                                        
+                                        
+                                        {{-- <td>
                                             <div class="dropend">
                                                 <button class="btn btn-primary dropdown-toggle me-1" type="button"
                                                     id="dropdownMenuButton" data-bs-toggle="dropdown"
@@ -70,7 +83,7 @@
                                                 </button>
                                                 <div class="dropdown-menu bg-transparent border-0" aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item text-white rounded bg-success" href="#"><i data-feather="eye" width="20"></i> Detail</a>
-                                                    <a class="dropdown-item text-white rounded bg-primary" href="#"><i data-feather="edit" width="20"></i> Edit</a>
+                                                    <a class="dropdown-item text-white rounded bg-primary" href="{{ route('residents.edit', $resident->id) }}"><i data-feather="edit" width="20"></i> Edit</a>
                                                     <form action="{{ route('residents.destroy', $resident->id) }}" method="POST">
                                                         @csrf
                                                         @method('delete')
@@ -78,6 +91,21 @@
                                                     </form>
                                                 </div>
                                             </div>
+                                        </td> --}}
+                                        <td>
+                                            <a href="{{ route('residents.show', $resident->id) }}" class="btn round btn-info btn-sm">
+                                                <i data-feather="eye" width="20"></i>
+                                            </a>
+                                            <a href="{{ route('residents.edit', $resident->id) }}" class="btn round btn-primary btn-sm">
+                                                <i data-feather="edit" width="20"></i>
+                                            </a>
+                                            <form action="{{ route('residents.destroy', $resident->id) }}" method="POST" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn round btn-danger btn-sm ">
+                                                    <i data-feather="trash" width="20"></i>
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                     @endforeach

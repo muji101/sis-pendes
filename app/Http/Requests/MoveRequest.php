@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class FamilyRequest extends FormRequest
+class MoveRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,11 +25,8 @@ class FamilyRequest extends FormRequest
     {
         return [
             'resident_id' => 'required',
-            'no_family' => 'required',
-            'village' => 'required',
-            'rt' => 'required',
-            'rw' => 'required',
-            'address' => 'required',
+            'date' => 'required',
+            'reason' => 'required'
         ];
     }
 }

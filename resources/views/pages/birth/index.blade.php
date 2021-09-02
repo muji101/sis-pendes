@@ -52,12 +52,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($births as $birth)
                                     <tr>
-                                        <td>1</td>
-                                        <td>Joko loyo</td>
-                                        <td>20-11-2018</td>
-                                        <td>Laki-laki</td>
-                                        <td>Supri</td>
+                                        <td>{{ $birth->id }}</td>
+                                        <td>{{ $birth->name }}</td>
+                                        <td>{{ $birth->date }}</td>
+                                        <td>{{ $birth->gender }}</td>
+                                        <td>{{ $birth->family->name }}</td>
                                         <td>
                                             <div class="dropend">
                                                 <button class="btn btn-primary dropdown-toggle me-1" type="button"
@@ -67,16 +68,17 @@
                                                 </button>
                                                 <div class="dropdown-menu bg-transparent border-0" aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item text-white rounded bg-success" href="#"><i data-feather="eye" width="20"></i> Detail</a>
-                                                    <a class="dropdown-item text-white rounded bg-primary" href="#"><i data-feather="edit" width="20"></i> Edit</a>
-                                                    <form action="#" method="POST">
+                                                    <a class="dropdown-item text-white rounded bg-primary" href="{{ route('births.edit', $birth->id) }}"><i data-feather="edit" width="20"></i> Edit</a>
+                                                    <form action="{{ route('births.destroy', $birth->id) }}" method="POST">
                                                         @csrf
-                                                        @method('DElETE')
+                                                        @method('DELETE')
                                                         <button class="dropdown-item text-white rounded bg-danger"><i data-feather="trash" width="20"></i> Delete</button>
                                                     </form>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

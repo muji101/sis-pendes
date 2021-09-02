@@ -19,6 +19,6 @@ class Birth extends Model
 
     public function family()
     {
-        return $this->belongsTo(Family::class);
+        return $this->belongsTo(Resident::class, 'family_id', 'id');
     }
 }

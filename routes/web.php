@@ -7,6 +7,7 @@ use App\Http\Controllers\FamilyController;
 use App\Http\Controllers\ComeController;
 use App\Http\Controllers\BirthController;
 use App\Http\Controllers\DeathController;
+use App\Http\Controllers\FamilyMemberController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +39,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('residents', ResidentController::class);
 
     Route::resource('families', FamilyController::class);
+
+    Route::resource('familyMember', FamilyMemberController::class);
 
     Route::resource('births', BirthController::class);
 

@@ -47,19 +47,21 @@
                                         <th>NIK</th>
                                         <th>Nama</th>
                                         <th>Tanggal</th>
-                                        <th>Alamat</th>
+                                        <th>Meninggal Jam</th>
                                         <th>Umur</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($deaths as $death)
                                     <tr>
-                                        <td>1</td>
-                                        <td>15432454523</td>
-                                        <td>eliti</td>
-                                        <td>22-01-2021</td>
-                                        <td>Rocca d'Arce</td>
-                                        <td>76</td>
+                                        <td>{{ $death->id }}</td>
+                                        <td>{{ $death->resident->nik }}</td>
+                                        <td>{{ $death->resident->name }}</td>
+                                        <td>{{ $death->date }}</td>
+                                        <td>{{ $death->time }}</td>
+                                        {{-- <td>{{ $current - $death->resident->birthdate}}</td> --}}
+                                        <td>{{ $death->age }}</td>
                                         <td>
                                             <div class="dropend">
                                                 <button class="btn btn-primary dropdown-toggle me-1" type="button"
@@ -69,16 +71,17 @@
                                                 </button>
                                                 <div class="dropdown-menu bg-transparent border-0" aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item text-white rounded bg-success" href="#"><i data-feather="eye" width="20"></i> Detail</a>
-                                                    <a class="dropdown-item text-white rounded bg-primary" href="#"><i data-feather="edit" width="20"></i> Edit</a>
-                                                    <form action="#" method="POST">
+                                                    <a class="dropdown-item text-white rounded bg-primary" href="{{ route('deaths.edit', $death->id) }}"><i data-feather="edit" width="20"></i> Edit</a>
+                                                    <form action="{{ route('deaths.destroy', $death->id) }}" method="POST">
                                                         @csrf
-                                                        @method('DElETE')
+                                                        @method('DELETE')
                                                         <button class="dropdown-item text-white rounded bg-danger"><i data-feather="trash" width="20"></i> Delete</button>
                                                     </form>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

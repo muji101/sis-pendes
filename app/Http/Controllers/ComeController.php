@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Resident;
+use App\Models\Come;
+use App\Http\Requests\ComeRequest;
+
 
 class ComeController extends Controller
 {
@@ -13,7 +17,11 @@ class ComeController extends Controller
      */
     public function index()
     {
-        return view('pages.come.index');
+        $comes = Come::get();
+
+        return view('pages.come.index', [
+            'comes' => $comes
+        ]);
     }
 
     /**
@@ -23,7 +31,11 @@ class ComeController extends Controller
      */
     public function create()
     {
-        return view('pages.come.create');
+        $residents = Resident::get();
+        
+        return view('pages.come.create', [
+            'residents' => $residents
+        ]);
     }
 
     /**
@@ -32,9 +44,13 @@ class ComeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ComeRequest $request)
     {
-        //
+        $data = $request->all();
+
+        Come::create($data);
+
+        return redirect()->route('comes.index');
     }
 
     /**
@@ -56,7 +72,12 @@ class ComeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $residents = Resident::get();
+        $comes = Come::findOrFail($id);
+        return view('pages.come.create', [
+            'comes' => $comes,
+            'residents' => $residents
+        ]);
     }
 
     /**
@@ -66,9 +87,13 @@ class ComeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ComeRequest $request, $id)
     {
-        //
+        $data = $request->all();
+
+        Come::FindOrfail($id)->update($data);
+
+        return redirect()->route('comes.index');
     }
 
     /**
@@ -79,6 +104,10 @@ class ComeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Come::find($id);
+
+        $data->delete();
+
+        return back();
     }
 }

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Birth;
+use App\Models\Resident;
 use Illuminate\Http\Request;
+use App\Http\Requests\BirthRequest;
 
 class BirthController extends Controller
 {
@@ -13,7 +16,11 @@ class BirthController extends Controller
      */
     public function index()
     {
-        return view('pages.birth.index');
+        $births = Birth::get();
+
+        return view('pages.birth.index', [
+            'births' => $births
+        ]);
     }
 
     /**
@@ -23,7 +30,11 @@ class BirthController extends Controller
      */
     public function create()
     {
-        return view('pages.birth.create');
+        $residents = Resident::get();
+        
+        return view('pages.birth.create', [
+            'residents' => $residents
+        ]);
     }
 
     /**
@@ -32,9 +43,13 @@ class BirthController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BirthRequest $request)
     {
-        //
+        $data = $request->all();
+
+        Birth::create($data);
+
+        return redirect()->route('births.index');
     }
 
     /**
@@ -56,7 +71,12 @@ class BirthController extends Controller
      */
     public function edit($id)
     {
-        //
+        $residents = Resident::get();
+        $births = Birth::findOrFail($id);
+        return view('pages.birth.create', [
+            'births' => $births,
+            'residents' => $residents
+        ]);
     }
 
     /**
@@ -66,9 +86,13 @@ class BirthController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BirthRequest $request, $id)
     {
-        //
+        $data = $request->all();
+
+        Birth::FindOrfail($id)->update($data);
+
+        return redirect()->route('births.index');
     }
 
     /**
@@ -79,6 +103,10 @@ class BirthController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Birth::find($id);
+
+        $data->delete();
+
+        return back();
     }
 }

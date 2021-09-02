@@ -1,6 +1,17 @@
+@php
+    //isset buat ngecek data kalau ada true kalau tidak false
+    $isEdit = isset($families);
+    
+    $title = $isEdit ? 'Edit Data Keluarga' : 'Tambah Data Keluarga';
+    
+    $route = $isEdit ? route('families.update', $families->id) : route('families.store');
+
+    $button = $isEdit ? 'Update' : 'Create';
+@endphp
+
 @extends('layouts.dashboard')
 
-@section('title', 'Tambah Data Keluarga')
+@section('title', $title)
 
 @section('content')
 <div class="main-content container-fluid">
@@ -32,56 +43,66 @@
                 </div>
                 <div class="card-content">
                 <div class="card-body">
-                    <form class="form form-vertical" action="{{ route('families.store') }}" method="POST">
+                    <form class="form form-vertical" action="{{ $route }}" method="POST">
                         @csrf
-                        @method('POST')
+                        @if ($isEdit)
+                            @method('PUT')
+                        @else
+                            @method('POST')
+                        @endif
                     <div class="form-body">
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
                                 <label for="first-name-vertical">NO.KK</label>
-                                <input type="number" id="first-name-vertical" class="form-control" name="no_family"
+                                <input type="number" id="first-name-vertical" class="form-control" name="no_family" value="{{ $isEdit ? $families->no_family : '' }}"
                                     placeholder="NO.KK">
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                 <label for="first-name-vertical">Kepala Keluarga</label>
-                                <select class="choices form-select" name="resident_id">
+                                <select class="choices form-select" name="resident_id"> value="{{ $isEdit ? $families->resident_id : '' }}"
                                     <option selected disabled>-- Kepala Keluarga --</option>
-                                    @foreach ($residents as $resident)
-                                    <option value="{{ $resident->id }}">{{ $resident->name }}</option>
-                                    @endforeach
-                                    {{-- <option value="rombo">Lunga</option>
-                                    <option value="romboid">Romboid</option>
-                                    <option value="trapeze">Trapeze</option>
-                                    <option value="traible">Triangle</option>
-                                    <option value="polygon">Polygon</option> --}}
+                                    @if ($isEdit)
+                                        <option value="{{ $families->resident->id }}"{{ $families->resident->name === $families->resident->name ? 'selected': '' }}>{{ $families->resident->nik }} -- {{ $families->resident->name }}</option>
+                                    @else
+                                        @foreach ($residents as $resident)
+                                        <option value="{{ $resident->id }}">{{ $resident->nik }} -- {{ $resident->name }}</option>
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                 <label for="first-name-vertical">Dusun</label>
-                                <input type="text" id="first-name-vertical" class="form-control" name="village"
+                                <input type="text" id="first-name-vertical" class="form-control" name="village" value="{{ $isEdit ? $families->village : '' }}"
                                     placeholder="Dusun">
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                 <label for="first-name-vertical">RT</label>
-                                <input type="number" id="first-name-vertical" class="form-control" name="rt"
+                                <input type="number" id="first-name-vertical" class="form-control" name="rt" value="{{ $isEdit ? $families->rt : '' }}"
                                     placeholder="Rukun Tetangga">
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                 <label for="first-name-vertical">RW</label>
-                                <input type="number" id="first-name-vertical" class="form-control" name="rw"
+                                <input type="number" id="first-name-vertical" class="form-control" name="rw" value="{{ $isEdit ? $families->rw : '' }}"
                                     placeholder="Rukun Warga">
                                 </div>
                             </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                <label for="first-name-vertical">Alamat</label>
+                                <input type="address" id="first-name-vertical" class="form-control" name="address" value="{{ $isEdit ? $families->address : '' }}"
+                                    placeholder="Alamat">
+                                </div>
+                            </div>
                             <div class="col-12 d-flex justify-content-end">
-                                <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                <button type="submit" class="btn btn-primary me-1 mb-1">{{ $button }}</button>
                                 <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
                             </div>
                         </div>

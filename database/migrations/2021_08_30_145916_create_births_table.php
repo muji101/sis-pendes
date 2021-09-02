@@ -19,7 +19,7 @@ class CreateBirthsTable extends Migration
             $table->string('name');
             $table->date('date');
             $table->string('place');
-            $table->enum('gender', ['LK, PR']);
+            $table->string('gender');
             $table->integer('family_id');
 
             $table->timestamps();
