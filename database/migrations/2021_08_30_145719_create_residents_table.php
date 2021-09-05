@@ -23,11 +23,11 @@ class CreateResidentsTable extends Migration
             $table->string('gender');
             $table->string('religion');
             $table->string('last_education');
-            // $table->string('address');
             $table->string('work');
             $table->string('blood_type');
             $table->string('martial_status');
             $table->string('citizenship');
+            $table->string('status');
 
             $table->timestamps();
         });

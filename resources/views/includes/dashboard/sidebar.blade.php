@@ -1,8 +1,10 @@
 <div id="sidebar" class='active'>
     <div class="sidebar-wrapper active">
         <div class="sidebar-header">
-            {{-- <img src="dist/assets/images/logo.svg" alt="" srcset=""> --}}
-            SIS-PENDES
+            <div class="d-flex">
+                <img src="/images/logo.png" alt="" srcset="">
+                <p class="text-primary">sispendes</p>
+            </div>
         </div>
         <div class="sidebar-menu">
             <ul class="menu">

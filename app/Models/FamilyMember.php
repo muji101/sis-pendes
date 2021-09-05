@@ -15,6 +15,11 @@ class FamilyMember extends Model
         'family_relationship'
     ];
 
+    // public function anggota()
+    // {
+    //     return $this->hasOne(Family::class, 'id', 'class_id');
+    // }
+
     public function family()
     {
         return $this->belongsTo(Family::class);

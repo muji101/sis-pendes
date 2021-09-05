@@ -2,281 +2,237 @@
 
 @section('title', 'Dashboard')
 
+@push('addon-style')
+<link rel="stylesheet" href="/dist/assets/vendors/apexcharts/apexcharts.css">
+@endpush
+
 @section('content')
 <div class="main-content container-fluid">
-    <div class="page-title">
-        <h3>Dashboard</h3>
-        <p class="text-subtitle text-muted">A good dashboard to display your statistics</p>
+    <div class="row">
+        <!-- Total Penduduk -->
+        <div class="col-2 px-2 px-xl-3 mb-2 mb-lg-3 mb-xl-4">
+            <div class="card border-top-0 border-start-0 border-end-0 border-5 border-info">
+                <div class="card-body p-1 p-xl-3">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col mr-2 d-flex flex-column justify-content-between h-100">
+                            <div class="text-sm fw-bold text-secondary text-uppercase d-flex align-items-center h-100 mb-1">
+                                Total Penduduk
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" style="font-size: 40px;">{{ $totalResidents }}</div>
+                        </div>
+                        {{-- <i data-feather="edit" class="text-secondary"></i>  --}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Total Keluarga -->
+        <div class="col-2 px-2 px-xl-3 mb-2 mb-lg-3 mb-xl-4">
+            <div class="card border-top-0 border-start-0 border-end-0 border-5 border-info">
+                <div class="card-body p-1 p-xl-3">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col mr-2 d-flex flex-column justify-content-between h-100">
+                            <div class="text-sm fw-bold text-secondary text-uppercase d-flex align-items-center h-100 mb-1">
+                                Total Keluarga
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" style="font-size: 40px;">{{ $families->count() }}</div>
+                        </div>
+                        {{-- <i data-feather="edit" class="text-secondary"></i>  --}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Total Kelahiran -->
+        <div class="col-2 px-2 px-xl-3 mb-2 mb-lg-3 mb-xl-4">
+            <div class="card border-top-0 border-start-0 border-end-0 border-5 border-info">
+                <div class="card-body p-1 p-xl-3">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col mr-2 d-flex flex-column justify-content-between h-100">
+                            <div class="text-sm fw-bold text-secondary text-uppercase d-flex align-items-center h-100 mb-1">
+                                Total  Kelahiran
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" style="font-size: 40px;">{{ $births->count() }}</div>
+                        </div>
+                        {{-- <i data-feather="edit" class="text-secondary"></i>  --}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Total Kematian -->
+        <div class="col-2 px-2 px-xl-3 mb-2 mb-lg-3 mb-xl-4">
+            <div class="card border-top-0 border-start-0 border-end-0 border-5 border-info">
+                <div class="card-body p-1 p-xl-3">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col mr-2 d-flex flex-column justify-content-between h-100">
+                            <div class="text-sm fw-bold text-secondary text-uppercase d-flex align-items-center h-100 mb-1">
+                                Total Kematian
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" style="font-size: 40px;">{{ $deaths->count() }}</div>
+                        </div>
+                        {{-- <i data-feather="edit" class="text-secondary"></i>  --}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Total Pendatang -->
+        <div class="col-2 px-2 px-xl-3 mb-2 mb-lg-3 mb-xl-4">
+            <div class="card border-top-0 border-start-0 border-end-0 border-5 border-info">
+                <div class="card-body p-1 p-xl-3">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col mr-2 d-flex flex-column justify-content-between h-100">
+                            <div class="text-sm fw-bold text-secondary text-uppercase d-flex align-items-center h-100 mb-1">
+                                Total Pendatang
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" style="font-size: 40px;">{{ $comes->count() }}</div>
+                        </div>
+                        {{-- <i data-feather="edit" class="text-secondary"></i>  --}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Total Pindahan -->
+        <div class="col-2 px-2 px-xl-3 mb-2 mb-lg-3 mb-xl-4">
+            <div class="card border-top-0 border-start-0 border-end-0 border-5 border-info">
+                <div class="card-body p-1 p-xl-3">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col mr-2 d-flex flex-column justify-content-between h-100">
+                            <div class="text-sm fw-bold text-secondary text-uppercase d-flex align-items-center h-100 mb-1">
+                                Total Pindahan
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" style="font-size: 40px;">{{ $moves->count() }}</div>
+                        </div>
+                        {{-- <i data-feather="edit" class="text-secondary"></i>  --}}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <section class="section">
-        <div class="row mb-2">
-            <div class="col-12 col-md-3">
-                <div class="card card-statistic">
-                    <div class="card-body p-0">
-                        <div class="d-flex flex-column">
-                            <div class='px-3 py-3 d-flex justify-content-between'>
-                                <h3 class='card-title'>BALANCE</h3>
-                                <div class="card-right d-flex align-items-center">
-                                    <p>$50 </p>
-                                </div>
-                            </div>
-                            <div class="chart-wrapper">
-                                <canvas id="canvas1" style="height:100px !important"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="card card-statistic">
-                    <div class="card-body p-0">
-                        <div class="d-flex flex-column">
-                            <div class='px-3 py-3 d-flex justify-content-between'>
-                                <h3 class='card-title'>Revenue</h3>
-                                <div class="card-right d-flex align-items-center">
-                                    <p>$532,2 </p>
-                                </div>
-                            </div>
-                            <div class="chart-wrapper">
-                                <canvas id="canvas2" style="height:100px !important"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="card card-statistic">
-                    <div class="card-body p-0">
-                        <div class="d-flex flex-column">
-                            <div class='px-3 py-3 d-flex justify-content-between'>
-                                <h3 class='card-title'>ORDERS</h3>
-                                <div class="card-right d-flex align-items-center">
-                                    <p>1,544 </p>
-                                </div>
-                            </div>
-                            <div class="chart-wrapper">
-                                <canvas id="canvas3" style="height:100px !important"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="card card-statistic">
-                    <div class="card-body p-0">
-                        <div class="d-flex flex-column">
-                            <div class='px-3 py-3 d-flex justify-content-between'>
-                                <h3 class='card-title'>Sales Today</h3>
-                                <div class="card-right d-flex align-items-center">
-                                    <p>423 </p>
-                                </div>
-                            </div>
-                            <div class="chart-wrapper">
-                                <canvas id="canvas4" style="height:100px !important"></canvas>
-                            </div>
-                        </div>
-                    </div>
+    <div class="row">
+        <div class="col-6 px-2 px-xl-3 mb-2 mb-lg-3 mb-xl-4">
+            <div class="card border-top-0 border-start-0 border-end-0 border-5 border-info">
+                <div class="card-body p-1 p-xl-3">
+                    <canvas id="myChart1" width="400" height="300"></canvas>
                 </div>
             </div>
         </div>
-        <div class="row mb-4">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class='card-heading p-1 pl-3'>Sales</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4 col-12">
-                                <div class="pl-3">
-                                    <h1 class='mt-5'>$21,102</h1>
-                                    <p class='text-xs'><span class="text-green"><i data-feather="bar-chart"
-                                                width="15"></i> +19%</span> than last month</p>
-                                    <div class="legends">
-                                        <div class="legend d-flex flex-row align-items-center">
-                                            <div class='w-3 h-3 rounded-full bg-info me-2'></div><span
-                                                class='text-xs'>Last Month</span>
-                                        </div>
-                                        <div class="legend d-flex flex-row align-items-center">
-                                            <div class='w-3 h-3 rounded-full bg-blue me-2'></div><span
-                                                class='text-xs'>Current Month</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-8 col-12">
-                                <canvas id="bar"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h4 class="card-title">Orders Today</h4>
-                        <div class="d-flex ">
-                            <i data-feather="download"></i>
-                        </div>
-                    </div>
-                    <div class="card-body px-0 pb-0">
-                        <div class="table-responsive">
-                            <table class='table mb-0' id="table1">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                        <th>City</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Graiden</td>
-                                        <td>vehicula.aliquet@semconsequat.co.uk</td>
-                                        <td>076 4820 8838</td>
-                                        <td>Offenburg</td>
-                                        <td>
-                                            <span class="badge bg-success">Active</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Dale</td>
-                                        <td>fringilla.euismod.enim@quam.ca</td>
-                                        <td>0500 527693</td>
-                                        <td>New Quay</td>
-                                        <td>
-                                            <span class="badge bg-success">Active</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nathaniel</td>
-                                        <td>mi.Duis@diam.edu</td>
-                                        <td>(012165) 76278</td>
-                                        <td>Grumo Appula</td>
-                                        <td>
-                                            <span class="badge bg-danger">Inactive</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Darius</td>
-                                        <td>velit@nec.com</td>
-                                        <td>0309 690 7871</td>
-                                        <td>Ways</td>
-                                        <td>
-                                            <span class="badge bg-success">Active</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ganteng</td>
-                                        <td>velit@nec.com</td>
-                                        <td>0309 690 7871</td>
-                                        <td>Ways</td>
-                                        <td>
-                                            <span class="badge bg-success">Active</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Oleg</td>
-                                        <td>rhoncus.id@Aliquamauctorvelit.net</td>
-                                        <td>0500 441046</td>
-                                        <td>Rossignol</td>
-                                        <td>
-                                            <span class="badge bg-success">Active</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Kermit</td>
-                                        <td>diam.Sed.diam@anteVivamusnon.org</td>
-                                        <td>(01653) 27844</td>
-                                        <td>Patna</td>
-                                        <td>
-                                            <span class="badge bg-success">Active</span>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card ">
-                    <div class="card-header">
-                        <h4>Your Earnings</h4>
-                    </div>
-                    <div class="card-body">
-                        <div id="radialBars"></div>
-                        <div class="text-center mb-5">
-                            <h6>From last month</h6>
-                            <h1 class='text-green'>+$2,134</h1>
-                        </div>
-                    </div>
-                </div>
-                <div class="card widget-todo">
-                    <div
-                        class="card-header border-bottom d-flex justify-content-between align-items-center">
-                        <h4 class="card-title d-flex">
-                            <i class='bx bx-check font-medium-5 pl-25 pr-75'></i>Progress
-                        </h4>
-
-                    </div>
-                    <div class="card-body px-0 py-1">
-                        <table class='table table-borderless'>
-                            <tr>
-                                <td class='col-3'>UI Design</td>
-                                <td class='col-6'>
-                                    <div class="progress progress-info">
-                                        <div class="progress-bar" role="progressbar" style="width: 60%"
-                                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </td>
-                                <td class='col-3 text-center'>60%</td>
-                            </tr>
-                            <tr>
-                                <td class='col-3'>VueJS</td>
-                                <td class='col-6'>
-                                    <div class="progress progress-success">
-                                        <div class="progress-bar" role="progressbar" style="width: 35%"
-                                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </td>
-                                <td class='col-3 text-center'>30%</td>
-                            </tr>
-                            <tr>
-                                <td class='col-3'>Laravel</td>
-                                <td class='col-6'>
-                                    <div class="progress progress-danger">
-                                        <div class="progress-bar" role="progressbar" style="width: 50%"
-                                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </td>
-                                <td class='col-3 text-center'>50%</td>
-                            </tr>
-                            <tr>
-                                <td class='col-3'>ReactJS</td>
-                                <td class='col-6'>
-                                    <div class="progress progress-primary">
-                                        <div class="progress-bar" role="progressbar" style="width: 80%"
-                                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </td>
-                                <td class='col-3 text-center'>80%</td>
-                            </tr>
-                            <tr>
-                                <td class='col-3'>Go</td>
-                                <td class='col-6'>
-                                    <div class="progress progress-secondary">
-                                        <div class="progress-bar" role="progressbar" style="width: 65%"
-                                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </td>
-                                <td class='col-3 text-center'>65%</td>
-                            </tr>
-                        </table>
-                    </div>
+        <div class="col-6 px-2 px-xl-3 mb-2 mb-lg-3 mb-xl-4">
+            <div class="card border-top-0 border-start-0 border-end-0 border-5 border-info">
+                <div class="card-body p-1 p-xl-3">
+                    <canvas id="myChart" width="400" height="300"></canvas>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+    <div class="row">
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Line Area Chart</h4>
+                </div>
+                <div class="card-body">
+                    <div id="area"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Radial Gradient Chart</h4>
+                </div>
+                <div class="card-body">
+                    <div id="radialGradient"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Line Chart</h4>
+                </div>
+                <div class="card-body">
+                    <div id="line"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Bar Chart</h4>
+                </div>
+                <div class="card-body">
+                    <div id="bar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+
 @endsection
+
+@push('addon-script')
+<script src="/dist/assets/vendors/dayjs/dayjs.min.js"></script>
+<script src="/dist/assets/vendors/apexcharts/apexcharts.min.js"></script>
+<script src="/dist/assets/js/pages/ui-apexchart.js"></script>
+
+    {{-- chart js --}}
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js" integrity="sha512-Wt1bJGtlnMtGP0dqNFH1xlkLBNpEodaiQ8ZN5JLA5wpc1sUlk/O5uuOMNgvzddzkpvZ9GLyYNa8w2s7rqiTk5Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+<script src="path/to/chartjs/dist/chart.js"></script>
+
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: ['Laki-laki', 'Perempuan'],
+        datasets: [{
+            label: 'My First Dataset',
+            data: [{{ $pie['pria'] }}, {{ $pie['wanita'] }}],
+            // circumference: [300, 100],
+            offset: 100,
+            backgroundColor: [
+            'rgb(255, 99, 132)',
+            'rgb(54, 162, 235)',
+            ],
+            hoverBorderColor: [
+                'rgb(54, 162, 235)',
+                'rgb(255, 99, 132)',
+            ],
+            hoverOffset: 4,
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        },
+    }
+});
+
+var ctx = document.getElementById('myChart1').getContext('2d');
+var myChart1 = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+        datasets: [{
+            label: 'Data Kematian',
+            data: [65, 59, 80, 81, 56, 55, 40,54,45,34,35,93],
+            fill: true,
+            borderColor: 'rgb(0, 255, 58, 1)',
+            backgroundColor: 'rgb(255, 255, 0, 0.37)',
+            hoverBackgroundColor: 'rgb(86, 232, 105)',
+            tension: 0.1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+@endpush

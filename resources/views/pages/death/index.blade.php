@@ -7,7 +7,7 @@
                 <div class="page-title">
                     <div class="row">
                         <div class="col-12 col-md-6 order-md-1 order-last">
-                            <h3>Datatable</h3>
+                            {{-- <h3>Datatable</h3> --}}
                             {{-- <p class="text-subtitle text-muted">We use 'simple-datatables' made by @fiduswriter. You can
                                 check the full documentation <a
                                     href="https://github.com/fiduswriter/Simple-DataTables/wiki">here</a>.</p> --}}
@@ -15,24 +15,35 @@
                         <div class="col-12 col-md-6 order-md-2 order-first">
                             <nav aria-label="breadcrumb" class='breadcrumb-header'>
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Datatable</li>
+                                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">List kematian</li>
                                 </ol>
                             </nav>
                         </div>
                     </div>
                 </div>
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if(session('delete'))
+                    <div class="alert alert-danger">
+                        {{ session('delete') }}
+                    </div>
+                @endif
                 <section class="section">
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <p>Simple Datatable</p>
+                                <h3>List Kematian</h3>
                                 <div class="text-light ">
-                                    <a href="#" class="btn btn-success">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn round btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                         <i data-feather="upload" width="20"></i>
                                         <span>Impor</span>
-                                    </a>
-                                    <a href="#" class="btn btn-primary">
+                                    </button>
+                                    <a href="{{ route('exportDeath', 'xlsx') }}" class="btn round btn-primary">
                                         <i data-feather="download" width="20"></i>
                                         <span>Export</span>
                                     </a>
@@ -63,22 +74,24 @@
                                         {{-- <td>{{ $current - $death->resident->birthdate}}</td> --}}
                                         <td>{{ $death->age }}</td>
                                         <td>
-                                            <div class="dropend">
-                                                <button class="btn btn-primary dropdown-toggle me-1" type="button"
-                                                    id="dropdownMenuButton" data-bs-toggle="dropdown"
-                                                    aria-haspopup="true" aria-expanded="false">
-                                                    Info
+                                            <a href="#mymodal"
+                                                data-remote="{{ route('deaths.show', $death->id) }}"
+                                                data-toggle="modal"
+                                                data-target="#mymodal"
+                                                data-title="Detail Penduduk {{ $death->name }}" 
+                                                class="btn round btn-success btn-sm">
+                                                <i data-feather="eye" width="20"></i>
+                                            </a>
+                                            <a href="{{ route('deaths.edit', $death->id) }}" class="btn round btn-primary btn-sm">
+                                                <i data-feather="edit" width="20"></i>
+                                            </a>
+                                            <form action="{{ route('deaths.destroy', $death->id) }}" method="POST" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn round btn-danger btn-sm ">
+                                                    <i data-feather="trash" width="20"></i>
                                                 </button>
-                                                <div class="dropdown-menu bg-transparent border-0" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item text-white rounded bg-success" href="#"><i data-feather="eye" width="20"></i> Detail</a>
-                                                    <a class="dropdown-item text-white rounded bg-primary" href="{{ route('deaths.edit', $death->id) }}"><i data-feather="edit" width="20"></i> Edit</a>
-                                                    <form action="{{ route('deaths.destroy', $death->id) }}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button class="dropdown-item text-white rounded bg-danger"><i data-feather="trash" width="20"></i> Delete</button>
-                                                    </form>
-                                                </div>
-                                            </div>
+                                            </form>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -86,7 +99,37 @@
                             </table>
                         </div>
                     </div>
-
                 </section>
+
+                <!-- Modal Import-->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Import Data Kelahiran</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form  method="POST"  action="{{ route('importDeath') }}" enctype="multipart/form-data">
+                            @csrf
+                            <div class="modal-body">
+                                    <p>With Icon And Button Color</p>
+                                    <div class="form-file">
+                                        <input type="file" name="file" class="form-file-input" id="customFile">
+                                        <label class="form-file-label" for="customFile">
+                                            <span class="form-file-text">Choose file...</span>
+                                            <span class="form-file-button btn-primary "><i
+                                                    data-feather="upload"></i></span>
+                                        </label>
+                                    </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary me-1 mb-1">Create</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    </div>
+                </div>
+
             </div>
 @endsection

@@ -9,11 +9,6 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function dashboard()
-    {
-        return view('pages.dashboard');
-    }
-
     public function index()
     {
         $users = User::get();
@@ -90,5 +85,13 @@ class AuthController extends Controller
         Auth::logout();
 
         return redirect()->intended('/');
+    }
+
+    public function delete($id)
+    {
+        $data  = User::find($id);
+
+        $data->delete();
+        return back();
     }
 }

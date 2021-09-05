@@ -18,9 +18,11 @@ class FamilyController extends Controller
     public function index()
     {
         $families = Family::get();
+        $residents = Resident::get();
         
         return view('pages.family.index', [
             'families' => $families,
+            'residents' => $residents
         ]);
     }
 
@@ -52,7 +54,7 @@ class FamilyController extends Controller
 
         Family::create($data);
 
-        return redirect()->route('families.index')->with('residents');
+        return redirect()->route('families.index')->with('residents')->with('success', 'Berhasil Membuat Data');
 
     }
 
@@ -73,17 +75,26 @@ class FamilyController extends Controller
         //     'families' => $families
         // ]);
 
-        return view('pages.family.detail', [
+        return view('pages.family.show', [
             'families' => $families,
             'residents' => $residents,
             'members' => $members
         ]);
 
-        // $families = Family::findOrFail($id);
+    }
 
-        // return view('pages.family.detail', [
-        //     'families' => $families
-        // ]);
+    public function createMember($id)
+    {
+        $families = Family::findOrFail($id);
+        $residents = Resident::get();
+
+
+        return view('pages.family.createMember', [
+            'families' => $families,
+            'residents' => $residents,
+
+        ]);
+        
     }
 
     /**
@@ -95,8 +106,12 @@ class FamilyController extends Controller
     public function edit($id)
     {
         $families = Family::findOrFail($id);
+        $residents = Resident::get();
+
         return view('pages.family.create', [
-            'families' => $families
+            'families' => $families,
+            'residents' => $residents,
+
         ]);
     }
 
@@ -113,7 +128,7 @@ class FamilyController extends Controller
 
         Family::Find($id)->update($data);
 
-        return redirect()->route('families.index');
+        return redirect()->route('families.index')->with('success', 'Berhasil Membuat Data');
     }
 
     /**
@@ -128,6 +143,6 @@ class FamilyController extends Controller
 
         $data->delete();
 
-        return back();
+        return back()->with('delete', 'Berhasil Menghapus Data');
     }
 }

@@ -49,7 +49,7 @@ class BirthController extends Controller
 
         Birth::create($data);
 
-        return redirect()->route('births.index');
+        return redirect()->route('births.index')->with('success', 'Berhasil Membuat Data');
     }
 
     /**
@@ -60,7 +60,11 @@ class BirthController extends Controller
      */
     public function show($id)
     {
-        //
+        $births = Birth::find($id);
+
+        return view('pages.birth.show', [
+            'births' => $births
+        ]);
     }
 
     /**
@@ -92,7 +96,7 @@ class BirthController extends Controller
 
         Birth::FindOrfail($id)->update($data);
 
-        return redirect()->route('births.index');
+        return redirect()->route('births.index')->with('success', 'Berhasil Mengedit Data');
     }
 
     /**
@@ -107,6 +111,6 @@ class BirthController extends Controller
 
         $data->delete();
 
-        return back();
+        return back()->with('delete', 'Berhasil Menghapus Data');
     }
 }

@@ -49,7 +49,7 @@ class MoveController extends Controller
 
         Move::create($data);
 
-        return redirect()->route('moves.index');
+        return redirect()->route('moves.index')->with('success', 'Berhasil Membuat Data');
     }
 
     /**
@@ -60,7 +60,11 @@ class MoveController extends Controller
      */
     public function show($id)
     {
-        //
+        $moves = Move::find($id);
+
+        return view('pages.move.show', [
+            'moves' => $moves
+        ]);
     }
 
     /**
@@ -92,7 +96,7 @@ class MoveController extends Controller
 
         Move::FindOrfail($id)->update($data);
 
-        return redirect()->route('moves.index');
+        return redirect()->route('moves.index')->with('success', 'Berhasil Mengedit Data');
     }
 
     /**
@@ -107,6 +111,6 @@ class MoveController extends Controller
 
         $data->delete();
 
-        return back();
+        return back()->with('delete', 'Berhasil Menghapus Data');
     }
 }

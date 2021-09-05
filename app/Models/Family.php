@@ -30,7 +30,8 @@ class Family extends Model
 
     public function familyMember()
     {
-        return $this->hasMany(FamilyMember::class, 'family_id', 'id');
+        return $this->hasMany(FamilyMember::class);
     }
+
 
 }

@@ -1,51 +1,96 @@
 <table class="table table-bordered">
     <tr>
-        <th>Nama</th>
+        <th>NO Kartu Keluarga</th>
         <td>{{ $families->no_family }}</td>
     </tr>
     <tr>
-        <th>Email</th>
+        <th>Kepala Keluarga</th>
         <td>{{ $families->resident->name }}</td>
     </tr>
     <tr>
-        <th>Nomor</th>
+        <th>Dusun</th>
         <td>{{ $families->village }}</td>
     </tr>
     <tr>
-        <th>Alamat</th>
+        <th>RT</th>
         <td>{{ $families->rt }}</td>
     </tr>
     <tr>
-        <th>Total Transaksi</th>
-        <td>{{ $families->transaction_total}}</td>
+        <th>RW</th>
+        <td>{{ $families->rw}}</td>
     </tr>
     <tr>
-        <th>Status Transaksi</th>
-        <td>{{ $families->transaction_status }}</td>
+        <th>Alamat</th>
+        <td>{{ $families->address }}</td>
     </tr>
     <tr>
-        <th>Pembelian Produk</th>
+        <th>Anggota Keluarga</th>
         <td>
             <table class="table table-bordered w-100">
                 <tr>
                     <th>Nama</th>
-                    <th>Tipe</th>
-                    <th>Harga</th>
+                    <th>Jenis Kelamin</th>
+                    <th>Hubungan</th>
+                    <th>Action</th>
                 </tr>
+                {{-- <form action="{{ route('familyMember.store') }}" method="POST">
+                    @csrf
+                    @method('POST')
+                    <input type="hidden" name="family_id" value="{{ $families->id }}">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-6 form-group">
+                                <select class="choices form-select" name="resident_id">
+                                    <option selected disabled>-- Pilih Keluarga --</option>
+                                    @foreach ($residents as $resident)
+                                    <option value="{{ $resident->id }}">{{ $resident->nik }} -- {{ $resident->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class=" col-4 form-group">
+                                <select class="choices form-select" name="family_relationship">
+                                    <option selected disabled>-- Pilih Hubungan --</option>
+                                    <option value="Kepala Keluarga">Kepala Keluarga</option>
+                                    <option value="Istri">Istri</option>
+                                    <option value="Anak Kandung">Anak Kandung</option>
+                                    <option value="Anak Tiri">Anak Tiri</option>
+                                    <option value="Ibu">Ibu</option>
+                                    <option value="Ayah">Ayah</option>
+                                </select>
+                            </div>
+                            <div class="col-2 ms-0">
+                                <button type="submit" class="btn btn-success">
+                                    <i data-feather="plus" width="20"></i>
+                                    <span>Tambah</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form> --}}
                 <tr>
-                    {{-- @foreach ($families->details as $detail)
+                    @foreach ($members as $family)
                         <tr>
-                            <td>{{ $detail->product->name }}</td>
-                            <td>{{ $detail->product->type }}</td>
-                            <td>${{ $detail->product->price }}</td>
+                            <td>{{ $family->resident->name }}</td>
+                            <td>{{ $family->resident->gender }}</td>
+                            <td>{{ $family->family_relationship }}</td>
+                            <td>
+                                <form action="{{ route('familyMember.destroy', $family->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn round btn-danger btn-sm ">
+                                        <i data-feather="trash" width="20"></i>
+                                        <span>Hapus</span>
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
-                    @endforeach --}}
+                        @endforeach
                 </tr>
             </table>
         </td>
     </tr>
 </table>
-<div class="row">
+{{-- <div class="row">
     <div class="col-4">
         <a href="{{ route('transactions.status', $families->id) }}?status=SUCCESS" class="btn btn-success btn-block">
             <i class="fa fa-check"></i>Set Sukses
@@ -61,4 +106,4 @@
             <i class="fa fa-spinner"></i>Set Pending
         </a>
     </div>
-</div>
+</div> --}}

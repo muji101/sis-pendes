@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\ResidentRequest;
+use App\Models\Death;
 use App\Models\Family;
 use App\Models\FamilyMember;
 use App\Models\Resident;
+use Illuminate\Support\Carbon;
 
 class ResidentController extends Controller
 {
@@ -18,11 +20,15 @@ class ResidentController extends Controller
     public function index()
     {
         $residents = Resident::get();
-        $families = Family::get();
+        $deaths = Death::get();
+        // $families = Family::get();
+
+        // dd($residents);
 
         return view('pages.resident.index', [
             'residents' => $residents,
-            'families' => $families
+            'deaths' => $deaths
+            // 'families' => $families,
         ]);
     }
 
@@ -48,7 +54,7 @@ class ResidentController extends Controller
 
         Resident::create($data);
 
-        return redirect()->route('residents.index');
+        return redirect()->route('residents.index')->with('success', 'Berhasil Membuat Data');
 
     }
 
@@ -60,7 +66,16 @@ class ResidentController extends Controller
      */
     public function show($id)
     {
-        //
+        $residents = Resident::find($id);
+
+        $now = Carbon::now(); // Tanggal sekarang
+        $b_day = Carbon::parse($residents->birthdate); // Tanggal Lahir
+        $age = $b_day->diffInYears($now);  // Menghitung umur
+
+        return view('pages.resident.show', [
+            'residents' => $residents,
+            'age' => $age
+        ]);
     }
 
     /**
@@ -90,7 +105,7 @@ class ResidentController extends Controller
 
         Resident::Find($id)->update($data);
 
-        return redirect()->route('residents.index');
+        return redirect()->route('residents.index')->with('success', 'Berhasil Mengedit Data');
     }
 
     /**
@@ -105,6 +120,6 @@ class ResidentController extends Controller
 
         $data->delete();
 
-        return back();
+        return back()->with('delete', 'Berhasil Menghapus Data');
     }
 }

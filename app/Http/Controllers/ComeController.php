@@ -50,7 +50,7 @@ class ComeController extends Controller
 
         Come::create($data);
 
-        return redirect()->route('comes.index');
+        return redirect()->route('comes.index')->with('success', 'Berhasil Membuat Data');
     }
 
     /**
@@ -61,7 +61,11 @@ class ComeController extends Controller
      */
     public function show($id)
     {
-        //
+        $comes = Come::find($id);
+
+        return view('pages.come.show', [
+            'comes' => $comes
+        ]);
     }
 
     /**
@@ -93,7 +97,7 @@ class ComeController extends Controller
 
         Come::FindOrfail($id)->update($data);
 
-        return redirect()->route('comes.index');
+        return redirect()->route('comes.index')->with('success', 'Berhasil Mengedit Data');
     }
 
     /**
@@ -108,6 +112,6 @@ class ComeController extends Controller
 
         $data->delete();
 
-        return back();
+        return back()->with('delete', 'Berhasil Menghapus Data');
     }
 }

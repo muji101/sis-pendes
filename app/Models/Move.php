@@ -19,4 +19,9 @@ class Move extends Model
     {
         return $this->belongsTo(Resident::class);
     }
+
+    public function family()
+    {
+        return $this->belongsTo(Family::class);
+    }
 }

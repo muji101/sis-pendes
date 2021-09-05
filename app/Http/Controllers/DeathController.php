@@ -18,14 +18,9 @@ class DeathController extends Controller
     public function index()
     {
         $deaths = Death::get();
-        // $residents = Resident::get();
-        $current = Carbon::now()->toDateString();
-        $matis = Carbon::now()->isoFormat('dddd, D MMMM Y');
 
         return view('pages.death.index', [
             'deaths' => $deaths,
-            'current' => $current,
-            'matis' => $matis
         ]);
     }
 
@@ -55,7 +50,7 @@ class DeathController extends Controller
 
         Death::create($data);
 
-        return redirect()->route('deaths.index');
+        return redirect()->route('deaths.index')->with('success', 'Berhasil Membuat Data');
     }
 
     /**
@@ -66,7 +61,19 @@ class DeathController extends Controller
      */
     public function show($id)
     {
-        //
+        $deaths = Death::find($id);
+        $residents = Resident::get();
+
+        $now = Carbon::now(); // Tanggal sekarang
+        $b_day = Carbon::parse($residents->first()->birthdate); // Tanggal Lahir
+        $age = $b_day->diffInYears($now);  // Menghitung umur
+        // echo 'Umurnya Adalah '.$age. ' Tahun'; 
+        // dd($age);
+
+        return view('pages.death.show', [
+            'deaths' => $deaths,
+            'age' => $age
+        ]);
     }
 
     /**
@@ -98,7 +105,7 @@ class DeathController extends Controller
 
         Death::FindOrfail($id)->update($data);
 
-        return redirect()->route('deaths.index');
+        return redirect()->route('deaths.index')->with('success', 'Berhasil Mengedit Data');
     }
 
     /**
@@ -113,6 +120,6 @@ class DeathController extends Controller
 
         $data->delete();
 
-        return back();
+        return back()->with('delete', 'Berhasil Menghapus Data');
     }
 }

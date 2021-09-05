@@ -39,7 +39,7 @@ class FamilyMemberController extends Controller
 
         FamilyMember::create($data);
 
-        return back();
+        return redirect()->route('families.index')->with('success', 'Berhasil Membuat Data');
     }
 
     /**
@@ -84,6 +84,10 @@ class FamilyMemberController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = FamilyMember::find($id);
+
+        $data->delete();
+        return back()->with('delete', 'Berhasil Menghapus Data');
+
     }
 }

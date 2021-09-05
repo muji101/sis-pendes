@@ -7,7 +7,7 @@
                 <div class="page-title">
                     <div class="row">
                         <div class="col-12 col-md-6 order-md-1 order-last">
-                            <h3>Datatable</h3>
+                            {{-- <h3>Datatable</h3> --}}
                             {{-- <p class="text-subtitle text-muted">We use 'simple-datatables' made by @fiduswriter. You can
                                 check the full documentation <a
                                     href="https://github.com/fiduswriter/Simple-DataTables/wiki">here</a>.</p> --}}
@@ -22,6 +22,16 @@
                         </div>
                     </div>
                 </div>
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if(session('delete'))
+                    <div class="alert alert-danger">
+                        {{ session('delete') }}
+                    </div>
+                @endif
                 <section class="section">
                     <div class="card">
                         <div class="card-header">
@@ -67,9 +77,9 @@
                                                 <div class="dropdown-menu bg-transparent border-0" aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item text-white rounded bg-success" href="#"><i data-feather="eye" width="20"></i> Detail</a>
                                                     <a class="dropdown-item text-white rounded bg-primary" href="#"><i data-feather="edit" width="20"></i> Edit</a>
-                                                    <form action="#" method="POST">
+                                                    <form action="{{ route('user.delete', $user->id) }}" method="POST">
                                                         @csrf
-                                                        @method('DElETE')
+                                                        @method('DELETE')
                                                         <button class="dropdown-item text-white rounded bg-danger"><i data-feather="trash" width="20"></i> Delete</button>
                                                     </form>
                                                 </div>

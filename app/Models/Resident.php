@@ -33,26 +33,28 @@ class Resident extends Model
     {
         return $this->hasMany(Birth::class);
     }
+
+    public function familyMember()
+    {
+        return $this->hasMany(FamilyMember::class);
+    }
+
+    public function move()
+    {
+        return $this->hasMany(Move::class);
+    }
     
-    // public function come()
-    // {
-    //     return $this->hasMany(Come::class);
-    // }
+    public function come()
+    {
+        return $this->hasMany(Come::class);
+    }
 
-    // public function death()
-    // {
-    //     return $this->hasMany(Death::class);
-    // }
+    public function death()
+    {
+        return $this->hasMany(Death::class);
+    }
 
-    // public function move()
-    // {
-    //     return $this->hasMany(Move::class);
-    // }
-
-    // public function familyMember()
-    // {
-    //     return $this->hasMany(FamilyMember::class);
-    // }
+    
 
     
 }

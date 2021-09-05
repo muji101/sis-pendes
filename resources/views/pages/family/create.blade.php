@@ -65,7 +65,12 @@
                                 <select class="choices form-select" name="resident_id"> value="{{ $isEdit ? $families->resident_id : '' }}"
                                     <option selected disabled>-- Kepala Keluarga --</option>
                                     @if ($isEdit)
-                                        <option value="{{ $families->resident->id }}"{{ $families->resident->name === $families->resident->name ? 'selected': '' }}>{{ $families->resident->nik }} -- {{ $families->resident->name }}</option>
+                                        {{-- masih ada error di sini --}}
+                                        @foreach ($residents as $resident)
+                                        {{-- <option value="{{ $families->resident->id }}"{{ $families->resident->name === $families->resident->name ? 'selected': '' }}>{{ $families->resident->nik }} -- {{ $families->resident->name }}</option> --}}
+                                        <option value="{{ $resident->id }}"{{ $resident->name === $families->resident->name ? 'selected': '' }}>{{ $resident->nik }} -- {{ $resident->name }}</option>
+                                        {{-- <option value="{{ $resident->id }}">{{ $resident->nik }} -- {{ $resident->name }}</option> --}}
+                                        @endforeach
                                     @else
                                         @foreach ($residents as $resident)
                                         <option value="{{ $resident->id }}">{{ $resident->nik }} -- {{ $resident->name }}</option>
