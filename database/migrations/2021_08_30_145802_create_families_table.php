@@ -17,7 +17,7 @@ class CreateFamiliesTable extends Migration
             $table->id();
             
             $table->integer('resident_id');
-            $table->bigInteger('no_family');
+            $table->bigInteger('no_family')->unique();
             $table->string('village');
             $table->integer('rt');
             $table->integer('rw');

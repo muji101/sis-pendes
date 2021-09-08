@@ -50,6 +50,7 @@
                         @else
                             @method('POST')
                         @endif
+                        {{-- <input type="hidden" name="id" value=""> --}}
                     <div class="form-body">
                         <div class="row">
                             <div class="col-12">

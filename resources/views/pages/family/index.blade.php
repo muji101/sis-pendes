@@ -120,7 +120,7 @@
                         <div class="modal-body">
                             <form class="form form-vertical" action="{{ route('families.store') }}" method="POST">
                                 @csrf
-                                    @method('POST')
+                                @method('POST')
                             <div class="form-body">
                                 <div class="row">
                                     <div class="col-12">

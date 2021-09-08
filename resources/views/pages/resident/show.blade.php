@@ -45,7 +45,7 @@
     </tr>
     <tr>
         <th>Umur</th>
-        <td>{{ $age }}</td>
+        <td>{{ $age }} Tahun</td>
     </tr>
     <tr>
         <th>Alamat</th>

@@ -35,7 +35,7 @@ class ResidentRequest extends FormRequest
             'blood_type' => 'required',
             'martial_status' => 'required',
             'citizenship' => 'required',
-            'status' => 'required|in:ada,meninggal,pindah'
+            'status'
         ];
     }
 }

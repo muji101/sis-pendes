@@ -52,6 +52,21 @@ class FamilyController extends Controller
 
         $data = $request->all();
 
+        
+        // $item = FamilyMember::findOrFail($request->resident_id);
+        // $item->status = 'meninggal';
+        // $item->save();
+        
+        // membuat anggota otomatis dengan kepala keluarga
+        $families = Family::get();
+        // dd($families->last()->id+1);
+        
+        FamilyMember::create([
+            'resident_id' => $request->resident_id,
+            'family_id' => $families->last()->id + 1,
+            'family_relationship' => 'Kepala Keluarga'
+        ]);
+
         Family::create($data);
 
         return redirect()->route('families.index')->with('residents')->with('success', 'Berhasil Membuat Data');

@@ -16,7 +16,7 @@ class CreateComesTable extends Migration
         Schema::create('comes', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('nik');
+            $table->bigInteger('nik')->unique();
             $table->string('name');
             $table->string('birthplace');
             $table->date('birthdate');

@@ -16,7 +16,7 @@ class CreateResidentsTable extends Migration
         Schema::create('residents', function (Blueprint $table) {
             $table->id();
             
-            $table->bigInteger('nik');
+            $table->bigInteger('nik')->unique();
             $table->string('name');
             $table->string('birthplace');
             $table->date('birthdate');
@@ -27,7 +27,7 @@ class CreateResidentsTable extends Migration
             $table->string('blood_type');
             $table->string('martial_status');
             $table->string('citizenship');
-            $table->string('status');
+            $table->string('status')->default('ada');
 
             $table->timestamps();
         });
