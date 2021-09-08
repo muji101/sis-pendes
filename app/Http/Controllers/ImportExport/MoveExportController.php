@@ -40,6 +40,6 @@ class MoveExportController extends Controller
     */
     public function exportExcelCSV($slug) 
     {
-        return Excel::download(new MovesExport, 'kelahiran.'.$slug);
+        return Excel::download(new MovesExport, 'perpindahan.'.$slug);
     }
 }

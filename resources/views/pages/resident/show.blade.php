@@ -83,3 +83,16 @@
         </td>
     </tr>
 </table>
+
+{{-- <div class="row">
+    <div class="col-6">
+        <a href="{{ route('residents.status', $residents->id) }}?status=ada" class="btn btn-success btn-block">
+            <i class="fa fa-check"></i>Hidup
+        </a>
+    </div>
+    <div class="col-6">
+        <a href="{{ route('residents.status', $residents->id) }}?status=meninggal" class="btn btn-danger btn-block">
+            <i class="fa fa-times"></i>Meninggal
+        </a>
+    </div>
+</div> --}}

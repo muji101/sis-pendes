@@ -7,6 +7,7 @@
                 <div class="page-title">
                     <div class="row">
                         <div class="col-12 col-md-6 order-md-1 order-last">
+                            <h3>List Kematian</h3>
                             {{-- <h3>Datatable</h3> --}}
                             {{-- <p class="text-subtitle text-muted">We use 'simple-datatables' made by @fiduswriter. You can
                                 check the full documentation <a
@@ -16,7 +17,7 @@
                             <nav aria-label="breadcrumb" class='breadcrumb-header'>
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">List kematian</li>
+                                    <li class="breadcrumb-item active" aria-current="page">List Kematian</li>
                                 </ol>
                             </nav>
                         </div>
@@ -36,7 +37,55 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <h3>List Kematian</h3>
+                                <div class="d-flex">
+                                    <form method="GET">
+                                        <div class="row">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Jenis Kelamin</label>
+                                                    <select name="gender" class="form-select">
+                                                        <option class="gender" selected value="{{ null }}">Semua</option>
+                                                        <option class="gender" value="Laki-laki" {{ request()->get('gender') == 'Laki-laki' ? 'selected' :''  }}>Laki-laki</option>
+                                                        <option class="gender" value="Perempuan" {{ request()->get('gender') == 'Perempuan' ? 'selected' :''  }}>Perempuan</option>
+                                                    </select>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="d-none" id="gender1" formaction="{{ route('deaths.index') }}"></button>
+                                    </form>
+    
+                                    <form action="{{ route('deaths.filter') }}" method="GET" class="form-group" id="formFilter">
+                                        <div class="row">
+                                            <div class="col-5 form-group">
+                                                <select class="form-select" name="year">
+                                                    <label for="exampleInputEmail1">Tahun</label>
+                                                    <option value="0" selected disabled>-- Pilih Tahun --</option>
+                                                        @php
+                                                            $year = date('Y');
+                                                            $min = $year - 10;
+                                                            $max = $year;
+
+                                                            for( $i=$max; $i>=$min; $i-- ) {
+                                                            echo '<option value='.$i.'>'.$i.'</option>';
+                                                            }
+                                                        @endphp
+                                                </select>
+                                            </div>
+                                            <div class="col-5 form-group">
+                                                <select class=" form-select" name="month">
+                                                    <label for="exampleInputEmail1">Bulan</label>
+                                                    <option value="0" selected disabled>-- Pilih Bulan --</option>
+                                                        <?php for( $m=1; $m<=12; ++$m ) { 
+                                                        $month_label = date('F', mktime(0, 0, 0, $m, 1));
+                                                        $m
+                                                        ?>
+                                                    <option value="<?php echo '0'.$m; ?>"><?php echo $month_label; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-info btn-block" type="submit" form="formFilter" value="Submit">Cari Data</button>
+                                    </form>
+                                </div>
+    
                                 <div class="text-light ">
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn round btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -80,16 +129,16 @@
                                                 data-target="#mymodal"
                                                 data-title="Detail Penduduk {{ $death->name }}" 
                                                 class="btn round btn-success btn-sm">
-                                                <i data-feather="eye" width="20"></i>
+                                                <i class="fas fa-eye"></i>
                                             </a>
                                             <a href="{{ route('deaths.edit', $death->id) }}" class="btn round btn-primary btn-sm">
-                                                <i data-feather="edit" width="20"></i>
+                                                <i class="fas fa-edit"></i>
                                             </a>
                                             <form action="{{ route('deaths.destroy', $death->id) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn round btn-danger btn-sm ">
-                                                    <i data-feather="trash" width="20"></i>
+                                                    <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
                                         </td>
@@ -106,13 +155,16 @@
                     <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Import Data Kelahiran</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Import Data Kematian</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <form  method="POST"  action="{{ route('importDeath') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="modal-body">
-                                    <p>With Icon And Button Color</p>
+                                    <p>
+                                        Pastikan anda sudah memiliki template file download
+                                        <a href="{{ route('deaths.template') }}">disini</a>
+                                    </p>
                                     <div class="form-file">
                                         <input type="file" name="file" class="form-file-input" id="customFile">
                                         <label class="form-file-label" for="customFile">
@@ -133,3 +185,11 @@
 
             </div>
 @endsection
+
+@push('addon-script')
+<script>
+    $(".gender").click(function(){
+        $("#gender1").click();
+    });
+</script>
+@endpush

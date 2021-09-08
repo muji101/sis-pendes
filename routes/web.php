@@ -50,7 +50,7 @@ Route::middleware(['auth'])->group(function () {
     // Route::get('export-excel-csv-file/{slug}', [ExcelCSVController::class, 'exportExcelCSV']);
 
     // Route::get('excel-csv-file', [ExcelCSVController::class, 'index']);
-    Route::get('import-residents', [ResidentExportController::class, 'index'])->name('import-resident');
+    Route::get('import-residents', [ResidentExportController::class, 'index'])->name('modal-resident');
     Route::post('import-residents', [ResidentExportController::class, 'importExcelCSV'])->name('importResident');
     Route::get('export-residents/{slug}', [ResidentExportController::class, 'exportExcelCSV'])->name('exportResident');
 
@@ -70,6 +70,9 @@ Route::middleware(['auth'])->group(function () {
     // Route::get('export-families/{slug}', [ResidentExportController::class, 'exportExcelCSV']);
 
     Route::resource('residents', ResidentController::class);
+    Route::get('/download-template/residents',[ResidentController::class,'downloadtemplate'])->name('residents.template');
+    // Route::get('residents/{id}/set-status', [ResidentController::class, 'setStatus'])->name('residents.status');
+
 
     Route::resource('families', FamilyController::class);
     Route::get('families/createMember/{id}', [FamilyController::class, 'createMember'])->name('families.createMember');
@@ -77,12 +80,20 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('familyMember', FamilyMemberController::class);
 
     Route::resource('births', BirthController::class);
+    Route::get('/download-template/births',[BirthController::class,'downloadtemplate'])->name('births.template');
+
 
     Route::resource('deaths', DeathController::class);
+    Route::get('deaths/filter/data', [DeathController::class, 'filter'])->name('deaths.filter');
+    Route::get('/download-template/deaths',[DeathController::class,'downloadtemplate'])->name('deaths.template');
 
     Route::resource('moves', MoveController::class);
+    Route::get('/download-template/moves',[MoveController::class,'downloadtemplate'])->name('moves.template');
+
 
     Route::resource('comes', ComeController::class);
+    Route::get('/download-template/comes',[ComeController::class,'downloadtemplate'])->name('comes.template');
+
     
 });
 

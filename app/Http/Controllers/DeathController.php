@@ -7,6 +7,8 @@ use App\Http\Requests\DeathRequest;
 use App\Models\Death;
 use App\Models\Resident;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Response as FacadeResponse;
+
 
 class DeathController extends Controller
 {
@@ -17,12 +19,27 @@ class DeathController extends Controller
      */
     public function index()
     {
-        $deaths = Death::get();
+        $data = Death::where('resident_id', '!=', null );
 
-        return view('pages.death.index', [
-            'deaths' => $deaths,
-        ]);
+        if (request()->get('gender') && request()->get('gender') != null ) {
+            $data=$data->where('gender','=',request()->get('gender'));
+        }
+
+        $deaths=$data->get();
+
+        return view('pages.death.index',compact('deaths'));
     }
+
+    public function filter(Request $request){
+        $month = $request->get('month');
+        $year = $request->get('year');
+            
+        $deaths = Death::whereYear('created_at', '=', $year)
+            ->whereMonth('created_at', '=', $month)
+            ->get();
+            
+            return view('pages.death.index', ['deaths' => $deaths]);
+        }
 
     /**
      * Show the form for creating a new resource.
@@ -44,10 +61,14 @@ class DeathController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(DeathRequest $request)
+    public function store(Request $request)
     {
         $data = $request->all();
 
+        $item = Resident::findOrFail($request->resident_id);
+        $item->status = 'meninggal';
+        $item->save();
+        
         Death::create($data);
 
         return redirect()->route('deaths.index')->with('success', 'Berhasil Membuat Data');
@@ -121,5 +142,11 @@ class DeathController extends Controller
         $data->delete();
 
         return back()->with('delete', 'Berhasil Menghapus Data');
+    }
+
+    public function downloadtemplate()
+    {
+        $template="./template/kematian.xlsx";
+        return FacadeResponse::download($template);
     }
 }

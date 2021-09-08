@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Resident;
 use App\Models\Come;
 use App\Http\Requests\ComeRequest;
+use Illuminate\Support\Facades\Response as FacadeResponse;
+
 
 
 class ComeController extends Controller
@@ -17,11 +19,15 @@ class ComeController extends Controller
      */
     public function index()
     {
-        $comes = Come::get();
+        $data = Come::where('nik', '!=', null );
 
-        return view('pages.come.index', [
-            'comes' => $comes
-        ]);
+        if (request()->get('gender') && request()->get('gender') != null ) {
+            $data=$data->where('gender','=',request()->get('gender'));
+        }
+
+        $comes=$data->get();
+
+        return view('pages.come.index',compact('comes'));
     }
 
     /**
@@ -113,5 +119,11 @@ class ComeController extends Controller
         $data->delete();
 
         return back()->with('delete', 'Berhasil Menghapus Data');
+    }
+
+    public function downloadtemplate()
+    {
+        $template="./template/pendatang.xlsx";
+        return FacadeResponse::download($template);
     }
 }

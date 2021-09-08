@@ -15,8 +15,8 @@
                         <div class="col-12 col-md-6 order-md-2 order-first">
                             <nav aria-label="breadcrumb" class='breadcrumb-header'>
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Datatable</li>
+                                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">List User</li>
                                 </ol>
                             </nav>
                         </div>
@@ -36,7 +36,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <p>Simple Datatable</p>
+                                <h3>List Pengguna</h3>
                                 {{-- <div class="text-light ">
                                     <a href="#" class="btn btn-success">
                                         <i data-feather="upload" width="20"></i>

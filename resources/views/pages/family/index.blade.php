@@ -7,7 +7,7 @@
                 <div class="page-title">
                     <div class="row">
                         <div class="col-12 col-md-6 order-md-1 order-last">
-                            {{-- <h3>Datatable</h3> --}}
+                            <h3>List Keluarga</h3>
                             {{-- <p class="text-subtitle text-muted">We use 'simple-datatables' made by @fiduswriter. You can
                                 check the full documentation <a
                                     href="https://github.com/fiduswriter/Simple-DataTables/wiki">here</a>.</p> --}}
@@ -16,7 +16,7 @@
                             <nav aria-label="breadcrumb" class='breadcrumb-header'>
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">List keluarga</li>
+                                    <li class="breadcrumb-item active" aria-current="page">List Keluarga</li>
                                 </ol>
                             </nav>
                         </div>
@@ -81,22 +81,23 @@
                                                 data-target="#mymodal"
                                                 data-title="Detail Keluarga {{ $family->no_family }}" 
                                                 class="btn round btn-success btn-sm">
-                                                <i data-feather="eye" width="20"></i>
+                                                <i class="fas fa-eye"></i>
                                             </a>
                                             {{-- <button type="button" class="btn round btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal1">
                                                 <i data-feather="user-plus"></i>
                                             </button> --}}
                                             <a href="{{ route('families.createMember', $family->id) }}" class="btn round btn-info btn-sm">
-                                                <i data-feather="user-plus" width="20"></i>
+                                                {{-- <i data-feather="user-plus" width="20"></i> --}}
+                                                <i class="fas fa-user-plus"></i>
                                             </a>
                                             <a href="{{ route('families.edit', $family->id) }}" class="btn round btn-primary btn-sm">
-                                                <i data-feather="edit" width="20"></i>
+                                                <i class="fas fa-edit"></i>
                                             </a>
                                             <form action="{{ route('families.destroy', $family->id) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn round btn-danger btn-sm ">
-                                                    <i data-feather="trash" width="20"></i>
+                                                    <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
                                         </td>

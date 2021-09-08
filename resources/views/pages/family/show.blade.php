@@ -78,8 +78,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn round btn-danger btn-sm ">
-                                        <i data-feather="trash" width="20"></i>
-                                        <span>Hapus</span>
+                                        <i class="fas fa-trash"></i>
                                     </button>
                                 </form>
                             </td>

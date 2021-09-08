@@ -4,14 +4,21 @@ namespace App\Imports;
 
 use App\Models\Resident;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithStartRow;
 
-class ResidentsImport implements ToModel
+class ResidentsImport implements ToModel,WithStartRow
 {
     /**
     * @param array $row
     *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
+
+    public function startRow(): int
+    {
+        return 2;
+    }
+    
     public function model(array $row)
     {
         return new Resident([
@@ -25,7 +32,7 @@ class ResidentsImport implements ToModel
             'work' => $row[8],
             'blood_type' => $row[9],
             'martial_status' => $row[10],
-            'citizenship' => $row[11]
+            'citizenship' => $row[11],
         ]);
     }
 }

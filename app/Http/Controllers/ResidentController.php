@@ -9,6 +9,8 @@ use App\Models\Family;
 use App\Models\FamilyMember;
 use App\Models\Resident;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Response as FacadeResponse;
+
 
 class ResidentController extends Controller
 {
@@ -19,17 +21,36 @@ class ResidentController extends Controller
      */
     public function index()
     {
-        $residents = Resident::get();
-        $deaths = Death::get();
-        // $families = Family::get();
+        $data = Resident::where('status', 'ada');
 
-        // dd($residents);
+        if (request()->get('religion') && request()->get('religion') != null ) {
+            $data=$data->where('religion','=',request()->get('religion'));
+        }   
+        
+        if (request()->get('gender') && request()->get('gender') != null ) {
+            $data=$data->where('gender','=',request()->get('gender'));
+        }
 
-        return view('pages.resident.index', [
-            'residents' => $residents,
-            'deaths' => $deaths
-            // 'families' => $families,
-        ]);
+        if (request()->get('martial_status') && request()->get('martial_status') != null ) {
+            $data=$data->where('martial_status','=',request()->get('martial_status'));
+        }
+
+        if (request()->get('citizenship') && request()->get('citizenship') != null ) {
+            $data=$data->where('citizenship','=',request()->get('citizenship'));
+        }
+
+        if (request()->get('last_education') && request()->get('last_education') != null ) {
+            $data=$data->where('last_education','=',request()->get('last_education'));
+        }
+
+        if (request()->get('blood_type') && request()->get('blood_type') != null ) {
+            $data=$data->where('blood_type','=',request()->get('blood_type'));
+        }
+        
+
+        $residents=$data->get();
+
+        return view('pages.resident.index',compact('residents'));
     }
 
     /**
@@ -122,4 +143,24 @@ class ResidentController extends Controller
 
         return back()->with('delete', 'Berhasil Menghapus Data');
     }
+
+    public function downloadtemplate()
+    {
+        $template="./template/penduduk.xlsx";
+        return FacadeResponse::download($template);
+    }
+
+    // public function setStatus(Request $request, $id)
+    // {
+    //     $request->validate([
+    //         'status' => 'required|in:ada,meninggal,pindah'
+    //     ]);
+
+    //     $item = Resident::findOrFail($id);
+    //     $item->status = $request->status;
+
+    //     $item->save();
+
+    //     return redirect()->route('residents.index');
+    // }
 }

@@ -7,6 +7,7 @@
                 <div class="page-title">
                     <div class="row">
                         <div class="col-12 col-md-6 order-md-1 order-last">
+                            <h3>List Perpindahan</h3>
                             {{-- <h3>Datatable</h3> --}}
                             {{-- <p class="text-subtitle text-muted">We use 'simple-datatables' made by @fiduswriter. You can
                                 check the full documentation <a
@@ -16,7 +17,7 @@
                             <nav aria-label="breadcrumb" class='breadcrumb-header'>
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">List perpindahan</li>
+                                    <li class="breadcrumb-item active" aria-current="page">List Perpindahan</li>
                                 </ol>
                             </nav>
                         </div>
@@ -36,7 +37,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <h3>List Perpindahan</h3>
+                                <p></p>
                                 <div class="text-light ">
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn round btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -81,16 +82,16 @@
                                                 data-target="#mymodal"
                                                 data-title="Detail Penduduk {{ $move->name }}" 
                                                 class="btn round btn-success btn-sm">
-                                                <i data-feather="eye" width="20"></i>
+                                                <i class="fas fa-eye"></i>
                                             </a>
                                             <a href="{{ route('moves.edit', $move->id) }}" class="btn round btn-primary btn-sm">
-                                                <i data-feather="edit" width="20"></i>
+                                                <i class="fas fa-edit"></i>
                                             </a>
                                             <form action="{{ route('moves.destroy', $move->id) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn round btn-danger btn-sm ">
-                                                    <i data-feather="trash" width="20"></i>
+                                                    <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
                                         </td>
@@ -107,13 +108,16 @@
                 <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Import Data Kelahiran</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Import Data Perpindahan</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form  method="POST"  action="{{ route('importMove') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
-                                <p>With Icon And Button Color</p>
+                            <p>
+                                Pastikan anda sudah memiliki template file download
+                                <a href="{{ route('moves.template') }}">disini</a>
+                            </p>
                                 <div class="form-file">
                                     <input type="file" name="file" class="form-file-input" id="customFile">
                                     <label class="form-file-label" for="customFile">

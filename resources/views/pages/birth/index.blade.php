@@ -7,6 +7,7 @@
                 <div class="page-title">
                     <div class="row">
                         <div class="col-12 col-md-6 order-md-1 order-last">
+                            <h3>List Kelahiran</h3>
                             {{-- <h3>Datatable</h3> --}}
                             {{-- <p class="text-subtitle text-muted">We use 'simple-datatables' made by @fiduswriter. You can
                                 check the full documentation <a
@@ -16,7 +17,7 @@
                             <nav aria-label="breadcrumb" class='breadcrumb-header'>
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">List kelahiran</li>
+                                    <li class="breadcrumb-item active" aria-current="page">List Kelahiran</li>
                                 </ol>
                             </nav>
                         </div>
@@ -36,7 +37,19 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <h3>List Kelahiran</h3>
+                                <form method="GET">
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Jenis Kelamin</label>
+                                            <select name="gender" class="form-select">
+                                                <option class="gender" selected value="{{ null }}">Semua</option>
+                                                <option class="gender" value="Laki-laki" {{ request()->get('gender') == 'Laki-laki' ? 'selected' :''  }}>Laki-laki</option>
+                                                <option class="gender" value="Perempuan" {{ request()->get('gender') == 'Perempuan' ? 'selected' :''  }}>Perempuan</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="d-none" id="gender1" formaction="{{ route('births.index') }}"></button>
+                                </form>
                                 {{-- <a
                                     href="#mymodal"
                                     data-target="#mymodal"
@@ -72,6 +85,16 @@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nama</th>
+                                        <th>Tanggal</th>
+                                        <th>Jenis Kelamin</th>
+                                        <th>Keluarga</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </tfoot>
                                 <tbody>
                                     @foreach ($births as $birth)
                                     <tr>
@@ -87,7 +110,7 @@
                                                 data-target="#mymodal"
                                                 data-title="Detail Penduduk {{ $birth->name }}" 
                                                 class="btn round btn-success btn-sm">
-                                                <i data-feather="eye" width="20"></i>
+                                                <i class="fas fa-eye"></i>
                                             </a>
                                             {{-- <a
                                                 href="#mymodal"
@@ -99,13 +122,13 @@
                                                 <i data-feather="edit" width="20"></i>
                                             </a> --}}
                                             <a href="{{ route('births.edit', $birth->id) }}" class="btn round btn-primary btn-sm">
-                                                <i data-feather="edit" width="20"></i>
+                                                <i class="fas fa-edit"></i>
                                             </a>
                                             <form action="{{ route('births.destroy', $birth->id) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn round btn-danger btn-sm ">
-                                                    <i data-feather="trash" width="20"></i>
+                                                    <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
                                         </td>
@@ -128,7 +151,10 @@
                         <form  method="POST"  action="{{ route('importBirth') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="modal-body">
-                                    <p>With Icon And Button Color</p>
+                                    <p>
+                                        Pastikan anda sudah memiliki template file download
+                                        <a href="{{ route('births.template') }}">disini</a>
+                                    </p>
                                     <div class="form-file">
                                         <input type="file" name="file" class="form-file-input" id="customFile">
                                         <label class="form-file-label" for="customFile">
@@ -149,3 +175,11 @@
 
             </div>
 @endsection
+
+@push('addon-script')
+<script>
+    $(".gender").click(function(){
+        $("#gender1").click();
+    });
+</script>
+@endpush

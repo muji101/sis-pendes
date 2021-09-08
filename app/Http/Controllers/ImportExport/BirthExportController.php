@@ -31,7 +31,6 @@ class BirthExportController extends Controller
 
         Excel::import(new BirthsImport,$request->file('file'));
 
-            
         return redirect()->route('births.index')->with('success', 'Berhasil mengimport file excel');
     }
 

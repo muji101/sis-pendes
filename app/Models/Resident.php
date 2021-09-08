@@ -21,7 +21,8 @@ class Resident extends Model
         'work',
         'blood_type',
         'martial_status',
-        'citizenship'
+        'citizenship',
+        'status'
     ] ;
 
     public function family()

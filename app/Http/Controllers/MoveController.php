@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\MoveRequest;
 use App\Models\Move;
 use App\Models\Resident;
+use Illuminate\Support\Facades\Response as FacadeResponse;
+
 
 class MoveController extends Controller
 {
@@ -46,6 +48,10 @@ class MoveController extends Controller
     public function store(MoveRequest $request)
     {
         $data = $request->all();
+
+        $item = Resident::findOrFail($request->resident_id);
+        $item->status = 'pindah';
+        $item->save();
 
         Move::create($data);
 
@@ -112,5 +118,11 @@ class MoveController extends Controller
         $data->delete();
 
         return back()->with('delete', 'Berhasil Menghapus Data');
+    }
+
+    public function downloadtemplate()
+    {
+        $template="./template/perpindahan.xlsx";
+        return FacadeResponse::download($template);
     }
 }

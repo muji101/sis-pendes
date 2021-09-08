@@ -6,6 +6,7 @@ use App\Models\Birth;
 use App\Models\Resident;
 use Illuminate\Http\Request;
 use App\Http\Requests\BirthRequest;
+use Illuminate\Support\Facades\Response as FacadeResponse;
 
 class BirthController extends Controller
 {
@@ -16,11 +17,16 @@ class BirthController extends Controller
      */
     public function index()
     {
-        $births = Birth::get();
+        $data = Birth::where('family_id', '!=', null );
 
-        return view('pages.birth.index', [
-            'births' => $births
-        ]);
+        if (request()->get('gender') && request()->get('gender') != null ) {
+            $data=$data->where('gender','=',request()->get('gender'));
+        }
+
+        $births=$data->get();
+
+        return view('pages.birth.index',compact('births'));
+        
     }
 
     /**
@@ -112,5 +118,11 @@ class BirthController extends Controller
         $data->delete();
 
         return back()->with('delete', 'Berhasil Menghapus Data');
+    }
+
+    public function downloadtemplate()
+    {
+        $template="./template/kelahiran.xlsx";
+        return FacadeResponse::download($template);
     }
 }
