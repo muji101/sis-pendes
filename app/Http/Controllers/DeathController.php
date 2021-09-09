@@ -25,7 +25,7 @@ class DeathController extends Controller
             $data=$data->where('gender','=',request()->get('gender'));
         }
 
-        $deaths=$data->get();
+        $deaths= $data->get();
 
         return view('pages.death.index',compact('deaths'));
     }
@@ -48,7 +48,7 @@ class DeathController extends Controller
      */
     public function create()
     {
-        $residents = Resident::get();
+        $residents = Resident::where('status', 'ada')->get();
         
         return view('pages.death.create', [
             'residents' => $residents
@@ -83,10 +83,10 @@ class DeathController extends Controller
     public function show($id)
     {
         $deaths = Death::find($id);
-        $residents = Resident::get();
-
+        
         $now = Carbon::now(); // Tanggal sekarang
-        $b_day = Carbon::parse($residents->first()->birthdate); // Tanggal Lahir
+        $b_day = Carbon::parse($deaths->resident->birthdate); // Tanggal Lahir
+
         $age = $b_day->diffInYears($now);  // Menghitung umur
         // echo 'Umurnya Adalah '.$age. ' Tahun'; 
         // dd($age);

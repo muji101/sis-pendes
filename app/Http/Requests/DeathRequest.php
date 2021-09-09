@@ -27,7 +27,6 @@ class DeathRequest extends FormRequest
             'resident_id' => 'required',
             'date' => 'required',
             'time' => 'required',
-            'age' => 'required',
             'reason' => 'required',
         ];
     }

@@ -19,7 +19,6 @@ class CreateDeathsTable extends Migration
             $table->integer('resident_id');
             $table->date('date');
             $table->time('time');
-            $table->integer('age');
             $table->string('reason');
 
             $table->timestamps();

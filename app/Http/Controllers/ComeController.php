@@ -54,6 +54,20 @@ class ComeController extends Controller
     {
         $data = $request->all();
 
+        Resident::create([
+            'nik' => $request->nik,
+            'name' => $request->name,
+            'birthplace' => $request->birthplace,
+            'birthdate' => $request->birthdate,
+            'gender' => $request->gender,
+            'religion' => $request->religion,
+            'last_education' => $request->last_education,
+            'work' => $request->work,
+            'blood_type' => $request->blood_type,
+            'martial_status' => $request->martial_status,
+            'citizenship' => $request->citizenship
+        ]);
+
         Come::create($data);
 
         return redirect()->route('comes.index')->with('success', 'Berhasil Membuat Data');

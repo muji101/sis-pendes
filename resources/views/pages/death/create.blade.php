@@ -82,12 +82,6 @@
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                            <label for="password-vertical">Umur</label>
-                            <input type="number" id="contact-info-vertical" class="form-control" name="age" value="{{ $isEdit ? $deaths->age : '' }}"
-                            placeholder="Umur">
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group">
                             <label for="first-name-vertical">Penyebab</label>
                             <input type="text" id="first-name-vertical" class="form-control" name="reason" value="{{ $isEdit ? $deaths->reason : '' }}"
                                 placeholder="Penyebab Kematian">

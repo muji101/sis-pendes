@@ -4,6 +4,10 @@
         <td>{{ $deaths->resident->name }}</td>
     </tr>
     <tr>
+        <th>Tanggal Lahir</th>
+        <td>{{ $deaths->resident->birthdate }}</td>
+    </tr>
+    <tr>
         <th>Tanggal Meninggal</th>
         <td>{{ $deaths->date }}</td>
     </tr>
@@ -13,7 +17,11 @@
     </tr>
     <tr>
         <th>Usia</th>
-        <td>{{ $deaths->age }}</td>
+        <td>{{ $age }}</td>
+    </tr>
+    <tr>
+        <th>Jenis Kelamin</th>
+        <td>{{ $deaths->resident->gender }}</td>
     </tr>
     <tr>
         <th>Penyebab Meninggal</th>

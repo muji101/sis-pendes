@@ -108,7 +108,6 @@
                                         <th>Nama</th>
                                         <th>Tanggal</th>
                                         <th>Meninggal Jam</th>
-                                        <th>Umur</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -120,8 +119,6 @@
                                         <td>{{ $death->resident->name }}</td>
                                         <td>{{ $death->date }}</td>
                                         <td>{{ $death->time }}</td>
-                                        {{-- <td>{{ $current - $death->resident->birthdate}}</td> --}}
-                                        <td>{{ $death->age }}</td>
                                         <td>
                                             <a href="#mymodal"
                                                 data-remote="{{ route('deaths.show', $death->id) }}"

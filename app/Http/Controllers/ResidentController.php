@@ -138,8 +138,9 @@ class ResidentController extends Controller
     public function destroy($id)
     {
         $data = Resident::findOrFail($id);
-
         $data->delete();
+
+        familyMember::where('resident_id', $id)->delete();
 
         return back()->with('delete', 'Berhasil Menghapus Data');
     }
@@ -150,17 +151,8 @@ class ResidentController extends Controller
         return FacadeResponse::download($template);
     }
 
-    // public function setStatus(Request $request, $id)
-    // {
-    //     $request->validate([
-    //         'status' => 'required|in:ada,meninggal,pindah'
-    //     ]);
-
-    //     $item = Resident::findOrFail($id);
-    //     $item->status = $request->status;
-
-    //     $item->save();
-
-    //     return redirect()->route('residents.index');
-    // }
+    public function resetFilter()
+    {
+        return redirect()->route('residents.index');
+    }
 }

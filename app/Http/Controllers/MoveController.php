@@ -32,7 +32,7 @@ class MoveController extends Controller
      */
     public function create()
     {
-        $residents = Resident::get();
+        $residents = Resident::where('status', 'ada')->get();
         
         return view('pages.move.create', [
             'residents' => $residents
@@ -122,7 +122,7 @@ class MoveController extends Controller
 
     public function downloadtemplate()
     {
-        $template="./template/perpindahan.xlsx";
+        $template = "./template/perpindahan.xlsx";
         return FacadeResponse::download($template);
     }
 }

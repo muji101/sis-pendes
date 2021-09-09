@@ -6,6 +6,7 @@ use App\Models\Birth;
 use App\Models\Resident;
 use Illuminate\Http\Request;
 use App\Http\Requests\BirthRequest;
+use App\Models\FamilyMember;
 use Illuminate\Support\Facades\Response as FacadeResponse;
 
 class BirthController extends Controller
@@ -36,7 +37,9 @@ class BirthController extends Controller
      */
     public function create()
     {
-        $residents = Resident::get();
+        // $residents = Resident::get();
+        $residents = FamilyMember::where('family_relationship', 'Kepala Keluarga')->get();
+
         
         return view('pages.birth.create', [
             'residents' => $residents
@@ -52,6 +55,16 @@ class BirthController extends Controller
     public function store(BirthRequest $request)
     {
         $data = $request->all();
+
+        // Resident::create([
+        //     ''
+        // ]);
+
+        // FamilyMember::create([
+        //     'resident_id' => '',
+        //     'family_id' => '',
+        //     'family_relationship' => 'Anak Kandung'
+        // ]);
 
         Birth::create($data);
 

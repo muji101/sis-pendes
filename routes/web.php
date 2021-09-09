@@ -70,9 +70,8 @@ Route::middleware(['auth'])->group(function () {
     // Route::get('export-families/{slug}', [ResidentExportController::class, 'exportExcelCSV']);
 
     Route::resource('residents', ResidentController::class);
-    Route::get('/download-template/residents',[ResidentController::class,'downloadtemplate'])->name('residents.template');
-    // Route::get('residents/{id}/set-status', [ResidentController::class, 'setStatus'])->name('residents.status');
-
+    Route::get('/download-template/residents', [ResidentController::class,'downloadtemplate'])->name('residents.template');
+    Route::get('/reset-filter/residents', [ResidentController::class,'resetFilter'])->name('filter-reset');
 
     Route::resource('families', FamilyController::class);
     Route::get('families/createMember/{id}', [FamilyController::class, 'createMember'])->name('families.createMember');
@@ -82,14 +81,12 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('births', BirthController::class);
     Route::get('/download-template/births',[BirthController::class,'downloadtemplate'])->name('births.template');
 
-
     Route::resource('deaths', DeathController::class);
     Route::get('deaths/filter/data', [DeathController::class, 'filter'])->name('deaths.filter');
     Route::get('/download-template/deaths',[DeathController::class,'downloadtemplate'])->name('deaths.template');
 
     Route::resource('moves', MoveController::class);
     Route::get('/download-template/moves',[MoveController::class,'downloadtemplate'])->name('moves.template');
-
 
     Route::resource('comes', ComeController::class);
     Route::get('/download-template/comes',[ComeController::class,'downloadtemplate'])->name('comes.template');

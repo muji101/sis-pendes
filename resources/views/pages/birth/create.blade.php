@@ -98,7 +98,8 @@
                                             @endforeach
                                         @else
                                             @foreach ($residents as $resident)
-                                            <option value="{{ $resident->id }}">{{ $resident->nik }} -- {{ $resident->name }}</option>
+                                            {{-- <option value="{{ $resident->id }}">{{ $resident->nik }} -- {{ $resident->name }}</option> --}}
+                                                <option value="{{ $resident->resident->id }}">{{ $resident->resident->nik }} -- {{ $resident->resident->name }}</option>
                                             @endforeach
                                         @endif
                                     </select>

@@ -23,6 +23,7 @@
                                             <select class="choices form-select" name="resident_id">
                                                 <option selected disabled>-- Anggota Keluarga --</option>
                                                 @foreach ($residents as $resident)
+                                                {{-- <option value="{{ $resident->resident->id }}">{{ $resident->resident->nik }} -- {{ $resident->resident->name }}</option> --}}
                                                 <option value="{{ $resident->id }}">{{ $resident->nik }} -- {{ $resident->name }}</option>
                                                 @endforeach
                                             </select>

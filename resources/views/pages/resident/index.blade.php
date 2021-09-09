@@ -223,10 +223,13 @@
                                 </div>
                             </div>
                             
-                            <div class="modal-footer">
+                            <div class="modal-footer d-flex justify-content-between">
                                 <button type="submit" class="btn btn-primary" formaction="{{ route('residents.index') }}">Terapkan</button>
+                                <div>
+                                    <button type="submit" class="btn btn-danger" formaction="{{ route('filter-reset') }}">Reset</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
                                 {{-- <button type="submit" class="btn btn-primary me-1 mb-1">Create</button> --}}
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </form>

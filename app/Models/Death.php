@@ -13,7 +13,6 @@ class Death extends Model
         'resident_id',
         'date',
         'time',
-        'age',
         'reason',
     ];
 
