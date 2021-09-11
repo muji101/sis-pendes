@@ -37,7 +37,8 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <div class="d-flex">
+                                <p></p>
+                                {{-- <div class="d-flex">
                                     <form method="GET">
                                         <div class="row">
                                                 <div class="form-group">
@@ -84,7 +85,7 @@
                                         </div>
                                         <button class="btn btn-info btn-block" type="submit" form="formFilter" value="Submit">Cari Data</button>
                                     </form>
-                                </div>
+                                </div> --}}
     
                                 <div class="text-light ">
                                     <!-- Button trigger modal -->

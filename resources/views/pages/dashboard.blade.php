@@ -11,7 +11,7 @@
     <div class="row">
         <!-- Total Penduduk -->
         <div class="col-2 px-2 px-xl-3 mb-2 mb-lg-3 mb-xl-4">
-            <div class="card border-top-0 border-start-0 border-end-0 border-5 border-info" style="background-color: rgb(124, 131, 253, 0.5)">
+            <div class="card border-top-0 border-start-0 border-end-0 border-5 border-info" style="background-color: rgb(255, 201, 71, 0.5)">
                 <div class="card-body p-1 p-xl-3">
                     <div class="row d-flex justify-content-center">
                         <div class="col mr-2 d-flex flex-column justify-content-between h-100">
@@ -27,7 +27,7 @@
         </div>
         <!-- Total Keluarga -->
         <div class="col-2 px-2 px-xl-3 mb-2 mb-lg-3 mb-xl-4">
-            <div class="card border-top-0 border-start-0 border-end-0 border-5 border-info" style="background-color: rgb(255, 201, 71, 0.5)">
+            <div class="card border-top-0 border-start-0 border-end-0 border-5 border-info" style="background-color: rgb(124, 131, 253, 0.5)">
                 <div class="card-body p-1 p-xl-3">
                     <div class="row d-flex justify-content-center">
                         <div class="col mr-2 d-flex flex-column justify-content-between h-100">
@@ -43,7 +43,7 @@
         </div>
         <!-- Total Kelahiran -->
         <div class="col-2 px-2 px-xl-3 mb-2 mb-lg-3 mb-xl-4">
-            <div class="card border-top-0 border-start-0 border-end-0 border-5 border-info" style="background-color: rgb(124, 131, 253, 0.5)">
+            <div class="card border-top-0 border-start-0 border-end-0 border-5 border-info" style="background-color: rgb(255, 201, 71, 0.5)">
                 <div class="card-body p-1 p-xl-3">
                     <div class="row d-flex justify-content-center">
                         <div class="col mr-2 d-flex flex-column justify-content-between h-100">
@@ -59,7 +59,7 @@
         </div>
         <!-- Total Kematian -->
         <div class="col-2 px-2 px-xl-3 mb-2 mb-lg-3 mb-xl-4">
-            <div class="card border-top-0 border-start-0 border-end-0 border-5 border-info" style="background-color: rgb(255, 201, 71, 0.5)">
+            <div class="card border-top-0 border-start-0 border-end-0 border-5 border-info" style="background-color: rgb(124, 131, 253, 0.5)">
                 <div class="card-body p-1 p-xl-3">
                     <div class="row d-flex justify-content-center">
                         <div class="col mr-2 d-flex flex-column justify-content-between h-100">
@@ -75,7 +75,7 @@
         </div>
         <!-- Total Pendatang -->
         <div class="col-2 px-2 px-xl-3 mb-2 mb-lg-3 mb-xl-4">
-            <div class="card border-top-0 border-start-0 border-end-0 border-5 border-info" style="background-color: rgb(124, 131, 253, 0.5)">
+            <div class="card border-top-0 border-start-0 border-end-0 border-5 border-info" style="background-color: rgb(255, 201, 71, 0.5)">
                 <div class="card-body p-1 p-xl-3">
                     <div class="row d-flex justify-content-center">
                         <div class="col mr-2 d-flex flex-column justify-content-between h-100">
@@ -91,7 +91,7 @@
         </div>
         <!-- Total Pindahan -->
         <div class="col-2 px-2 px-xl-3 mb-2 mb-lg-3 mb-xl-4">
-            <div class="card border-top-0 border-start-0 border-end-0 border-5 border-info" style="background-color: rgb(255, 201, 71, 0.5)">
+            <div class="card border-top-0 border-start-0 border-end-0 border-5 border-info" style="background-color: rgb(124, 131, 253, 0.5)">
                 <div class="card-body p-1 p-xl-3">
                     <div class="row d-flex justify-content-center">
                         <div class="col mr-2 d-flex flex-column justify-content-between h-100">
@@ -116,7 +116,7 @@
                     </h5>
                 </div>
                 <div class="card-body p-1 p-xl-3">
-                    <canvas id="myChart1" width="400" height="300"></canvas>
+                    <canvas id="myChart1" width="400" height="260"></canvas>
                 </div>
             </div>
         </div>
@@ -129,12 +129,53 @@
                     </h5>
                 </div>
                 <div class="card-body p-1 p-xl-3">
-                    <canvas id="myChart" width="400" height="300"></canvas>
+                    <canvas id="myChart" width="400" height="260"></canvas>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
+        <div class="col-6 px-2 px-xl-3 mb-2 mb-lg-3 mb-xl-4">
+            <div class="card border-top-0 border-start-0 border-end-0 border-5 border-info">
+                <div class="card-header">
+                    <h5 class="fw-bold border-bottom border-2">
+                        <i data-feather="activity"></i> 
+                        Perbandingan Penganut  Agama
+                    </h5>
+                </div>
+                <div class="card-body p-1 p-xl-3">
+                    <canvas id="myChart2" width="400" height="260"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 px-2 px-xl-3 mb-2 mb-lg-3 mb-xl-4">
+            <div class="card border-top-0 border-start-0 border-end-0 border-5 border-info">
+                <div class="card-header">
+                    <h5 class="fw-bold border-bottom border-2">
+                        <i data-feather="pie-chart"></i> 
+                        Status Pernikahan
+                    </h5>
+                </div>
+                <div class="card-body p-1 p-xl-3">
+                    <canvas id="myChart3" width="400" height="260"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 px-2 px-xl-3 mb-2 mb-lg-3 mb-xl-4">
+            <div class="card border-top-0 border-start-0 border-end-0 border-5 border-info">
+                <div class="card-header">
+                    <h5 class="fw-bold border-bottom border-2">
+                        <i data-feather="activity"></i> 
+                        Perbandingan Kedatangan & Perpindahan
+                    </h5>
+                </div>
+                <div class="card-body p-1 p-xl-3">
+                    <canvas id="myChart4" width="400" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- <div class="row">
         <div class="col-md-9">
             <div class="card">
                 <div class="card-header">
@@ -177,7 +218,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
 
 
@@ -243,6 +284,112 @@ var myChart1 = new Chart(ctx, {
             fill: true,
             borderColor: 'rgb(3, 219, 252)',
             backgroundColor: 'rgb(125, 237, 255, 0.27)',
+            hoverBackgroundColor: 'rgb(86, 232, 105)',
+            tension: 0.5
+            },
+        ]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true,
+            }
+        },
+    }
+});
+
+var ctx = document.getElementById('myChart2').getContext('2d');
+var myChart1 = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        // labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+        labels: <?php echo json_encode($labelAgama); ?>,
+        datasets: [
+        {
+        label: ['Jumlah Orang Per Agama'],
+        data:  [{{ $bar['islam'] }}, {{ $bar['budha'] }}, {{ $bar['hindu'] }}, {{ $bar['katolik'] }}, {{ $bar['kristen'] }}, {{ $bar['konghucu'] }}],
+        backgroundColor: [
+        'rgba(255, 99, 132, 0.3)',
+        'rgba(255, 159, 64, 0.3)',
+        'rgba(255, 205, 86, 0.3)',
+        'rgba(75, 192, 192, 0.3)',
+        'rgba(54, 162, 235, 0.3)',
+        'rgba(153, 102, 255, 0.3)'
+        ],
+        borderColor: [
+        'rgb(255, 99, 132)',
+        'rgb(255, 159, 64)',
+        'rgb(255, 205, 86)',
+        'rgb(75, 192, 192)',
+        'rgb(54, 162, 235)',
+        'rgb(153, 102, 255)'
+        ],
+        borderWidth: 1
+        }
+    ]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true,
+            }
+        },
+    }
+});
+
+var ctx = document.getElementById('myChart3').getContext('2d');
+var myChart1 = new Chart(ctx, {
+    type: 'polarArea',
+    data: {
+        // labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+        labels: ['Menikah' ,'Belum Menikah'],
+        datasets: [
+        {
+        label: ['Status Pernikahan'],
+        data:  [{{ $status['kawin'] }}, {{ $status['belum_kawin'] }}],
+        backgroundColor: [
+            'rgba(255, 99, 132, 0.4)',
+            'rgba(75, 192, 192, 0.4)',
+        ],
+        borderColor: [
+            'rgba(255, 99, 132, 0.5)',
+            'rgba(75, 192, 192, 0.5)'
+        ],
+        borderWidth: 2
+        }
+    ]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true,
+            }
+        },
+    }
+});
+
+var ctx = document.getElementById('myChart4').getContext('2d');
+var myChart1 = new Chart(ctx, {
+    type: 'line',
+    data: {
+        // labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+        labels: <?php echo json_encode($label); ?>,
+        datasets: [
+            {
+            label: ['Data Kedatangan'],
+            data: <?php echo json_encode($jumlah_come); ?>,
+            fill: true,
+            borderColor: 'rgb(100, 201, 207)',
+            backgroundColor: 'rgba(100, 201, 207, 0.27)',
+            hoverBackgroundColor: 'rgb(86, 232, 105)',
+            tension: 0.5
+            },
+            {
+            label: ['Data Perpindahan'],
+            data: <?php echo json_encode($jumlah_move); ?>,
+            fill: true,
+            borderColor: 'rgb(255, 204, 41)',
+            backgroundColor: 'rgba(255, 204, 41, 0.27)',
             hoverBackgroundColor: 'rgb(86, 232, 105)',
             tension: 0.5
             },

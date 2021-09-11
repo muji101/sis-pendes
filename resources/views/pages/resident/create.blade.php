@@ -105,6 +105,7 @@
                                 @if ($isEdit)
                                     <option value="Islam"{{ $residents->religion ===  'Islam'  ? 'selected': '' }}>Islam</option>
                                     <option value="Hindu"{{ $residents->religion ===  'Hindu'  ? 'selected': '' }}>Hindu</option>
+                                    <option value="Katolik"{{ $residents->religion ===  'Katolik'  ? 'selected': '' }}>Katolik</option>
                                     <option value="Budha"{{ $residents->religion ===  'Budha'  ? 'selected': '' }}>Budha</option>
                                     <option value="Kristen"{{ $residents->religion ===  'Kristen'  ? 'selected': '' }}>Kristen</option>
                                     <option value="Konghucu"{{ $residents->religion ===  'Konghucu'  ? 'selected': '' }}>Konghucu</option>
@@ -217,6 +218,33 @@
                                 @endif
                             </select>
                         </div>
+                        @if ($isEdit)
+                        <div class="col-12">
+                            <div class="form-group">
+                            <label for="first-name-vertical">Ayah</label>
+                            <select class="choices form-select" name="father">
+                                <option selected disabled>-- Ayah --</option>
+                                @if ($isEdit)
+                                    @foreach ($parentFather as $resident)
+                                    <option value="{{ $resident->name }}"{{ $resident->name === $residents->father ? 'selected': '' }}>{{ $resident->nik }} -- {{ $resident->name }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                            <label for="first-name-vertical">Ibu</label>
+                            <select class="choices form-select" name="mother">
+                                <option selected disabled>-- Ibu --</option>
+                                @if ($isEdit)
+                                    @foreach ($parentMother as $resident)
+                                    <option value="{{ $resident->name }}"{{ $resident->name === $residents->mother ? 'selected': '' }}>{{ $resident->nik }} -- {{ $resident->name }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
+                        @endif
+                        
                         <div class="col-12 d-flex justify-content-end">
                             <button type="submit" class="btn btn-primary me-1 mb-1">{{ $button }}</button>
                             <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>

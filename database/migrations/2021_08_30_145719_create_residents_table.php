@@ -28,6 +28,8 @@ class CreateResidentsTable extends Migration
             $table->string('martial_status');
             $table->string('citizenship');
             $table->string('status')->default('ada');
+            $table->string('father')->nullable();
+            $table->string('mother')->nullable();
 
             $table->timestamps();
         });

@@ -75,8 +75,7 @@
                                                     Info
                                                 </button>
                                                 <div class="dropdown-menu bg-transparent border-0" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item text-white rounded bg-success" href="#"><i data-feather="eye" width="20"></i> Detail</a>
-                                                    <a class="dropdown-item text-white rounded bg-primary" href="#"><i data-feather="edit" width="20"></i> Edit</a>
+                                                    <a class="dropdown-item text-white rounded bg-primary" href="{{ route('user.edit', $user->id) }}"><i data-feather="edit" width="20"></i> Edit</a>
                                                     <form action="{{ route('user.delete', $user->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')

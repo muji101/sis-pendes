@@ -108,8 +108,12 @@ class ResidentController extends Controller
     public function edit($id)
     {
         $residents = Resident::findOrFail($id);
+        $parentFather = Resident::where('gender', 'Laki-laki')->where('id','!=', $residents)->get();
+        $parentMother = Resident::where('gender', 'Perempuan')->where('id','!=', $residents)->get();
         return view('pages.resident.create', [
-            'residents' => $residents
+            'residents' => $residents,
+            'parentFather' => $parentFather,
+            'parentMother' => $parentMother,
         ]);
     }
 

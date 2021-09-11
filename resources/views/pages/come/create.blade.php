@@ -105,6 +105,7 @@
                                 @if ($isEdit)
                                     <option value="Islam"{{ $comes->religion ===  'Islam'  ? 'selected': '' }}>Islam</option>
                                     <option value="Hindu"{{ $comes->religion ===  'Hindu'  ? 'selected': '' }}>Hindu</option>
+                                    <option value="Katolik"{{ $residents->religion ===  'Katolik'  ? 'selected': '' }}>Katolik</option>
                                     <option value="Budha"{{ $comes->religion ===  'Budha'  ? 'selected': '' }}>Budha</option>
                                     <option value="Kristen"{{ $comes->religion ===  'Kristen'  ? 'selected': '' }}>Kristen</option>
                                     <option value="Konghucu"{{ $comes->religion ===  'Konghucu'  ? 'selected': '' }}>Konghucu</option>

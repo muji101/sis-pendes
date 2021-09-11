@@ -72,13 +72,13 @@
                     <th>Ibu</th>
                 </tr>
                 <tr>
-                    @forelse ($residents->familyMember as $item)
-                        <td>{{ $item->family->resident->name }}</td> 
-                        <td>{{ $item->family->resident->name }}</td> 
-                    @empty
-                        <td>-</td>
-                        <td>-</td>
-                    @endforelse
+                    @if (isset($residents->father))
+                    <td>{{ $residents->father }}</td>
+                    <td>{{ $residents->mother }}</td>
+                    @else   
+                    <td>-</td>
+                    <td>-</td>
+                    @endif
                 </tr>
             </table>
         </td>

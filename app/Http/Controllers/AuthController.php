@@ -49,12 +49,15 @@ class AuthController extends Controller
 
     public function store(Request $request)
     {
+        $users = User::get();
+
         $data = $request->all();
 
         User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role' => $data['role']
         ]);
 
         
@@ -76,7 +79,11 @@ class AuthController extends Controller
 
         // User::create($data);
 
-        return view('pages.user.index');
+        // return view('pages.user.index', [
+        //     'users' => $users
+        // ]);
+        return redirect()->route('user.index');
+
 
     }
 
@@ -85,6 +92,48 @@ class AuthController extends Controller
         Auth::logout();
 
         return redirect()->intended('/');
+    }
+
+    public function edit($id)
+    {
+        $users = User::findOrFail($id);
+        
+        return view('pages.user.create', ['users' => $users]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $data = User::findOrFail($id);
+        // dd($request->password);
+        if($request->password){
+            // $request->validate([
+            //     'name'=> 'required|min:5|max:25',
+            //     'email'=> 'required|min:5|max:25|email:rfc,dns|unique:users,email,'.$id,
+            //     // 'current_password' => 'required',
+            //     'password' =>'required|min:5|confirmed',
+            //     // 'image'
+            // ]);
+    
+            $request->merge([
+                'password' => Hash::make($request->password)
+            ]);
+    
+            }else{
+                // $request->validate([
+                //     'name'=> 'required|min:5|max:25',
+                //     'email'=> 'required|min:5|max:25|email:rfc,dns|unique:users,email,'. $id,
+                //     // 'image' => 'required'
+                // ]);
+            }
+
+        if ($request->password) {
+            $data->update($request->all());
+        }else{
+            $data->update($request->except('password'));
+        }
+        
+        return redirect()->route('user.index');
+
     }
 
     public function delete($id)

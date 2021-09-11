@@ -1,6 +1,16 @@
+@php
+    //isset buat ngecek data kalau ada true kalau tidak false
+    $isEdit = isset($users);
+    
+    $title = $isEdit ? 'Edit Data Pengguna' : 'Tambah Data Pengguna';
+
+    $route = $isEdit ? route('user.update', $users->id) : route('user.store');
+
+    $button = $isEdit ? 'Update' : 'Create';
+@endphp
 @extends('layouts.dashboard')
 
-@section('title', 'Tambah Data Pengguna')
+@section('title', $title)
 
 @section('content')
 <div class="main-content container-fluid">
@@ -32,13 +42,13 @@
             </div>
             <div class="card-content">
             <div class="card-body">
-                <form class="form form-vertical" method="POST" action="{{ route('user.store') }}">
+                <form class="form form-vertical" method="POST" action="{{ $route }}">
                     @csrf
                     @method('POST')
                     <div class="form-group position-relative has-icon-left">
                         <label for="username">Name</label>
                         <div class="position-relative">
-                            <input type="text" name="name" class="form-control" id="name" value="{{ old('name') }}" placeholder="Enter Name" required>
+                            <input type="text" name="name" class="form-control" id="name" value="{{ $isEdit ? $users->name :  old('name') }}" placeholder="Enter Name" required>
                             <div class="form-control-icon">
                                 <i data-feather="user"></i>
                             </div>
@@ -47,7 +57,7 @@
                     <div class="form-group position-relative has-icon-left">
                         <label for="username">Email</label>
                         <div class="position-relative">
-                            <input type="email" name="email" class="form-control" id="email" value="{{ old('email') }}" placeholder="Enter Email" required>
+                            <input type="email" name="email" class="form-control" id="email" value="{{ $isEdit ? $users->email : old('email') }}" placeholder="Enter Email" required>
                             <div class="form-control-icon">
                                 <i data-feather="mail"></i>
                             </div>
@@ -63,7 +73,7 @@
                             @endif --}}
                         </div>
                         <div class="position-relative">
-                            <input type="password" class="form-control" id="password" name="password" value="{{ old('password') }}" placeholder="Enter Password" required>
+                            <input type="password" class="form-control" id="password" name="password" value="{{ $isEdit ? $users->password : old('password') }}" placeholder="Enter Password" required>
                             <div class="form-control-icon">
                                 <i data-feather="lock"></i>
                             </div>
@@ -74,9 +84,14 @@
                         <div class="position-relative">
                             {{-- <input type="email" name="email" class="form-control" id="name" value="{{ old('email') }}" placeholder="Enter Email" required> --}}
                             <select class="form-select form-control" name="role" id="">
+                                @if ($isEdit)
+                                <option value="ADMIN" {{ $users->role === 'ADMIN' ? 'selected' : '' }}>Admin</option>
+                                <option value="USER" {{ $users->role === 'USER' ? 'selected' : '' }}>User</option>
+                                @else
                                 <option selected disabled>-- Role --</option>
                                 <option value="ADMIN">Admin</option>
                                 <option value="USER">User</option>
+                                @endif
                             </select>
                             <div class="form-control-icon">
                                 <i data-feather="users"></i>
@@ -85,7 +100,7 @@
                     </div>
 
                     <div class="clearfix">
-                        <button class="btn btn-primary float-end">Submit</button>
+                        <button class="btn btn-primary float-end">{{ $button }}</button>
                     </div>
                 </form>
             </div>
