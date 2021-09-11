@@ -13,8 +13,8 @@ class Family extends Model
         'resident_id',
         'no_family',
         'village',
-        'rt',
         'rw',
+        'rt',
         'address',
     ];
 
@@ -27,6 +27,21 @@ class Family extends Model
     {
         return $this->belongsTo(Resident::class);
     }
+
+    // public function village()
+    // {
+    //     return $this->belongsTo(Village::class);
+    // }
+
+    // public function rw()
+    // {
+    //     return $this->belongsTo(Rw::class);
+    // }
+
+    // public function rt()
+    // {
+    //     return $this->belongsTo(Rt::class);
+    // }
 
     public function familyMember()
     {

@@ -1,0 +1,106 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Rt;
+use App\Models\Rw;
+use App\Models\Village;
+use Illuminate\Http\Request;
+
+class VillageController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $rws = Rw::get();
+        $rts = Rt::get();
+        $villages = Village::orderBy('name')->get();
+        
+        return view('pages.village.index', compact('villages', 'rws', 'rts'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('pages.village.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $data = $request->all();
+
+        Village::create($data);
+
+        return redirect()->route('villages.index')->with('success', 'Berhasil Membuat Data');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $villages = Village::findOrFail($id);
+        return view('pages.village.create', [
+            'villages' => $villages,
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $data = $request->all();
+
+        Village::FindOrfail($id)->update($data);
+
+        return redirect()->route('villages.index')->with('success', 'Berhasil Mengedit Data');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $data = Village::find($id);
+
+        $data->delete();
+
+        return back()->with('delete', 'Berhasil Menghapus Data');
+    }
+}

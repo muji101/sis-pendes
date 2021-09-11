@@ -145,7 +145,7 @@
                     </ul>
                 </li>
                 <li class="sidebar-item ">
-                    <a href="#" class='sidebar-link'>
+                    <a href="{{ route('villages.index') }}" class='sidebar-link'>
                         <i data-feather="file-text" width="20"></i>
                         <span>Setting Profile Village</span>
                     </a>

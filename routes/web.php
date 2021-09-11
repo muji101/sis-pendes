@@ -15,6 +15,9 @@ use App\Http\Controllers\ImportExport\BirthExportController;
 use App\Http\Controllers\ImportExport\ComeExportController;
 use App\Http\Controllers\ImportExport\MoveExportController;
 use App\Http\Controllers\ImportExport\DeathExportController;
+use App\Http\Controllers\VillageController;
+use App\Http\Controllers\RwController;
+use App\Http\Controllers\RtController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -93,7 +96,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('comes', ComeController::class);
     Route::get('/download-template/comes',[ComeController::class,'downloadtemplate'])->name('comes.template');
 
-    
+    Route::resource('villages', VillageController::class);
+    Route::resource('rws', RwController::class);
+    Route::resource('rts', RtController::class);
 });
 
 // Route::middleware(['guest'])->group(function () {

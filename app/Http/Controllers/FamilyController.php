@@ -7,6 +7,9 @@ use App\Http\Requests\FamilyRequest;
 use App\Models\Family;
 use App\Models\FamilyMember;
 use App\Models\Resident;
+use App\Models\Village;
+use App\Models\Rw;
+use App\Models\Rt;
 
 class FamilyController extends Controller
 {
@@ -34,9 +37,15 @@ class FamilyController extends Controller
     public function create()
     {
         $residents = Resident::get();
+        $villages = Village::get();
+        $rws = Rw::get();
+        $rts = Rt::get();
         
         return view('pages.family.create', [
-            'residents' => $residents
+            'residents' => $residents,
+            'villages' => $villages,
+            'rws' => $rws,
+            'rts' => $rts
         ]);
     }
 
@@ -63,7 +72,7 @@ class FamilyController extends Controller
         
         FamilyMember::create([
             'resident_id' => $request->resident_id,
-            'family_id' => $families->last()->id + 1,
+            'family_id' => $families->count() <= 0 ? 1 : $families->last()->id + 1,
             'family_relationship' => 'Kepala Keluarga'
         ]);
 
@@ -123,11 +132,16 @@ class FamilyController extends Controller
     {
         $families = Family::findOrFail($id);
         $residents = Resident::get();
+        $villages = Village::get();
+        $rws = Rw::get();
+        $rts = Rt::get();
 
         return view('pages.family.create', [
             'families' => $families,
             'residents' => $residents,
-
+            'villages' => $villages,
+            'rws' => $rws,
+            'rts' => $rts
         ]);
     }
 

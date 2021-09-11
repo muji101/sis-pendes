@@ -82,23 +82,50 @@
                             <div class="col-12">
                                 <div class="form-group">
                                 <label for="first-name-vertical">Dusun</label>
-                                <input type="text" id="first-name-vertical" class="form-control" name="village" value="{{ $isEdit ? $families->village : '' }}"
-                                    placeholder="Dusun">
-                                </div>
+                                <select class="choices form-select" name="village"> value="{{ $isEdit ? $families->village : '' }}"
+                                    <option selected disabled>-- Dusun/Kampung --</option>
+                                    @if ($isEdit)
+                                        @foreach ($villages as $village)
+                                        <option value="{{ $village->name }}"{{ $village->name === $village->name ? 'selected': '' }}>{{ $village->name }}</option>
+                                        @endforeach
+                                    @else
+                                        @foreach ($villages as $village)
+                                        <option value="{{ $village->name }}">{{ $village->name }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
-                                <label for="first-name-vertical">RT</label>
-                                <input type="number" id="first-name-vertical" class="form-control" name="rt" value="{{ $isEdit ? $families->rt : '' }}"
-                                    placeholder="Rukun Tetangga">
-                                </div>
+                                <label for="first-name-vertical">Rukun Warga (RW)</label>
+                                <select class="choices form-select" name="rw"> value="{{ $isEdit ? $families->rw : '' }}"
+                                    <option selected disabled>-- Rukun Warga --</option>
+                                    @if ($isEdit)
+                                        @foreach ($rws as $rw)
+                                        <option value="{{ $rw->rw }}"{{ $rw->rw === $rw->rw ? 'selected': '' }}>{{ $rw->rw }}</option>
+                                        @endforeach
+                                    @else
+                                        @foreach ($rws as $rw)
+                                        <option value="{{ $rw->rw }}">{{ $rw->rw }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
-                                <label for="first-name-vertical">RW</label>
-                                <input type="number" id="first-name-vertical" class="form-control" name="rw" value="{{ $isEdit ? $families->rw : '' }}"
-                                    placeholder="Rukun Warga">
-                                </div>
+                                <label for="first-name-vertical">Rukun Tetangga (RT)</label>
+                                <select class="choices form-select" name="rt"> value="{{ $isEdit ? $families->rt : '' }}"
+                                    <option selected disabled>-- Rukun Tetangga --</option>
+                                    @if ($isEdit)
+                                        @foreach ($rts as $rt)
+                                        <option value="{{ $rt->rt }}"{{ $rt->rt === $rt->rt ? 'selected': '' }}>{{ $rt->rt }}</option>
+                                        @endforeach
+                                    @else
+                                        @foreach ($rts as $rt)
+                                        <option value="{{ $rt->rt }}">{{ $rt->rt }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
