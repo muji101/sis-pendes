@@ -96,7 +96,7 @@ class ComeController extends Controller
      */
     public function edit($id)
     {
-        $residents = Resident::get();
+        $residents = Resident::where('nik', '!=', null)->get();
         $comes = Come::findOrFail($id);
         return view('pages.come.create', [
             'comes' => $comes,

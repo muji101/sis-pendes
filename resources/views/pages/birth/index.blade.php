@@ -62,11 +62,15 @@
                                 </a> --}}
                                 <div class="text-light ">
                                     <!-- Button trigger modal -->
-                                    <button type="button" class="btn round btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <button type="button" class="btn round btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Import Data"
+                                    >
                                         <i data-feather="upload" width="20"></i>
                                         <span>Impor</span>
                                     </button>
-                                    <a href="{{ route('exportBirth', 'xlsx') }}" class="btn round btn-primary">
+                                    <a href="{{ route('exportBirth', 'xlsx') }}" class="btn round btn-primary"
+                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Export Data"
+                                    >
                                         <i data-feather="download" width="20"></i>
                                         <span>Export</span>
                                     </a>
@@ -109,7 +113,9 @@
                                                 data-toggle="modal"
                                                 data-target="#mymodal"
                                                 data-title="Detail Penduduk {{ $birth->name }}" 
-                                                class="btn round btn-success btn-sm">
+                                                class="btn round btn-success btn-sm"
+                                                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Show Detail"
+                                                >
                                                 <i class="fas fa-eye"></i>
                                             </a>
                                             {{-- <a
@@ -121,13 +127,16 @@
                                                 class="btn round btn-info btn-sm"> 
                                                 <i data-feather="edit" width="20"></i>
                                             </a> --}}
-                                            <a href="{{ route('births.edit', $birth->id) }}" class="btn round btn-primary btn-sm">
+                                            <a href="{{ route('births.edit', $birth->id) }}" class="btn round btn-primary btn-sm"
+                                                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Data"
+                                                >
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             <form action="{{ route('births.destroy', $birth->id) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="btn round btn-danger btn-sm ">
+                                                <button class="btn round btn-danger btn-sm " 
+                                                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete Data">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>

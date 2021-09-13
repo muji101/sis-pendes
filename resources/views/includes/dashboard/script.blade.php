@@ -35,7 +35,7 @@
 </script>
 
 <div class="modal" id="mymodal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header text-right">
                 <button class="close" type="button" data-dismiss="modal" aria-label="close">

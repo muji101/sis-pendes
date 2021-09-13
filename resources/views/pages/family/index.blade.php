@@ -36,16 +36,17 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
+                                <p></p>
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn round btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                {{-- <button type="button" class="btn round btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                     <i data-feather="plus"></i> Keluarga
-                                </button>
+                                </button> --}}
                                 <div class="text-light ">
-                                    <a href="#" class="btn round btn-success">
+                                    <a href="#" class="btn round btn-success"data-bs-toggle="tooltip" data-bs-placement="bottom" title="Import Data">
                                         <i data-feather="upload" width="20"></i>
                                         <span>Impor</span>
                                     </a>
-                                    <a href="#" class="btn round btn-primary">
+                                    <a href="#" class="btn round btn-primary"data-bs-toggle="tooltip" data-bs-placement="bottom" title="Export Data">
                                         <i data-feather="download" width="20"></i>
                                         <span>Export</span>
                                     </a>
@@ -80,23 +81,26 @@
                                                 data-toggle="modal"
                                                 data-target="#mymodal"
                                                 data-title="Detail Keluarga {{ $family->no_family }}" 
-                                                class="btn round btn-success btn-sm">
+                                                class="btn round btn-success btn-sm"
+                                                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Show Detail">
                                                 <i class="fas fa-eye"></i>
                                             </a>
                                             {{-- <button type="button" class="btn round btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal1">
                                                 <i data-feather="user-plus"></i>
                                             </button> --}}
-                                            <a href="{{ route('families.createMember', $family->id) }}" class="btn round btn-info btn-sm">
+                                            <a href="{{ route('families.createMember', $family->id) }}" class="btn round btn-info btn-sm"
+                                                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Add Member Family">
                                                 {{-- <i data-feather="user-plus" width="20"></i> --}}
                                                 <i class="fas fa-user-plus"></i>
                                             </a>
-                                            <a href="{{ route('families.edit', $family->id) }}" class="btn round btn-primary btn-sm">
+                                            <a href="{{ route('families.edit', $family->id) }}" class="btn round btn-primary btn-sm"
+                                                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Data">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             <form action="{{ route('families.destroy', $family->id) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="btn round btn-danger btn-sm ">
+                                                <button class="btn round btn-danger btn-sm " data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete Data">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
@@ -110,7 +114,7 @@
                 </section>
                 
                 <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                {{-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -143,23 +147,50 @@
                                     <div class="col-12">
                                         <div class="form-group">
                                         <label for="first-name-vertical">Dusun</label>
-                                        <input type="text" id="first-name-vertical" class="form-control" name="village" 
-                                            placeholder="Dusun">
-                                        </div>
+                                        <select class="choices form-select" name="village"> value="{{ $isEdit ? $families->village : '' }}"
+                                            <option selected disabled>-- Dusun/Kampung --</option>
+                                            @if ($isEdit)
+                                                @foreach ($villages as $village)
+                                                <option value="{{ $village->name }}"{{ $village->name === $village->name ? 'selected': '' }}>{{ $village->name }}</option>
+                                                @endforeach
+                                            @else
+                                                @foreach ($villages as $village)
+                                                <option value="{{ $village->name }}">{{ $village->name }}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                        <label for="first-name-vertical">RT</label>
-                                        <input type="number" id="first-name-vertical" class="form-control" name="rt" 
-                                            placeholder="Rukun Tetangga">
-                                        </div>
+                                        <label for="first-name-vertical">Rukun Warga (RW)</label>
+                                        <select class="choices form-select" name="rw"> value="{{ $isEdit ? $families->rw : '' }}"
+                                            <option selected disabled>-- Rukun Warga --</option>
+                                            @if ($isEdit)
+                                                @foreach ($rws as $rw)
+                                                <option value="{{ $rw->rw }}"{{ $rw->rw === $rw->rw ? 'selected': '' }}>{{ $rw->rw }}</option>
+                                                @endforeach
+                                            @else
+                                                @foreach ($rws as $rw)
+                                                <option value="{{ $rw->rw }}">{{ $rw->rw }}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                        <label for="first-name-vertical">RW</label>
-                                        <input type="number" id="first-name-vertical" class="form-control" name="rw" 
-                                            placeholder="Rukun Warga">
-                                        </div>
+                                        <label for="first-name-vertical">Rukun Tetangga (RT)</label>
+                                        <select class="choices form-select" name="rt"> value="{{ $isEdit ? $families->rt : '' }}"
+                                            <option selected disabled>-- Rukun Tetangga --</option>
+                                            @if ($isEdit)
+                                                @foreach ($rts as $rt)
+                                                <option value="{{ $rt->rt }}"{{ $rt->rt === $rt->rt ? 'selected': '' }}>{{ $rt->rt }}</option>
+                                                @endforeach
+                                            @else
+                                                @foreach ($rts as $rt)
+                                                <option value="{{ $rt->rt }}">{{ $rt->rt }}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
@@ -168,10 +199,6 @@
                                             placeholder="Alamat">
                                         </div>
                                     </div>
-                                    {{-- <div class="col-12 d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-primary me-1 mb-1">Create</button>
-                                        <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
-                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -182,7 +209,7 @@
                     </form>
                     </div>
                     </div>
-                </div>
+                </div> --}}
 
             </div>
             

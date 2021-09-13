@@ -105,7 +105,7 @@
                                 @if ($isEdit)
                                     <option value="Islam"{{ $comes->religion ===  'Islam'  ? 'selected': '' }}>Islam</option>
                                     <option value="Hindu"{{ $comes->religion ===  'Hindu'  ? 'selected': '' }}>Hindu</option>
-                                    <option value="Katolik"{{ $residents->religion ===  'Katolik'  ? 'selected': '' }}>Katolik</option>
+                                    <option value="Katolik"{{ $comes->religion ===  'Katolik'  ? 'selected': '' }}>Katolik</option>
                                     <option value="Budha"{{ $comes->religion ===  'Budha'  ? 'selected': '' }}>Budha</option>
                                     <option value="Kristen"{{ $comes->religion ===  'Kristen'  ? 'selected': '' }}>Kristen</option>
                                     <option value="Konghucu"{{ $comes->religion ===  'Konghucu'  ? 'selected': '' }}>Konghucu</option>
@@ -238,7 +238,9 @@
                                 <select class="choices form-select" name="resident_id"> value="{{ $isEdit ? $comes->resident_id : '' }}"
                                     <option selected disabled>-- NIK -- Nama --</option>
                                     @if ($isEdit)
-                                        <option value="{{ $comes->resident->id }}"{{ $comes->resident->name === $comes->resident->name ? 'selected': '' }}>{{ $comes->resident->nik }} -- {{ $comes->resident->name }}</option>
+                                        @foreach ($residents as $resident)
+                                        <option value="{{ $resident->id }}"{{ $resident->name === $comes->resident->name ? 'selected': '' }}>{{ $resident->nik }} -- {{ $resident->name }}</option>
+                                        @endforeach
                                     @else
                                         @foreach ($residents as $resident)
                                         <option value="{{ $resident->id }}">{{ $resident->nik }} -- {{ $resident->name }}</option>

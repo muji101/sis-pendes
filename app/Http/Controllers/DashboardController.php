@@ -8,8 +8,10 @@ use App\Models\Death;
 use App\Models\Family;
 use App\Models\Move;
 use App\Models\Resident;
+use App\Models\Village;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 class DashboardController extends Controller
 {
     public function index()
@@ -24,6 +26,7 @@ class DashboardController extends Controller
         
         $label  = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
         $labelAgama  = ["Islam","Budha","Hindu","Katolik","Kristen","Konghucu"];
+        $labelUmur  = ["1-10 Tahun","11-20 Tahun","21-30 Tahun","31-40 Tahun","41-50 Tahun","51-60 Tahun", "61-70 Tahun"];
         
         for($bulan=1;$bulan < 13;$bulan++){
             $chartDeath     = collect(DB::SELECT("SELECT count(id) AS jumlah from deaths where month(created_at)='$bulan'"))->first();
@@ -35,8 +38,6 @@ class DashboardController extends Controller
             $jumlah_come[] = $chartCome->jumlah;
             $jumlah_move[] = $chartMove->jumlah;
         }
-        // dd($jumlah_death);
-
         // $totalResidents = ($residents->count() + $births->count() + $comes->count())-($deaths->count() + $moves->count());
         $pie = [
             'pria' => Resident::where('status', 'ada')->where('gender', 'Laki-laki')->count(),
@@ -57,6 +58,16 @@ class DashboardController extends Controller
             'belum_kawin' => Resident::where('status', 'ada')->where('martial_status', 'Belum Kawin')->count()
         ];
 
+        $age = [
+                'age1' => Resident::all()->where('status', 'ada')->whereBetween('age',[0,10])->count(),
+                'age2' => Resident::all()->where('status', 'ada')->whereBetween('age',[11,20])->count(),
+                'age3' => Resident::all()->where('status', 'ada')->whereBetween('age',[21,30])->count(),
+                'age4' => Resident::all()->where('status', 'ada')->whereBetween('age',[31,40])->count(),
+                'age5' => Resident::all()->where('status', 'ada')->whereBetween('age',[41,50])->count(),
+                'age6' => Resident::all()->where('status', 'ada')->whereBetween('age',[51,60])->count(),
+                'age7' => Resident::all()->where('status', 'ada')->whereBetween('age',[61,70])->count()
+        ];
+
 
         return view('pages.dashboard', [
             'residents' => $residents,
@@ -72,10 +83,12 @@ class DashboardController extends Controller
             'deathMonth' => $deathMonth,
             'label' => $label,
             'labelAgama' => $labelAgama,
+            'labelUmur' => $labelUmur,
             'jumlah_death' => $jumlah_death,
             'jumlah_birth' => $jumlah_birth,
             'jumlah_come' => $jumlah_come,
             'jumlah_move' => $jumlah_move,
+            'age' => $age
         ]);
     }
 }

@@ -39,7 +39,8 @@
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn round btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <button type="button" class="btn round btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Filter Data">
                                     <i data-feather="filter" width="20"></i>
                                     <span>Filter</span>
                                 </button>
@@ -49,11 +50,13 @@
                                         data-remote="{{ route('modal-resident') }}"
                                         data-toggle="modal"
                                         data-target="#mymodal"
-                                        class="btn round btn-success">
+                                        class="btn round btn-success"
+                                        data-bs-toggle="tooltip" data-bs-placement="bottom" title="Import Data">
                                         <i data-feather="upload" width="20"></i>
                                         <span>Impor</span>
                                     </a>
-                                    <a href="{{ route('exportResident', 'xlsx') }}" class="btn round btn-primary">
+                                    <a href="{{ route('exportResident', 'xlsx') }}" class="btn round btn-primary"
+                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Export Data">
                                         <i data-feather="download" width="20"></i>
                                         <span>Export</span>
                                     </a>
@@ -85,31 +88,34 @@
                                             <td>{{ $resident->gender }}</td>
                                             {{-- mengambil address dari fileld families oleh residents yang berelasi di field family_members --}}
                                             @forelse ($resident->familyMember as $item)
-                                                <td>{{ $item->family->address }}</td> 
-                                                <td>{{ $item->family->no_family }}</td> 
+                                                <td class="px-0">{{ $item->family->address }}</td> 
+                                                <td class="px-0">{{ $item->family->no_family }}</td> 
                                             @empty
-                                                <td>-</td>
-                                                <td>-</td>
+                                                <td class="px-0">-</td>
+                                                <td class="px-0">-</td>
                                             @endforelse
                                             
-                                            <td>
+                                            <td class="px-0">
                                                 <a href="#mymodal"
                                                     data-remote="{{ route('residents.show', $resident->id) }}"
                                                     data-toggle="modal"
                                                     data-target="#mymodal"
                                                     data-title="Detail Penduduk {{ $resident->name }}" 
-                                                    class="btn round btn-success btn-sm">
+                                                    class="btn round btn-success btn-sm"
+                                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Show Detail">
                                                     {{-- <i data-feather="eye" width="20"></i> --}}
                                                     <i class="fas fa-eye"></i>
                                                 </a>
-                                                <a href="{{ route('residents.edit', $resident->id) }}" class="btn round btn-primary btn-sm">
+                                                <a href="{{ route('residents.edit', $resident->id) }}" class="btn round btn-primary btn-sm"
+                                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Data">
                                                     {{-- <i data-feather="edit" width="20"></i> --}}
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                                 <form action="{{ route('residents.destroy', $resident->id) }}" method="POST" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button class="btn round btn-danger btn-sm ">
+                                                    <button class="btn round btn-danger btn-sm "
+                                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete Data">
                                                         {{-- <i data-feather="trash" width="20"></i> --}}
                                                         <i class="fas fa-trash"></i>
                                                     </button>

@@ -8,10 +8,21 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav d-flex align-items-center navbar-light ms-auto">
             <li class="dropdown nav-icon">
+                @if(session('success'))
+                    <div class="alert alert-info pt-1">
+                        <b>{{ session('success') }}</b>
+                    </div>
+                @endif
                 <a href="#" data-bs-toggle="dropdown"
                     class="nav-link  dropdown-toggle nav-link-lg nav-link-user">
                     <div class="d-lg-inline-block">
                         <i data-feather="bell"></i>
+                        {{-- @if ($residents->count() <= 0)
+                        <span class="position-absolute top-0 start-60 translate-middle badge rounded-pill bg-danger">
+                            1
+                            <span class="visually-hidden">unread messages</span>
+                        </span>
+                        @endif --}}
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-large">
@@ -19,12 +30,12 @@
                     <ul class="list-group rounded-none">
                         <li class="list-group-item border-0 align-items-start">
                             <div class="avatar bg-success me-3">
-                                <span class="avatar-content"><i data-feather="shopping-cart"></i></span>
+                                <span class="avatar-content"><i class="fas fa-robot"></i></span>
                             </div>
                             <div>
-                                <h6 class='text-bold'>New Order</h6>
+                                <h6 class='text-bold'>Sistem Message</h6>
                                 <p class='text-xs'>
-                                    An order made by Ahmad Saugi for product Samsung Galaxy S69
+                                    Silahkan Masuk Ke Setting Profile Village Sebelum Membuat Data!
                                 </p>
                             </div>
                         </li>

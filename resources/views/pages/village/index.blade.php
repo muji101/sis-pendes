@@ -38,7 +38,12 @@
                         <div class="col-4">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Dusun / Kampung</h4>
+                                    <span class="fs-5 fw-bold card-title position-relative">
+                                        Dusun / Kampung
+                                        <span class="position-absolute top-20 start-100 translate-middle badge rounded-pill bg-success">
+                                            {{ $villages->count() }}
+                                        </span>
+                                    </span>
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
@@ -87,7 +92,12 @@
                         <div class="col-4">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Rukun Warga (RW)</h4>
+                                    <span class="fs-5 fw-bold card-title position-relative">
+                                        Rukun Warga (RW)
+                                        <span class="position-absolute top-20 start-100 translate-middle badge rounded-pill bg-success">
+                                            {{ $rws->count() }}
+                                        </span>
+                                    </span>
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
@@ -136,7 +146,12 @@
                         <div class="col-4">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Rukun Tetangga (RT)</h4>
+                                    <span class="fs-5 fw-bold card-title position-relative">
+                                        Rukun Tetangga (RT)
+                                        <span class="position-absolute top-20 start-100 translate-middle badge rounded-pill bg-success">
+                                            {{ $rts->count() }}
+                                        </span>
+                                    </span>
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">

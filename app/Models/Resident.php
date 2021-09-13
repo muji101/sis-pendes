@@ -9,6 +9,10 @@ class Resident extends Model
 {
     use HasFactory;
 
+    protected $appends = [
+        'age'
+    ];
+
     protected $fillable = [
         'nik',
         'name',
@@ -17,7 +21,6 @@ class Resident extends Model
         'gender',
         'religion',
         'last_education',
-        // 'address',
         'work',
         'blood_type',
         'martial_status',
@@ -25,6 +28,7 @@ class Resident extends Model
         'status',
         'father',
         'mother'
+        // 'address',
     ] ;
 
     public function family()
@@ -57,6 +61,16 @@ class Resident extends Model
         return $this->hasMany(Death::class);
     }
 
+    public function getAgeAttribute()
+    {
+        $birthDate = $this->birthdate;
+
+        $currentDate = date("d-m-Y");
+
+        $age = date_diff(date_create($birthDate), date_create($currentDate));
+
+        return  (int)$age->format("%y");
+    }
     
 
     

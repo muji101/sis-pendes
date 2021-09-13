@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Village;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -34,7 +35,7 @@ class AuthController extends Controller
             //lebih aman pake ini dari serangan hacker
             $request->session()->regenerate();
 
-            return redirect()->intended('dashboard');
+            return redirect()->intended('dashboard')->with('success', 'Selamat Datang '. Auth::user()->name. ' Jangan Lupa Bahagia  !!!');
         }
 
         return back()->with([

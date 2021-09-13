@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\DeathRequest;
 use App\Models\Death;
+use App\Models\FamilyMember;
 use App\Models\Resident;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Response as FacadeResponse;
@@ -69,7 +70,10 @@ class DeathController extends Controller
         $item->status = 'meninggal';
         $item->save();
         
+        FamilyMember::where('resident_id', $item->id)->delete();
+        
         Death::create($data);
+
 
         return redirect()->route('deaths.index')->with('success', 'Berhasil Membuat Data');
     }
@@ -138,8 +142,9 @@ class DeathController extends Controller
     public function destroy($id)
     {
         $data = Death::find($id);
-
         $data->delete();
+        
+        Resident::where('id', $data->resident_id)->delete();
 
         return back()->with('delete', 'Berhasil Menghapus Data');
     }

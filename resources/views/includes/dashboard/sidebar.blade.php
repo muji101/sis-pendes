@@ -126,30 +126,28 @@
                 </li>
 
                 <li class='sidebar-title'>Settings &amp; Others</li>
-
-                <li class="sidebar-item  has-sub {{ (request()->is('user*')) ? 'active' : '' }}">
-                    <a href="#" class='sidebar-link'>
-                        <i data-feather="users" width="20"></i>
-                        <span>Setting Users</span>
-                    </a>
-
-                    <ul class="submenu ">
-
-                        <li>
-                            <a href="{{ route('user.index') }}">List Users</a>
-                        </li>
-
-                        <li>
-                            <a href="{{ route('user.create') }}">Create Users</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="sidebar-item ">
-                    <a href="{{ route('villages.index') }}" class='sidebar-link'>
-                        <i data-feather="file-text" width="20"></i>
-                        <span>Setting Profile Village</span>
-                    </a>
-                </li>
+                @if (Auth::user()->role == 'ADMIN')
+                    <li class="sidebar-item  has-sub {{ (request()->is('user*')) ? 'active' : '' }}">
+                        <a href="#" class='sidebar-link'>
+                            <i data-feather="users" width="20"></i>
+                            <span>Setting Users</span>
+                        </a>
+                        <ul class="submenu ">
+                            <li>
+                                <a href="{{ route('user.index') }}">List Users</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('user.create') }}">Create Users</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item ">
+                        <a href="{{ route('villages.index') }}" class='sidebar-link'>
+                            <i data-feather="file-text" width="20"></i>
+                            <span>Setting Profile Village</span>
+                        </a>
+                    </li>                    
+                @endif
 
                 <li class="sidebar-item">
                     <form method="POST" action="{{ url('/logout') }}">

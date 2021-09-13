@@ -18,9 +18,9 @@ class CreateFamiliesTable extends Migration
             
             $table->integer('resident_id');
             $table->bigInteger('no_family')->unique();
-            $table->integer('village');
-            $table->integer('rw');
-            $table->integer('rt');
+            $table->string('village');
+            $table->string('rw');
+            $table->string('rt');
             $table->text('address');
 
             $table->timestamps();

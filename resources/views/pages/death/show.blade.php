@@ -17,7 +17,7 @@
     </tr>
     <tr>
         <th>Usia</th>
-        <td>{{ $age }}</td>
+        <td>{{ $age }} Tahun</td>
     </tr>
     <tr>
         <th>Jenis Kelamin</th>

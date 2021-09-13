@@ -110,9 +110,9 @@ class FamilyController extends Controller
     public function createMember($id)
     {
         $families = Family::findOrFail($id);
-        $residents = Resident::get();
-        // $residents = FamilyMember::where('family_relationship','!=', 'Kepala Keluarga')->get();
-
+        foreach ($families->familyMember as $family) {
+            $residents = Resident::where('id','!=', $family->resident_id)->get();
+        }
 
         return view('pages.family.createMember', [
             'families' => $families,
