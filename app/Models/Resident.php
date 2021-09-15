@@ -72,6 +72,4 @@ class Resident extends Model
         return  (int)$age->format("%y");
     }
     
-
-    
 }

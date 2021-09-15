@@ -24,12 +24,12 @@
                     </div>
                 </div>
                 @if(session('success'))
-                    <div class="alert alert-success">
+                    <div class="fw-bold alert alert-success">
                         {{ session('success') }}
                     </div>
                 @endif
                 @if(session('delete'))
-                    <div class="alert alert-danger">
+                    <div class="fw-bold alert alert-danger">
                         {{ session('delete') }}
                     </div>
                 @endif
@@ -61,6 +61,11 @@
                                     Create
                                 </a> --}}
                                 <div class="text-light ">
+                                    <a href="{{ route('births.create') }}" class="btn round btn-info"
+                                        data-bs-toggle="tooltip" data-bs-placement="bottom" title="Create Data">
+                                        <i class="fas fa-plus"></i>
+                                        <span>Create</span>
+                                    </a>
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn round btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal"
                                     data-bs-toggle="tooltip" data-bs-placement="bottom" title="Import Data"

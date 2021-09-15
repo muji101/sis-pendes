@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\FamilyMember;
 use Illuminate\Http\Request;
+use App\Models\Resident;
 
 class FamilyMemberController extends Controller
 {
@@ -50,7 +51,11 @@ class FamilyMemberController extends Controller
      */
     public function show($id)
     {
-        //
+        $residents = Resident::find($id);
+
+        return view('pages.family.detailMember', [
+            'residents' => $residents,
+        ]);
     }
 
     /**

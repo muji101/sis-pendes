@@ -22,8 +22,10 @@
             @include("includes.dashboard.navbar")
             
             @yield('content')
+    <div class="main-content container-fluid">
+        @include("includes.dashboard.footer")
+    </div>
 
-            @include("includes.dashboard.footer")
         </div>
     </div>
 

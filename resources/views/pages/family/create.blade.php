@@ -14,6 +14,15 @@
 @section('title', $title)
 
 @section('content')
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <div class="main-content container-fluid">
     <div class="page-title">
         <div class="row">

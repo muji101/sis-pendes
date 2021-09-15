@@ -35,7 +35,7 @@ class AuthController extends Controller
             //lebih aman pake ini dari serangan hacker
             $request->session()->regenerate();
 
-            return redirect()->intended('dashboard')->with('success', 'Selamat Datang '. Auth::user()->name. ' Jangan Lupa Bahagia  !!!');
+            return redirect()->intended('dashboard')->with('welcome', 'Selamat Datang '. Auth::user()->name. ' Jangan Lupa Bahagia  !!!');
         }
 
         return back()->with([

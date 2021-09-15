@@ -4,7 +4,7 @@
         <td>{{ $residents->nik }}</td>
     </tr>
     <tr>
-        <th>Email</th>
+        <th>Nama</th>
         <td>{{ $residents->name }}</td>
     </tr>
     <tr>
@@ -45,7 +45,7 @@
     </tr>
     <tr>
         <th>Umur</th>
-        <td>{{ $age }} Tahun</td>
+        <td>{{ $residents->age }} Tahun</td>
     </tr>
     <tr>
         <th>Alamat</th>

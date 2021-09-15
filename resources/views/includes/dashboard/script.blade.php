@@ -20,7 +20,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 
 
-
 {{-- script otomatis modal jquery --}}
 <script>
     jQuery(document).ready(function($){
@@ -34,18 +33,20 @@
     });
 </script>
 
-<div class="modal" id="mymodal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-xl" role="document">
+<div class="modal" id="mymodal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header text-right">
-                <button class="close" type="button" data-dismiss="modal" aria-label="close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h5 class="modal-title"></h5>
-            </div>
-            <div class="modal-body">
-                <i class="fa fa-spinner fa-spin"></i>
-            </div>
+        <div class="modal-header">
+            <h5 class="modal-title"></h5>
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <i class="fa fa-spinner fa-spin"></i>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+        </div>
         </div>
     </div>
 </div>

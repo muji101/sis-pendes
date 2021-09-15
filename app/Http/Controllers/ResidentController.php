@@ -89,13 +89,13 @@ class ResidentController extends Controller
     {
         $residents = Resident::find($id);
 
-        $now = Carbon::now(); // Tanggal sekarang
-        $b_day = Carbon::parse($residents->birthdate); // Tanggal Lahir
-        $age = $b_day->diffInYears($now);  // Menghitung umur
+        // $now = Carbon::now(); // Tanggal sekarang
+        // $b_day = Carbon::parse($residents->birthdate); // Tanggal Lahir
+        // $age = $b_day->diffInYears($now);  // Menghitung umur
 
         return view('pages.resident.show', [
             'residents' => $residents,
-            'age' => $age
+            // 'age' => $age
         ]);
     }
 
@@ -127,6 +127,10 @@ class ResidentController extends Controller
     public function update(ResidentRequest $request, $id)
     {
         $data = $request->all();
+        $request->validate([
+            'father' => 'required',
+            'mother' => 'required'
+        ]);
 
         Resident::Find($id)->update($data);
 

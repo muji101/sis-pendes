@@ -24,12 +24,12 @@
                     </div>
                 </div>
                 @if(session('success'))
-                    <div class="alert alert-success">
+                    <div class="fw-bold alert alert-success">
                         {{ session('success') }}
                     </div>
                 @endif
                 @if(session('delete'))
-                    <div class="alert alert-danger">
+                    <div class="fw-bold alert alert-danger">
                         {{ session('delete') }}
                     </div>
                 @endif
@@ -37,7 +37,11 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <p></p>
+                                <a href="{{ route('deaths.create') }}" class="btn round btn-primary"
+                                        data-bs-toggle="tooltip" data-bs-placement="bottom" title="Create Data">
+                                    <i class="fas fa-plus"></i>
+                                    <span>Create</span>
+                                </a>
                                 {{-- <div class="d-flex">
                                     <form method="GET">
                                         <div class="row">

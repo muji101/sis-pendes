@@ -20,4 +20,12 @@ class Death extends Model
     {
         return $this->belongsTo(Resident::class);
     }
+
+    public function getDateAttribute()
+    {
+        return \Carbon\Carbon::parse($this->attributes['date'])
+            ->format('d, M Y');
+    }
+
+    
 }

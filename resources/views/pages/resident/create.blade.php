@@ -14,6 +14,16 @@
 @section('title', $title)
 
 @section('content')
+{{-- menampilkan pesan error di create --}}
+{{-- @if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif --}}
 <div class="main-content container-fluid">
     <div class="page-title">
         <div class="row">
@@ -55,28 +65,40 @@
                         <div class="col-12">
                             <div class="form-group">
                             <label for="first-name-vertical">NIK</label>
-                            <input type="number" id="first-name-vertical" class="form-control" name="nik" value="{{ $isEdit ? $residents->nik : '' }}"
+                            <input type="number" id="first-name-vertical" class="form-control" name="nik" value="{{ $isEdit ? $residents->nik : old('nik') }}"
                                 placeholder="NIK">
+                                @if ($errors->has('nik'))
+                                    <span class="text-danger">{{ $errors->first('nik') }}</span>
+                                @endif
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
                             <label for="first-name-vertical">Nama</label>
-                            <input type="text" id="first-name-vertical" class="form-control" name="name" value="{{ $isEdit ? $residents->name : '' }}"
+                            <input type="text" id="first-name-vertical" class="form-control" name="name" value="{{ $isEdit ? $residents->name : old('name') }}"
                                 placeholder="Nama Lengkap">
+                                @if ($errors->has('name'))
+                                    <span class="text-danger">{{ $errors->first('name') }}</span>
+                                @endif
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-6 form-group">
                                     <label for="email-id-vertical">Tempat Lahir</label>
-                                    <input type="text" id="email-id-vertical" class="form-control" name="birthplace" value="{{ $isEdit ? $residents->birthplace : '' }}"
+                                    <input type="text" id="email-id-vertical" class="form-control" name="birthplace" value="{{ $isEdit ? $residents->birthplace : old('birthplace') }}"
                                         placeholder="Tempat Lahir">
+                                    @if ($errors->has('birthplace'))
+                                        <span class="text-danger">{{ $errors->first('birthplace') }}</span>
+                                    @endif
                                 </div>
                                 <div class=" col-6 form-group">
                                     <label for="contact-info-vertical">Tanggal Lahir</label>
-                                    <input type="date" id="contact-info-vertical" class="form-control" name="birthdate" value="{{ $isEdit ? $residents->birthdate : '' }}"
+                                    <input type="date" id="contact-info-vertical" class="form-control" name="birthdate" value="{{ $isEdit ? $residents->birthdate : old('birthdate') }}"
                                         placeholder="Tanggal Lahir">
+                                    @if ($errors->has('birthdate'))
+                                        <span class="text-danger">{{ $errors->first('birthdate') }}</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -96,6 +118,9 @@
                                     <option value="Perempuan">Perempuan</option>
                                 @endif
                             </select>
+                            @if ($errors->has('gender'))
+                                <span class="text-danger">{{ $errors->first('gender') }}</span>
+                            @endif
                             </div>
                         </div>
                         <div class="col-12">
@@ -118,6 +143,9 @@
                                     <option>Konghucu</option>
                                 @endif
                             </select>
+                            @if ($errors->has('religion'))
+                                <span class="text-danger">{{ $errors->first('religion') }}</span>
+                            @endif
                         </div>
                         <div class="col-12">
                             <div class="form-group">
@@ -159,7 +187,7 @@
                         <div class="col-12">
                             <div class="form-group">
                             <label for="first-name-vertical">Pekerjaan</label>
-                            <input type="text" id="first-name-vertical" class="form-control" name="work" value="{{ $isEdit ? $residents->work : '' }}"
+                            <input type="text" id="first-name-vertical" class="form-control" name="work" value="{{ $isEdit ? $residents->work : old('work') }}"
                                 placeholder="Pekerjaan">
                             </div>
                         </div>
@@ -202,6 +230,9 @@
                                     <option>Belum Kawin</option>
                                 @endif
                             </select>
+                            @if ($errors->has('martial_status'))
+                                <span class="text-danger">{{ $errors->first('martial_status') }}</span>
+                            @endif
                             </div>
                         </div>
                         <div class="col-12">
@@ -217,6 +248,9 @@
                                     <option>WNA</option>
                                 @endif
                             </select>
+                            @if ($errors->has('citizenship'))
+                                <span class="text-danger">{{ $errors->first('citizenship') }}</span>
+                            @endif
                         </div>
                         @if ($isEdit)
                         <div class="col-12">
@@ -230,6 +264,9 @@
                                     @endforeach
                                 @endif
                             </select>
+                            @if ($errors->has('father'))
+                                <span class="text-danger">{{ $errors->first('father') }}</span>
+                            @endif
                         </div>
                         <div class="col-12">
                             <div class="form-group">
@@ -242,6 +279,9 @@
                                     @endforeach
                                 @endif
                             </select>
+                            @if ($errors->has('mother'))
+                                <span class="text-danger">{{ $errors->first('mother') }}</span>
+                            @endif
                         </div>
                         @endif
                         

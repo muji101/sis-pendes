@@ -23,12 +23,12 @@
                     </div>
                 </div>
                 @if(session('success'))
-                    <div class="alert alert-success">
+                    <div class="fw-bold alert alert-success">
                         {{ session('success') }}
                     </div>
                 @endif
                 @if(session('delete'))
-                    <div class="alert alert-danger">
+                    <div class="fw-bold alert alert-danger">
                         {{ session('delete') }}
                     </div>
                 @endif
@@ -36,7 +36,11 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <p></p>
+                                <a href="{{ route('families.create') }}" class="btn round btn-primary"
+                                        data-bs-toggle="tooltip" data-bs-placement="bottom" title="Create Data">
+                                    <i class="fas fa-plus"></i>
+                                    <span>Create</span>
+                                </a>
                                 <!-- Button trigger modal -->
                                 {{-- <button type="button" class="btn round btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                     <i data-feather="plus"></i> Keluarga

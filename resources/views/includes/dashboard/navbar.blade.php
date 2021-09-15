@@ -8,9 +8,9 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav d-flex align-items-center navbar-light ms-auto">
             <li class="dropdown nav-icon">
-                @if(session('success'))
+                @if(session('welcome'))
                     <div class="alert alert-info pt-1">
-                        <b>{{ session('success') }}</b>
+                        <b>{{ session('welcome') }}</b>
                     </div>
                 @endif
                 <a href="#" data-bs-toggle="dropdown"

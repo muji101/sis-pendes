@@ -36,7 +36,10 @@ class FamilyController extends Controller
      */
     public function create()
     {
-        $residents = Resident::get();
+        $families = Family::get();
+        $residents = Resident::where('status', 'ada')->whereNotBetween('id', [$families->first()->resident_id,$families->last()->resident_id] )->get();
+        // dd($families->last()->resident_id);
+
         $villages = Village::get();
         $rws = Rw::get();
         $rts = Rt::get();
@@ -110,9 +113,14 @@ class FamilyController extends Controller
     public function createMember($id)
     {
         $families = Family::findOrFail($id);
-        foreach ($families->familyMember as $family) {
-            $residents = Resident::where('id','!=', $family->resident_id)->get();
-        }
+        $residents = Resident::where('status', 'ada')->get();
+        // foreach ($families->familyMember as $family) {
+        //     $residents = Resident::where('id','!=', $family->resident_id)->get();
+        // }
+
+        // $family = FamilyMember::get();
+        // $residents = Resident::where('id', '=', $family)->get();
+        // dd($residents);
 
         return view('pages.family.createMember', [
             'families' => $families,
@@ -131,7 +139,7 @@ class FamilyController extends Controller
     public function edit($id)
     {
         $families = Family::findOrFail($id);
-        $residents = Resident::get();
+        $residents = Resident::where('status', 'ada')->get();
         $villages = Village::get();
         $rws = Rw::get();
         $rts = Rt::get();
@@ -172,6 +180,8 @@ class FamilyController extends Controller
         $data = Family::findOrFail($id);
 
         $data->delete();
+
+        FamilyMember::where('family_id', $id)->delete();
 
         return back()->with('delete', 'Berhasil Menghapus Data');
     }

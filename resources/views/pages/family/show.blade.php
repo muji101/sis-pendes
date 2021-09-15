@@ -74,10 +74,24 @@
                             <td>{{ $family->resident->gender }}</td>
                             <td>{{ $family->family_relationship }}</td>
                             <td>
+                                {{-- <a href="#mymodal"
+                                    data-remote="{{ route('familyMember.show', $family->resident->id) }}"
+                                    data-toggle="modal"
+                                    data-target="#mymodal"
+                                    data-title="Detail Penduduk {{ $family->resident->name }}" 
+                                    class="btn round btn-success btn-sm"
+                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Show Detail">
+                                    <i class="fas fa-eye"></i>
+                                </a> --}}
+                                <a href="{{ route('familyMember.show', $family->resident->id) }}" class="btn round btn-success btn-sm"
+                                        data-bs-toggle="tooltip" data-bs-placement="bottom" title="Show Detail Data">
+                                    <i class="fas fa-eye"></i>
+                                </a>
                                 <form action="{{ route('familyMember.destroy', $family->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn round btn-danger btn-sm ">
+                                    <button class="btn round btn-danger btn-sm "
+                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete Data">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </form>
@@ -89,20 +103,3 @@
         </td>
     </tr>
 </table>
-{{-- <div class="row">
-    <div class="col-4">
-        <a href="{{ route('transactions.status', $families->id) }}?status=SUCCESS" class="btn btn-success btn-block">
-            <i class="fa fa-check"></i>Set Sukses
-        </a>
-    </div>
-    <div class="col-4">
-        <a href="{{ route('transactions.status', $families->id) }}?status=FAILED" class="btn btn-danger btn-block">
-            <i class="fa fa-times"></i>Set Gagal
-        </a>
-    </div>
-    <div class="col-4">
-        <a href="{{ route('transactions.status', $families->id) }}?status=PENDING" class="btn btn-info btn-block">
-            <i class="fa fa-spinner"></i>Set Pending
-        </a>
-    </div>
-</div> --}}
