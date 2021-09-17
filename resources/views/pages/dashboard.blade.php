@@ -320,7 +320,6 @@ var ctx = document.getElementById('myChart3').getContext('2d');
 var myChart1 = new Chart(ctx, {
     type: 'polarArea',
     data: {
-        // labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
         labels: ['Menikah' ,'Belum Menikah'],
         datasets: [
         {
@@ -351,7 +350,6 @@ var ctx = document.getElementById('myChart4').getContext('2d');
 var myChart1 = new Chart(ctx, {
     type: 'line',
     data: {
-        // labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
         labels: <?php echo json_encode($label); ?>,
         datasets: [
             {

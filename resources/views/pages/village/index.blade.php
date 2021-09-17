@@ -8,10 +8,6 @@
                     <div class="row">
                         <div class="col-12 col-md-6 order-md-1 order-last">
                             <h3>Profile Desa</h3>
-                            {{-- <h3>Datatable</h3> --}}
-                            {{-- <p class="text-subtitle text-muted">We use 'simple-datatables' made by @fiduswriter. You can
-                                check the full documentation <a
-                                    href="https://github.com/fiduswriter/Simple-DataTables/wiki">here</a>.</p> --}}
                         </div>
                         <div class="col-12 col-md-6 order-md-2 order-first">
                             <nav aria-label="breadcrumb" class='breadcrumb-header'>
@@ -52,7 +48,6 @@
                                             <li
                                                 class="list-group-item d-flex justify-content-between align-items-center">
                                                 <span>{{$village->name}}</span>
-                                                {{-- <span class="badge bg-warning badge-pill badge-round ml-1">8</span> --}}
                                                 <span>
                                                     <a
                                                     href="#mymodal"
@@ -106,7 +101,6 @@
                                             <li
                                                 class="list-group-item d-flex justify-content-between align-items-center">
                                                 <span>{{$rw->rw}}</span>
-                                                {{-- <span class="badge bg-warning badge-pill badge-round ml-1">8</span> --}}
                                                 <span>
                                                     <a
                                                     href="#mymodal"
@@ -160,7 +154,6 @@
                                             <li
                                                 class="list-group-item d-flex justify-content-between align-items-center">
                                                 <span>{{$rt->rt}}</span>
-                                                {{-- <span class="badge bg-warning badge-pill badge-round ml-1">8</span> --}}
                                                 <span>
                                                     <a
                                                     href="#mymodal"
@@ -199,33 +192,5 @@
                         </div>
                 </section>
 
-                <!-- Modal Import-->
-            {{-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Buat Data Dusun/Kampung</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form  method="POST"  action="{{ route('villages.store') }}" enctype="multipart/form-data">
-                        @csrf
-                        <div class="modal-body">
-                            <div class="col-12">
-                                <div class="form-group">
-                                <label for="first-name-vertical">Nama Dusun</label>
-                                <input type="text" id="first-name-vertical" class="form-control" name="name"
-                                    placeholder="Nama Dusun">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary me-1 mb-1">Create</button>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                </div>
-            </div> --}}
-                
             </div>
 @endsection

@@ -10,6 +10,8 @@ use App\Models\Resident;
 use App\Models\Village;
 use App\Models\Rw;
 use App\Models\Rt;
+use Illuminate\Support\Facades\Response as FacadeResponse;
+
 
 class FamilyController extends Controller
 {
@@ -36,10 +38,9 @@ class FamilyController extends Controller
      */
     public function create()
     {
-        $families = Family::get();
-        $residents = Resident::where('status', 'ada')->whereNotBetween('id', [$families->first()->resident_id,$families->last()->resident_id] )->get();
-        // dd($families->last()->resident_id);
-
+        //menampilkan data resident ya tidak ada di familymember
+        $residents = Resident::where('status', 'ada')->where('martial_status', 'Kawin')->doesntHave('familyMember')->get();
+        
         $villages = Village::get();
         $rws = Rw::get();
         $rts = Rt::get();
@@ -60,18 +61,10 @@ class FamilyController extends Controller
      */
     public function store(FamilyRequest $request)
     {
-        // $residents = Resident::get();
-
         $data = $request->all();
 
-        
-        // $item = FamilyMember::findOrFail($request->resident_id);
-        // $item->status = 'meninggal';
-        // $item->save();
-        
         // membuat anggota otomatis dengan kepala keluarga
         $families = Family::get();
-        // dd($families->last()->id+1);
         
         FamilyMember::create([
             'resident_id' => $request->resident_id,
@@ -95,12 +88,9 @@ class FamilyController extends Controller
     {
         $families = Family::findOrFail($id);
         $residents = Resident::get();
-        $members = FamilyMember::where('family_id', $id)->get();
-        // $families = Family::with('details.product')->findOrFail($id);
-
-        // return view('pages.family.show')->with([
-        //     'families' => $families
-        // ]);
+        $members = FamilyMember::where('family_id', $id)->whereHas('resident', function($query){
+            return $query;
+        })->get();
 
         return view('pages.family.show', [
             'families' => $families,
@@ -113,14 +103,7 @@ class FamilyController extends Controller
     public function createMember($id)
     {
         $families = Family::findOrFail($id);
-        $residents = Resident::where('status', 'ada')->get();
-        // foreach ($families->familyMember as $family) {
-        //     $residents = Resident::where('id','!=', $family->resident_id)->get();
-        // }
-
-        // $family = FamilyMember::get();
-        // $residents = Resident::where('id', '=', $family)->get();
-        // dd($residents);
+        $residents = Resident::where('status', 'ada')->doesntHave('familyMember')->get();
 
         return view('pages.family.createMember', [
             'families' => $families,
@@ -139,7 +122,7 @@ class FamilyController extends Controller
     public function edit($id)
     {
         $families = Family::findOrFail($id);
-        $residents = Resident::where('status', 'ada')->get();
+        $residents = Resident::where('status', 'ada')->where('martial_status', 'Kawin')->get();
         $villages = Village::get();
         $rws = Rw::get();
         $rts = Rt::get();
@@ -184,5 +167,11 @@ class FamilyController extends Controller
         FamilyMember::where('family_id', $id)->delete();
 
         return back()->with('delete', 'Berhasil Menghapus Data');
+    }
+
+    public function downloadtemplate()
+    {
+        $template="./template/keluarga.xlsx";
+        return FacadeResponse::download($template);
     }
 }

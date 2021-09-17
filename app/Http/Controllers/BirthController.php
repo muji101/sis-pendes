@@ -9,6 +9,7 @@ use App\Http\Requests\BirthRequest;
 use App\Models\Family;
 use App\Models\FamilyMember;
 use Illuminate\Support\Facades\Response as FacadeResponse;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BirthController extends Controller
 {
@@ -75,6 +76,8 @@ class BirthController extends Controller
         ]);
 
         Birth::create($data);
+
+        // Alert::success('Selamat', 'Berhasil Membuat data');
 
         return redirect()->route('births.index')->with('success', 'Berhasil Membuat Data');
     }

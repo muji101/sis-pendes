@@ -30,4 +30,13 @@
             <td>-</td>
         </tr>
     @endforelse
+    <tr>
+        <th>Informasi Lainnya</th>
+        <td>
+            <a href="{{ route('familyMember.show', $moves->resident->id) }}" class="btn round btn-success btn-sm"
+                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Show Detail Data">
+                <i class="fas fa-eye"></i>
+            </a>
+        </td>
+    </tr>
 </table>

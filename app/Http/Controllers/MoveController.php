@@ -7,6 +7,7 @@ use App\Http\Requests\MoveRequest;
 use App\Models\Move;
 use App\Models\Resident;
 use Illuminate\Support\Facades\Response as FacadeResponse;
+use App\Models\FamilyMember;
 
 
 class MoveController extends Controller
@@ -52,6 +53,8 @@ class MoveController extends Controller
         $item = Resident::findOrFail($request->resident_id);
         $item->status = 'pindah';
         $item->save();
+
+        // FamilyMember::where('resident_id', $request->resdent_id)->delete();
 
         Move::create($data);
 

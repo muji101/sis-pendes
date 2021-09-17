@@ -1,5 +1,4 @@
 @php
-    //isset buat ngecek data kalau ada true kalau tidak false
     $isEdit = isset($comes);
     
     $title = $isEdit ? 'Edit Data Pendatang' : 'Tambah Data Pendatang';
@@ -28,7 +27,6 @@
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
                 <h3>{{ $title }}</h3>
-                {{-- <p class="text-subtitle text-muted">There's a lot of form layout that you can use</p> --}}
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class='breadcrumb-header'>
@@ -92,9 +90,6 @@
                         <div class="col-12">
                             <div class="form-group">
                             <label for="contact-info-vertical">Jenis Kelamin</label>
-                            {{-- @php
-                                $gender =  $isEdit ? $comes->gender : '' ;
-                            @endphp --}}
                             <select class="form-select" id="disabledSelect" name="gender">
                                 @if ($isEdit)
                                     <option value="Laki-laki"{{ $comes->gender ===  'Laki-laki'  ? 'selected': '' }}>Laki-laki</option>
@@ -158,13 +153,6 @@
                                 @endif
                             </select>
                         </div>
-                        {{-- <div class="col-12">
-                            <div class="form-group">
-                            <label for="first-name-vertical">Alamat</label>
-                            <input type="text" id="first-name-vertical" class="form-control" name="address" value="{{ $isEdit ? $comes->address : '' }}"
-                                placeholder="Alamat">
-                            </div>
-                        </div> --}}
                         <div class="col-12">
                             <div class="form-group">
                             <label for="first-name-vertical">Pekerjaan</label>

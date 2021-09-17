@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\ResidentRequest;
-use App\Models\Death;
-use App\Models\Family;
 use App\Models\FamilyMember;
 use App\Models\Resident;
 use Illuminate\Support\Carbon;

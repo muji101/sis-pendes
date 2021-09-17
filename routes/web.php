@@ -15,6 +15,7 @@ use App\Http\Controllers\ImportExport\BirthExportController;
 use App\Http\Controllers\ImportExport\ComeExportController;
 use App\Http\Controllers\ImportExport\MoveExportController;
 use App\Http\Controllers\ImportExport\DeathExportController;
+use App\Http\Controllers\ImportExport\FamilyExportController;
 use App\Http\Controllers\VillageController;
 use App\Http\Controllers\RwController;
 use App\Http\Controllers\RtController;
@@ -68,6 +69,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('import-deaths', [DeathExportController::class, 'importExcelCSV'])->name('importDeath');
     Route::get('export-deaths/{slug}', [DeathExportController::class, 'exportExcelCSV'])->name('exportDeath');
 
+    Route::post('import-families', [FamilyExportController::class, 'importExcelCSV'])->name('importFamily');
+    Route::get('export-families/{slug}', [FamilyExportController::class, 'exportExcelCSV'])->name('exportFamily');
+
     Route::post('import-moves', [MoveExportController::class, 'importExcelCSV'])->name('importMove');
     Route::get('export-moves/{slug}', [MoveExportController::class, 'exportExcelCSV'])->name('exportMove');
 
@@ -80,6 +84,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('families', FamilyController::class);
     Route::get('families/createMember/{id}', [FamilyController::class, 'createMember'])->name('families.createMember');
+    Route::get('/download-template/families',[FamilyController::class, 'downloadtemplate'])->name('families.template');
 
     Route::resource('familyMember', FamilyMemberController::class);
 

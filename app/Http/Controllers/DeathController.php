@@ -70,7 +70,7 @@ class DeathController extends Controller
         $item->status = 'meninggal';
         $item->save();
         
-        FamilyMember::where('resident_id', $item->id)->delete();
+        // FamilyMember::where('resident_id', $item->id)->delete();
         
         Death::create($data);
 
@@ -88,16 +88,16 @@ class DeathController extends Controller
     {
         $deaths = Death::find($id);
         
-        $now = Carbon::now(); // Tanggal sekarang
-        $b_day = Carbon::parse($deaths->resident->birthdate); // Tanggal Lahir
+        // $now = Carbon::now(); // Tanggal sekarang
+        // $b_day = Carbon::parse($deaths->resident->birthdate); // Tanggal Lahir
 
-        $age = $b_day->diffInYears($now);  // Menghitung umur
+        // $age = $b_day->diffInYears($now);  // Menghitung umur
         // echo 'Umurnya Adalah '.$age. ' Tahun'; 
         // dd($age);
 
         return view('pages.death.show', [
             'deaths' => $deaths,
-            'age' => $age
+            // 'age' => $age
         ]);
     }
 

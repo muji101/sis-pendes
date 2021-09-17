@@ -47,38 +47,4 @@
         <th>Pelapor</th>
         <td>{{ $comes->resident->name }}</td>
     </tr>
-    {{-- <tr>
-        <th>Alamat</th>
-        @forelse ($comes->familyMember as $item)
-            <td>{{ $item->family->address }}</td> 
-        @empty
-            <td>-</td>
-        @endforelse
-    </tr>
-    <tr>
-        <th>Nomer KK</th>
-        @forelse ($comes->familyMember as $item)
-            <td>{{ $item->family->no_family }}</td> 
-        @empty
-            <td>-</td>
-        @endforelse
-    </tr>
-    <tr>
-        <th>Keluarga</th>
-        <td>
-            <table class="table table-bordered w-100">
-                <tr>
-                    <th>Ayah</th>
-                    <th>Ibu</th>
-                </tr>
-                <tr>
-                    @forelse ($comes->familyMember as $item)
-                        <td>{{ $item->family->resident->name }}</td> 
-                    @empty
-                        <td>-</td>
-                    @endforelse
-                </tr>
-            </table>
-        </td>
-    </tr> --}}
 </table>

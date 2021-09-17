@@ -105,9 +105,6 @@
                         <div class="col-12">
                             <div class="form-group">
                             <label for="contact-info-vertical">Jenis Kelamin</label>
-                            {{-- @php
-                                $gender =  $isEdit ? $residents->gender : '' ;
-                            @endphp --}}
                             <select class="form-select" id="disabledSelect" name="gender">
                                 @if ($isEdit)
                                     <option value="Laki-laki"{{ $residents->gender ===  'Laki-laki'  ? 'selected': '' }}>Laki-laki</option>
@@ -177,13 +174,6 @@
                                 @endif
                             </select>
                         </div>
-                        {{-- <div class="col-12">
-                            <div class="form-group">
-                            <label for="first-name-vertical">Alamat</label>
-                            <input type="text" id="first-name-vertical" class="form-control" name="address" value="{{ $isEdit ? $residents->address : '' }}"
-                                placeholder="Alamat">
-                            </div>
-                        </div> --}}
                         <div class="col-12">
                             <div class="form-group">
                             <label for="first-name-vertical">Pekerjaan</label>

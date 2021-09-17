@@ -16,6 +16,8 @@
 </head>
 
 <body>
+    @include('sweetalert::alert')
+
     <div id="app">
             @include('includes.dashboard.sidebar')
         <div id="main">

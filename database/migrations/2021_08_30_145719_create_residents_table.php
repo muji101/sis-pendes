@@ -16,17 +16,17 @@ class CreateResidentsTable extends Migration
         Schema::create('residents', function (Blueprint $table) {
             $table->id();
             
-            $table->bigInteger('nik')->unique();
+            $table->bigInteger('nik')->unique()->nullable();
             $table->string('name');
             $table->string('birthplace');
             $table->date('birthdate');
             $table->string('gender');
-            $table->string('religion');
-            $table->string('last_education');
-            $table->string('work');
-            $table->string('blood_type');
-            $table->string('martial_status');
-            $table->string('citizenship');
+            $table->string('religion')->nullable();
+            $table->string('last_education')->nullable();
+            $table->string('work')->nullable();
+            $table->string('blood_type')->nullable();
+            $table->string('martial_status')->nullable();
+            $table->string('citizenship')->nullable();
             $table->string('status')->default('ada');
             $table->string('father')->nullable();
             $table->string('mother')->nullable();

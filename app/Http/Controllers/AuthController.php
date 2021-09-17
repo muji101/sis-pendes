@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use App\Models\Village;
 use Illuminate\Support\Facades\Hash;
+use  RealRashid\SweetAlert\Facades\Alert;
 
 class AuthController extends Controller
 {
@@ -35,7 +35,15 @@ class AuthController extends Controller
             //lebih aman pake ini dari serangan hacker
             $request->session()->regenerate();
 
-            return redirect()->intended('dashboard')->with('welcome', 'Selamat Datang '. Auth::user()->name. ' Jangan Lupa Bahagia  !!!');
+            if(Auth::user()->role == 'ADMIN'){
+                Alert::success('Selamat Datang '. Auth::user()->name,  'Silahkan cek setting profile village jika belum ada data' );
+            }else{
+                Alert::success('Selamat Datang '. Auth::user()->name,  'Selamat Bertugas !!!' );
+            }
+            
+
+            return redirect()->intended('dashboard');
+            // ->with('welcome', 'Selamat Datang '. Auth::user()->name. ' Jangan Lupa Bahagia  !!!');
         }
 
         return back()->with([
@@ -50,8 +58,6 @@ class AuthController extends Controller
 
     public function store(Request $request)
     {
-        $users = User::get();
-
         $data = $request->all();
 
         User::create([
@@ -61,28 +67,8 @@ class AuthController extends Controller
             'role' => $data['role']
         ]);
 
-        
-        // $request->validate([
-        //     'name' => 'required',
-        //     'email' => 'required',
-        //     // 'password' => 'required|min:8',
-        //     'password' => Hash::make($data['password']),
-        //     'role' => 'required'
-        // ]);
+        Alert::success('Selamat', 'Berhasil Membuat Data');
 
-        // // $password = Hash::make($request->password);
-
-        // // dd($password);
-
-        // // $request->merge([
-        // //     'password' => $password
-        // // ]);
-
-        // User::create($data);
-
-        // return view('pages.user.index', [
-        //     'users' => $users
-        // ]);
         return redirect()->route('user.index');
 
 
@@ -107,24 +93,24 @@ class AuthController extends Controller
         $data = User::findOrFail($id);
         // dd($request->password);
         if($request->password){
-            // $request->validate([
-            //     'name'=> 'required|min:5|max:25',
-            //     'email'=> 'required|min:5|max:25|email:rfc,dns|unique:users,email,'.$id,
-            //     // 'current_password' => 'required',
-            //     'password' =>'required|min:5|confirmed',
-            //     // 'image'
-            // ]);
+            $request->validate([
+                'name'=> 'required|max:25',
+                'email'=> 'required|min:4|max:25|email:rfc,dns|unique:users,email,'.$id,
+                // 'current_password' => 'required',
+                'password' =>'required|min:5',
+                // 'image'
+            ]);
     
             $request->merge([
                 'password' => Hash::make($request->password)
             ]);
     
             }else{
-                // $request->validate([
-                //     'name'=> 'required|min:5|max:25',
-                //     'email'=> 'required|min:5|max:25|email:rfc,dns|unique:users,email,'. $id,
-                //     // 'image' => 'required'
-                // ]);
+                $request->validate([
+                    'name'=> 'required|max:25',
+                    'email'=> 'required|min:4|max:25|email:rfc,dns|unique:users,email,'. $id,
+                    // 'image' => 'required'
+                ]);
             }
 
         if ($request->password) {
@@ -132,6 +118,8 @@ class AuthController extends Controller
         }else{
             $data->update($request->except('password'));
         }
+
+        Alert::success('Selamat', 'Berhasil Mengedit Data');
         
         return redirect()->route('user.index');
 

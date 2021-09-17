@@ -21,7 +21,8 @@
                         <div class="card-body">
                             <div class="text-center mb-5">
                                 <img src="{{ asset('/images/logo.png') }}" height="60" class=''>
-                                <h2 class="fw-bold">Login SIS-PENDES</h2>
+                                <h2 class="fw-bold">Login</h2>
+                                <h3 class="fw-bold">SIS-PENDES</h3>
                                 {{-- <p>Please sign in to continue to Sinau.</p> --}}
                             </div>
                             @if (session('status'))
@@ -71,19 +72,6 @@
                                     <button class="btn btn-primary float-end">Submit</button>
                                 </div>
                             </form>
-                            {{-- <div class="divider">
-                                <div class="divider-text">OR</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <button class="btn btn-block mb-2 btn-primary"><i data-feather="facebook"></i>
-                                        Facebook</button>
-                                </div>
-                                <div class="col-sm-6">
-                                    <button class="btn btn-block mb-2 btn-secondary"><i data-feather="github"></i>
-                                        Github</button>
-                                </div>
-                            </div> --}}
                         </div>
                     </div>
                 </div>

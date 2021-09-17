@@ -8,9 +8,6 @@
                     <div class="row">
                         <div class="col-12 col-md-6 order-md-1 order-last">
                             <h3>List Keluarga</h3>
-                            {{-- <p class="text-subtitle text-muted">We use 'simple-datatables' made by @fiduswriter. You can
-                                check the full documentation <a
-                                    href="https://github.com/fiduswriter/Simple-DataTables/wiki">here</a>.</p> --}}
                         </div>
                         <div class="col-12 col-md-6 order-md-2 order-first">
                             <nav aria-label="breadcrumb" class='breadcrumb-header'>
@@ -41,16 +38,15 @@
                                     <i class="fas fa-plus"></i>
                                     <span>Create</span>
                                 </a>
-                                <!-- Button trigger modal -->
-                                {{-- <button type="button" class="btn round btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    <i data-feather="plus"></i> Keluarga
-                                </button> --}}
                                 <div class="text-light ">
-                                    <a href="#" class="btn round btn-success"data-bs-toggle="tooltip" data-bs-placement="bottom" title="Import Data">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn round btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Import Data">
                                         <i data-feather="upload" width="20"></i>
                                         <span>Impor</span>
-                                    </a>
-                                    <a href="#" class="btn round btn-primary"data-bs-toggle="tooltip" data-bs-placement="bottom" title="Export Data">
+                                    </button>
+                                    <a href="{{ route('exportFamily', 'xlsx') }}" class="btn round btn-primary"
+                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Export Data">
                                         <i data-feather="download" width="20"></i>
                                         <span>Export</span>
                                     </a>
@@ -89,12 +85,8 @@
                                                 data-bs-toggle="tooltip" data-bs-placement="bottom" title="Show Detail">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            {{-- <button type="button" class="btn round btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                                                <i data-feather="user-plus"></i>
-                                            </button> --}}
                                             <a href="{{ route('families.createMember', $family->id) }}" class="btn round btn-info btn-sm"
                                                 data-bs-toggle="tooltip" data-bs-placement="bottom" title="Add Member Family">
-                                                {{-- <i data-feather="user-plus" width="20"></i> --}}
                                                 <i class="fas fa-user-plus"></i>
                                             </a>
                                             <a href="{{ route('families.edit', $family->id) }}" class="btn round btn-primary btn-sm"
@@ -116,105 +108,41 @@
                         </div>
                     </div>
                 </section>
-                
-                <!-- Modal -->
-                {{-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
+                <!-- Modal Import-->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Tambah Data Keluarga</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Import Data Keluarga</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
-                            <form class="form form-vertical" action="{{ route('families.store') }}" method="POST">
-                                @csrf
-                                @method('POST')
-                            <div class="form-body">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                        <label for="first-name-vertical">NO.KK</label>
-                                        <input type="number" id="first-name-vertical" class="form-control" name="no_family"
-                                            placeholder="NO.KK">
-                                        </div>
+                        <form  method="POST"  action="{{ route('importFamily') }}" enctype="multipart/form-data">
+                            @csrf
+                            <div class="modal-body">
+                                    <p>
+                                        Pastikan anda sudah memiliki template file download
+                                        <a href="{{ route('families.template') }}">disini</a>
+                                    </p>
+                                    <div class="form-file">
+                                        <input type="file" name="file" class="form-file-input" id="customFile">
+                                        <label class="form-file-label" for="customFile">
+                                            <span class="form-file-text">Choose file...</span>
+                                            <span class="form-file-button btn-primary "><i
+                                                    data-feather="upload"></i></span>
+                                        </label>
                                     </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                        <label for="first-name-vertical">Kepala Keluarga</label>
-                                        <select class="choices form-select" name="resident_id"> 
-                                            <option selected disabled>-- Kepala Keluarga --</option>
-                                                @foreach ($residents as $resident)
-                                                <option value="{{ $resident->id }}">{{ $resident->nik }} -- {{ $resident->name }}</option>
-                                                @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                        <label for="first-name-vertical">Dusun</label>
-                                        <select class="choices form-select" name="village"> value="{{ $isEdit ? $families->village : '' }}"
-                                            <option selected disabled>-- Dusun/Kampung --</option>
-                                            @if ($isEdit)
-                                                @foreach ($villages as $village)
-                                                <option value="{{ $village->name }}"{{ $village->name === $village->name ? 'selected': '' }}>{{ $village->name }}</option>
-                                                @endforeach
-                                            @else
-                                                @foreach ($villages as $village)
-                                                <option value="{{ $village->name }}">{{ $village->name }}</option>
-                                                @endforeach
-                                            @endif
-                                        </select>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                        <label for="first-name-vertical">Rukun Warga (RW)</label>
-                                        <select class="choices form-select" name="rw"> value="{{ $isEdit ? $families->rw : '' }}"
-                                            <option selected disabled>-- Rukun Warga --</option>
-                                            @if ($isEdit)
-                                                @foreach ($rws as $rw)
-                                                <option value="{{ $rw->rw }}"{{ $rw->rw === $rw->rw ? 'selected': '' }}>{{ $rw->rw }}</option>
-                                                @endforeach
-                                            @else
-                                                @foreach ($rws as $rw)
-                                                <option value="{{ $rw->rw }}">{{ $rw->rw }}</option>
-                                                @endforeach
-                                            @endif
-                                        </select>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                        <label for="first-name-vertical">Rukun Tetangga (RT)</label>
-                                        <select class="choices form-select" name="rt"> value="{{ $isEdit ? $families->rt : '' }}"
-                                            <option selected disabled>-- Rukun Tetangga --</option>
-                                            @if ($isEdit)
-                                                @foreach ($rts as $rt)
-                                                <option value="{{ $rt->rt }}"{{ $rt->rt === $rt->rt ? 'selected': '' }}>{{ $rt->rt }}</option>
-                                                @endforeach
-                                            @else
-                                                @foreach ($rts as $rt)
-                                                <option value="{{ $rt->rt }}">{{ $rt->rt }}</option>
-                                                @endforeach
-                                            @endif
-                                        </select>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                        <label for="first-name-vertical">Alamat</label>
-                                        <input type="address" id="first-name-vertical" class="form-control" name="address" 
-                                            placeholder="Alamat">
-                                        </div>
-                                    </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary me-1 mb-1">Import</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary me-1 mb-1">Create</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </form>
+                        </form>
                     </div>
                     </div>
-                </div> --}}
-
+                </div>
+                
             </div>
             
 @endsection

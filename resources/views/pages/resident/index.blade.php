@@ -8,10 +8,6 @@
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
                     <h3>List Penduduk</h3>
-                    {{-- <h3>Datatable</h3> --}}
-                    {{-- <p class="text-subtitle text-muted">We use 'simple-datatables' made by @fiduswriter. You can
-                        check the full documentation <a
-                            href="https://github.com/fiduswriter/Simple-DataTables/wiki">here</a>.</p> --}}
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class='breadcrumb-header'>
@@ -51,7 +47,7 @@
                             </button>
                         </div>
                         <div class="text-light ">
-                            <a 
+                            {{-- <a 
                                 href="#mymodal"
                                 data-remote="{{ route('modal-resident') }}"
                                 data-toggle="modal"
@@ -60,13 +56,17 @@
                                 data-bs-toggle="tooltip" data-bs-placement="bottom" title="Import Data">
                                 <i data-feather="upload" width="20"></i>
                                 <span>Impor</span>
-                            </a>
+                            </a> --}}
+                            <button type="button" class="btn round btn-success" data-bs-toggle="modal" data-bs-target="#importModal"
+                                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Import Data">
+                                <i data-feather="upload" width="20"></i>
+                                <span>Impor</span>
+                            </button>
                             <a href="{{ route('exportResident', 'xlsx') }}" class="btn round btn-primary"
                             data-bs-toggle="tooltip" data-bs-placement="bottom" title="Export Data">
                                 <i data-feather="download" width="20"></i>
                                 <span>Export</span>
                             </a>
-                            {{-- <button class="btn round btn-info ml-2" id="filter">Filter</button> --}}
                         </div>
                     </div>
                 </div>
@@ -109,12 +109,10 @@
                                             data-title="Detail Penduduk {{ $resident->name }}" 
                                             class="btn round btn-success btn-sm"
                                             data-bs-toggle="tooltip" data-bs-placement="bottom" title="Show Detail">
-                                            {{-- <i data-feather="eye" width="20"></i> --}}
                                             <i class="fas fa-eye"></i>
                                         </a>
                                         <a href="{{ route('residents.edit', $resident->id) }}" class="btn round btn-primary btn-sm"
                                             data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Data">
-                                            {{-- <i data-feather="edit" width="20"></i> --}}
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <form action="{{ route('residents.destroy', $resident->id) }}" method="POST" class="d-inline">
@@ -122,7 +120,6 @@
                                             @method('DELETE')
                                             <button class="btn round btn-danger btn-sm "
                                             data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete Data">
-                                                {{-- <i data-feather="trash" width="20"></i> --}}
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </form>
@@ -242,6 +239,39 @@
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 </div>
                                 {{-- <button type="submit" class="btn btn-primary me-1 mb-1">Create</button> --}}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+
+            <!-- Modal Import-->
+            <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Import Data Penduduk</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form  method="POST"  action="{{ route('importResident') }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="modal-body">
+                            <p>
+                                Pastikan anda sudah memiliki template file download
+                                <a href="{{ route('residents.template') }}">disini</a>
+                            </p>
+                                <div class="form-file">
+                                    <input type="file" name="file" class="form-file-input" id="customFile">
+                                    <label class="form-file-label" for="customFile">
+                                        <span class="form-file-text">Choose file...</span>
+                                        <span class="form-file-button btn-primary "><i
+                                                data-feather="upload"></i></span>
+                                    </label>
+                                </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary me-1 mb-1">Import</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </form>

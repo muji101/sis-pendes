@@ -38,7 +38,6 @@ class DashboardController extends Controller
             $jumlah_come[] = $chartCome->jumlah;
             $jumlah_move[] = $chartMove->jumlah;
         }
-        // $totalResidents = ($residents->count() + $births->count() + $comes->count())-($deaths->count() + $moves->count());
         $pie = [
             'pria' => Resident::where('status', 'ada')->where('gender', 'Laki-laki')->count(),
             'wanita' => Resident::where('status', 'ada')->where('gender', 'Perempuan')->count(),
@@ -79,7 +78,6 @@ class DashboardController extends Controller
             'pie' => $pie,
             'bar' => $bar,
             'status' => $status,
-            // 'totalResidents' => $totalResidents
             'deathMonth' => $deathMonth,
             'label' => $label,
             'labelAgama' => $labelAgama,
