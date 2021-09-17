@@ -141,7 +141,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="sidebar-item ">
+                    <li class="sidebar-item {{ (request()->is('villages*')) ? 'active' : '' }}">
                         <a href="{{ route('villages.index') }}" class='sidebar-link'>
                             <i data-feather="file-text" width="20"></i>
                             <span>Setting Profile Village</span>
@@ -159,6 +159,11 @@
                             <span>Logout</span>
                         </a>
                     </form>
+                </li>
+
+                <li class="sidebar-item text-center mt-5 bg-info   py-2">
+                    <h6 class="text-white fw-bold">Version 0.1</h6>
+                    <p class="text-white mb-1">Last update, 18 September 2021</p>
                 </li>
 
             </ul>
