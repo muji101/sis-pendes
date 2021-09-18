@@ -26,6 +26,5 @@ class Death extends Model
         return \Carbon\Carbon::parse($this->attributes['date'])
             ->format('d, M Y');
     }
-
     
 }

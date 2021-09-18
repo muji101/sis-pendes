@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @push('addon-style')
-<link rel="stylesheet" href="/dist/assets/vendors/apexcharts/apexcharts.css">
+    <link rel="stylesheet" href="/dist/assets/vendors/apexcharts/apexcharts.css">
 @endpush
 
 @section('content')

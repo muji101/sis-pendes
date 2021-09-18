@@ -51,11 +51,6 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/user/delete/{id}', [AuthController::class, 'delete'])->name('user.delete');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-    // Route::get('excel-csv-file', [ExcelCSVController::class, 'index']);
-    // Route::post('import-excel-csv-file', [ExcelCSVController::class, 'importExcelCSV']);
-    // Route::get('export-excel-csv-file/{slug}', [ExcelCSVController::class, 'exportExcelCSV']);
-
-    // Route::get('excel-csv-file', [ExcelCSVController::class, 'index']);
     Route::get('import-residents', [ResidentExportController::class, 'index'])->name('modal-resident');
     Route::post('import-residents', [ResidentExportController::class, 'importExcelCSV'])->name('importResident');
     Route::get('export-residents/{slug}', [ResidentExportController::class, 'exportExcelCSV'])->name('exportResident');
@@ -74,9 +69,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('import-moves', [MoveExportController::class, 'importExcelCSV'])->name('importMove');
     Route::get('export-moves/{slug}', [MoveExportController::class, 'exportExcelCSV'])->name('exportMove');
-
-    // Route::post('import-families', [ResidentExportController::class, 'importExcelCSV'])->name('importResident');
-    // Route::get('export-families/{slug}', [ResidentExportController::class, 'exportExcelCSV']);
 
     Route::resource('residents', ResidentController::class);
     Route::get('/download-template/residents', [ResidentController::class,'downloadtemplate'])->name('residents.template');

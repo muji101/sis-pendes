@@ -59,7 +59,6 @@ class BirthController extends Controller
         $residents = Resident::get();
         $data = $request->all();
         $family = Family::where('resident_id', $request->family_id)->get();
-        // dd($family->first()->id);
         //otomatis nambah jadi penduduk
         Resident::create([
             'name' => $request->name, 
@@ -78,7 +77,6 @@ class BirthController extends Controller
         Birth::create($data);
 
         // Alert::success('Selamat', 'Berhasil Membuat data');
-
         return redirect()->route('births.index')->with('success', 'Berhasil Membuat Data');
     }
 

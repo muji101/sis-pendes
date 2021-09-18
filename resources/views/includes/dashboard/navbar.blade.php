@@ -17,12 +17,6 @@
                     class="nav-link  dropdown-toggle nav-link-lg nav-link-user">
                     <div class="d-lg-inline-block">
                         <i data-feather="bell"></i>
-                        {{-- @if ($residents->count() <= 0)
-                        <span class="position-absolute top-0 start-60 translate-middle badge rounded-pill bg-danger">
-                            1
-                            <span class="visually-hidden">unread messages</span>
-                        </span>
-                        @endif --}}
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-large">

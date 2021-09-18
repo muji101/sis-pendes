@@ -46,16 +46,6 @@
                                     </div>
                                     <button type="submit" class="d-none" id="gender1" formaction="{{ route('births.index') }}"></button>
                                 </form>
-                                {{-- <a
-                                    href="#mymodal"
-                                    data-target="#mymodal"
-                                    data-toggle="modal"
-                                    data-remote="{{ route('births.create') }}"
-                                    data-title="Create Kelahiran"
-                                    class="btn round btn-primary btn-sm"> 
-                                    <i data-feather="file-plus" width="20"></i>
-                                    Create
-                                </a> --}}
                                 <div class="text-light ">
                                     <a href="{{ route('births.create') }}" class="btn round btn-info"
                                         data-bs-toggle="tooltip" data-bs-placement="bottom" title="Create Data">
@@ -119,15 +109,6 @@
                                                 >
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            {{-- <a
-                                                href="#mymodal"
-                                                data-target="#mymodal"
-                                                data-toggle="modal"
-                                                data-remote="{{ route('births.edit', $birth->id) }}"
-                                                data-title="Edit Kelahiran {{ $birth->name }}"
-                                                class="btn round btn-info btn-sm"> 
-                                                <i data-feather="edit" width="20"></i>
-                                            </a> --}}
                                             <a href="{{ route('births.edit', $birth->id) }}" class="btn round btn-primary btn-sm"
                                                 data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Data"
                                                 >

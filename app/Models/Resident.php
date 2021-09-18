@@ -28,7 +28,6 @@ class Resident extends Model
         'status',
         'father',
         'mother'
-        // 'address',
     ] ;
 
     public function family()

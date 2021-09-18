@@ -18,15 +18,20 @@ class Family extends Model
         'address',
     ];
 
-    // public function birth()
-    // {
-    //     return $this->hasMany(Birth::class);
-    // }
+    public function familyMember()
+    {
+        return $this->hasMany(FamilyMember::class);
+    }
 
     public function resident()
     {
         return $this->belongsTo(Resident::class);
     }
+
+    // public function birth()
+    // {
+    //     return $this->hasMany(Birth::class);
+    // }
 
     // public function village()
     // {
@@ -42,11 +47,5 @@ class Family extends Model
     // {
     //     return $this->belongsTo(Rt::class);
     // }
-
-    public function familyMember()
-    {
-        return $this->hasMany(FamilyMember::class);
-    }
-
 
 }

@@ -41,11 +41,8 @@ class AuthController extends Controller
                 Alert::success('Selamat Datang '. Auth::user()->name,  'Selamat Bertugas !!!' );
             }
             
-
             return redirect()->intended('dashboard');
-            // ->with('welcome', 'Selamat Datang '. Auth::user()->name. ' Jangan Lupa Bahagia  !!!');
         }
-
         return back()->with([
             'error' => 'gagal login'
         ]);
@@ -70,8 +67,6 @@ class AuthController extends Controller
         Alert::success('Selamat', 'Berhasil Membuat Data');
 
         return redirect()->route('user.index');
-
-
     }
 
     public function logout()
@@ -122,7 +117,6 @@ class AuthController extends Controller
         Alert::success('Selamat', 'Berhasil Mengedit Data');
         
         return redirect()->route('user.index');
-
     }
 
     public function delete($id)
